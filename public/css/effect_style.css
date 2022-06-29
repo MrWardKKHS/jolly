@@ -368,8 +368,6 @@
 	line-height:26px;
 }
 
-.accordion-first.accordion-second{
-}
 .accordion-first.accordion-second .accordion-group {
     margin-bottom: 15px;
 }
@@ -569,8 +567,7 @@ ul.filter > li span {
 .isotopeSelector figure {
 	overflow:hidden
 }
-.isotopeSelector figure {
-}
+
  @media only screen and (max-width: 767px) {
 ul.filter > li > a {
     padding: 10px 0px;
@@ -649,8 +646,7 @@ ul.filter > li > a {
 	text-align: center;
 	height: 100%;
 }
-.project_classic {
-}
+
 .project_classic .project_txt_btn {
 	width:100%;
 }
@@ -951,9 +947,7 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 .home2 #our_project .controls {
     right: 10px;
 }
-#minimal-bootstrap-carousel .carousel-caption .thm-container .box.valign-bottom {
-    
-}
+
 #minimal-bootstrap-carousel .carousel-caption p {
 	display:none;
 }
