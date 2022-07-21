@@ -173,7 +173,7 @@ var init_multipart_parser = __esm({
         let i2 = 0;
         const length_ = data.length;
         let previousIndex = this.index;
-        let { lookbehind, boundary, boundaryChars, index: index35, state, flags } = this;
+        let { lookbehind, boundary, boundaryChars, index: index36, state, flags } = this;
         const boundaryLength = this.boundary.length;
         const boundaryEnd = boundaryLength - 1;
         const bufferLength = data.length;
@@ -207,20 +207,20 @@ var init_multipart_parser = __esm({
           c = data[i2];
           switch (state) {
             case S.START_BOUNDARY:
-              if (index35 === boundary.length - 2) {
+              if (index36 === boundary.length - 2) {
                 if (c === HYPHEN) {
                   flags |= F.LAST_BOUNDARY;
                 } else if (c !== CR) {
                   return;
                 }
-                index35++;
+                index36++;
                 break;
-              } else if (index35 - 1 === boundary.length - 2) {
+              } else if (index36 - 1 === boundary.length - 2) {
                 if (flags & F.LAST_BOUNDARY && c === HYPHEN) {
                   state = S.END;
                   flags = 0;
                 } else if (!(flags & F.LAST_BOUNDARY) && c === LF) {
-                  index35 = 0;
+                  index36 = 0;
                   callback("onPartBegin");
                   state = S.HEADER_FIELD_START;
                 } else {
@@ -228,29 +228,29 @@ var init_multipart_parser = __esm({
                 }
                 break;
               }
-              if (c !== boundary[index35 + 2]) {
-                index35 = -2;
+              if (c !== boundary[index36 + 2]) {
+                index36 = -2;
               }
-              if (c === boundary[index35 + 2]) {
-                index35++;
+              if (c === boundary[index36 + 2]) {
+                index36++;
               }
               break;
             case S.HEADER_FIELD_START:
               state = S.HEADER_FIELD;
               mark("onHeaderField");
-              index35 = 0;
+              index36 = 0;
             case S.HEADER_FIELD:
               if (c === CR) {
                 clear("onHeaderField");
                 state = S.HEADERS_ALMOST_DONE;
                 break;
               }
-              index35++;
+              index36++;
               if (c === HYPHEN) {
                 break;
               }
               if (c === COLON) {
-                if (index35 === 1) {
+                if (index36 === 1) {
                   return;
                 }
                 dataCallback("onHeaderField", true);
@@ -292,8 +292,8 @@ var init_multipart_parser = __esm({
               state = S.PART_DATA;
               mark("onPartData");
             case S.PART_DATA:
-              previousIndex = index35;
-              if (index35 === 0) {
+              previousIndex = index36;
+              if (index36 === 0) {
                 i2 += boundaryEnd;
                 while (i2 < bufferLength && !(data[i2] in boundaryChars)) {
                   i2 += boundaryLength;
@@ -301,27 +301,27 @@ var init_multipart_parser = __esm({
                 i2 -= boundaryEnd;
                 c = data[i2];
               }
-              if (index35 < boundary.length) {
-                if (boundary[index35] === c) {
-                  if (index35 === 0) {
+              if (index36 < boundary.length) {
+                if (boundary[index36] === c) {
+                  if (index36 === 0) {
                     dataCallback("onPartData", true);
                   }
-                  index35++;
+                  index36++;
                 } else {
-                  index35 = 0;
+                  index36 = 0;
                 }
-              } else if (index35 === boundary.length) {
-                index35++;
+              } else if (index36 === boundary.length) {
+                index36++;
                 if (c === CR) {
                   flags |= F.PART_BOUNDARY;
                 } else if (c === HYPHEN) {
                   flags |= F.LAST_BOUNDARY;
                 } else {
-                  index35 = 0;
+                  index36 = 0;
                 }
-              } else if (index35 - 1 === boundary.length) {
+              } else if (index36 - 1 === boundary.length) {
                 if (flags & F.PART_BOUNDARY) {
-                  index35 = 0;
+                  index36 = 0;
                   if (c === LF) {
                     flags &= ~F.PART_BOUNDARY;
                     callback("onPartEnd");
@@ -335,14 +335,14 @@ var init_multipart_parser = __esm({
                     state = S.END;
                     flags = 0;
                   } else {
-                    index35 = 0;
+                    index36 = 0;
                   }
                 } else {
-                  index35 = 0;
+                  index36 = 0;
                 }
               }
-              if (index35 > 0) {
-                lookbehind[index35 - 1] = c;
+              if (index36 > 0) {
+                lookbehind[index36 - 1] = c;
               } else if (previousIndex > 0) {
                 const _lookbehind = new Uint8Array(lookbehind.buffer, lookbehind.byteOffset, lookbehind.byteLength);
                 callback("onPartData", 0, previousIndex, _lookbehind);
@@ -360,7 +360,7 @@ var init_multipart_parser = __esm({
         dataCallback("onHeaderField");
         dataCallback("onHeaderValue");
         dataCallback("onPartData");
-        this.index = index35;
+        this.index = index36;
         this.state = state;
         this.flags = flags;
       }
@@ -498,9 +498,9 @@ async function consumeBody(data) {
   }
 }
 function fromRawHeaders(headers = []) {
-  return new Headers2(headers.reduce((result, value, index35, array2) => {
-    if (index35 % 2 === 0) {
-      result.push(array2.slice(index35, index35 + 2));
+  return new Headers2(headers.reduce((result, value, index36, array2) => {
+    if (index36 % 2 === 0) {
+      result.push(array2.slice(index36, index36 + 2));
     }
     return result;
   }, []).filter(([name, value]) => {
@@ -1615,10 +1615,10 @@ var init_polyfills = __esm({
           [PullSteps](readRequest) {
             const stream = this._controlledReadableByteStream;
             if (this._queueTotalSize > 0) {
-              const entry35 = this._queue.shift();
-              this._queueTotalSize -= entry35.byteLength;
+              const entry36 = this._queue.shift();
+              this._queueTotalSize -= entry36.byteLength;
               ReadableByteStreamControllerHandleQueueDrain(this);
-              const view = new Uint8Array(entry35.buffer, entry35.byteOffset, entry35.byteLength);
+              const view = new Uint8Array(entry36.buffer, entry36.byteOffset, entry36.byteLength);
               readRequest._chunkSteps(view);
               return;
             }
@@ -5509,7 +5509,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css37) => css37.code).join("\n"),
+          code: Array.from(result.css).map((css39) => css39.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -5731,6 +5731,29 @@ var init_service_svelte = __esm({
   }
 });
 
+// .svelte-kit/output/server/entries/pages/components/video.svelte.js
+var video_svelte_exports = {};
+__export(video_svelte_exports, {
+  default: () => Video
+});
+var css5, Video;
+var init_video_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/components/video.svelte.js"() {
+    init_shims();
+    init_index_2835083a();
+    css5 = {
+      code: ".full-frame-video.small-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:none}@media screen and (max-width: 991px){.full-frame-video.small-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:none}}@media screen and (max-width: 767px){.full-frame-video.small-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:block;height:250px;min-height:250px}.full-frame-video.large-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:none}}.full-frame-video.svelte-1b3zeyc.svelte-1b3zeyc{width:100%;min-height:580px}.svelte-1b3zeyc.svelte-1b3zeyc{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}div.svelte-1b3zeyc.svelte-1b3zeyc{display:block;background-image:url(https://assets.website-files.com/5b1091d\u2026/5da4f56\u2026_mackenzie-civil-20-secs-mobile-poster-00001.jpg)}.w-background-video.svelte-1b3zeyc>video.svelte-1b3zeyc{background-size:cover;background-position:50% 50%;position:absolute;margin:auto;width:100%;height:100%;right:-100%;bottom:-100%;top:-100%;left:-100%;object-fit:cover;z-index:-100}video.svelte-1b3zeyc.svelte-1b3zeyc{display:inline-block;vertical-align:baseline}video.svelte-1b3zeyc.svelte-1b3zeyc{object-fit:contain}.w-background-video.svelte-1b3zeyc.svelte-1b3zeyc{position:relative;overflow:hidden;height:500px;color:white}",
+      map: null
+    };
+    Video = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css5);
+      return `<div class="${"wf-section svelte-1b3zeyc"}"><div data-poster-url="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5e65c6c168556a69ca3fbca3_Combination-Video-poster-00001.jpg"}" data-video-urls="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5e65c6c168556a69ca3fbca3_Combination-Video-transcode.mp4,https://assets.website-files.com/5b1091da3a8396fd4c72348a/5e65c6c168556a69ca3fbca3_Combination-Video-transcode.webm"}" data-autoplay="${"true"}" data-loop="${"true"}" data-wf-ignore="${"true"}" data-beta-bgvideo-upgrade="${"false"}" class="${"full-frame-video large-screens w-background-video w-background-video-atom svelte-1b3zeyc"}"><video id="${"15baf89e-581f-1068-60fd-07967504b087-video"}" autoplay="${""}" loop="${""}" style="${"background-image:url(&quot;https://assets.website-files.com/5b1091da3a8396fd4c72348a/5e65c6c168556a69ca3fbca3_Combination-Video-poster-00001.jpg&quot;)"}" muted="${""}" playsinline="${""}" data-wf-ignore="${"true"}" data-object-fit="${"cover"}" class="${"svelte-1b3zeyc"}"><source src="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5e65c6c168556a69ca3fbca3_Combination-Video-transcode.mp4"}" data-wf-ignore="${"true"}" class="${"svelte-1b3zeyc"}"><source src="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5e65c6c168556a69ca3fbca3_Combination-Video-transcode.webm"}" data-wf-ignore="${"true"}" class="${"svelte-1b3zeyc"}"></video></div>
+            <div data-poster-url="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5da4f566fddfd2746c0f42a1_mackenzie-civil-20-secs-mobile-poster-00001.jpg"}" data-video-urls="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5da4f566fddfd2746c0f42a1_mackenzie-civil-20-secs-mobile-transcode.mp4,https://assets.website-files.com/5b1091da3a8396fd4c72348a/5da4f566fddfd2746c0f42a1_mackenzie-civil-20-secs-mobile-transcode.webm"}" data-autoplay="${"true"}" data-loop="${"true"}" data-wf-ignore="${"true"}" data-beta-bgvideo-upgrade="${"false"}" class="${"full-frame-video small-screens w-background-video w-background-video-atom svelte-1b3zeyc"}"><video id="${"d5472912-7a7d-7931-bbad-079b85b869cf-video"}" autoplay="${""}" loop="${""}" style="${"background-image:url(&quot;https://assets.website-files.com/5b1091da3a8396fd4c72348a/5da4f566fddfd2746c0f42a1_mackenzie-civil-20-secs-mobile-poster-00001.jpg&quot;)"}" muted="${""}" playsinline="${""}" data-wf-ignore="${"true"}" data-object-fit="${"cover"}" class="${"svelte-1b3zeyc"}"><source src="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5da4f566fddfd2746c0f42a1_mackenzie-civil-20-secs-mobile-transcode.mp4"}" data-wf-ignore="${"true"}" class="${"svelte-1b3zeyc"}"><source src="${"https://assets.website-files.com/5b1091da3a8396fd4c72348a/5da4f566fddfd2746c0f42a1_mackenzie-civil-20-secs-mobile-transcode.webm"}" data-wf-ignore="${"true"}" class="${"svelte-1b3zeyc"}"></video></div>
+</div>`;
+    });
+  }
+});
+
 // .svelte-kit/output/server/entries/pages/components/home.svelte.js
 var home_svelte_exports = {};
 __export(home_svelte_exports, {
@@ -5742,19 +5765,19 @@ var init_home_svelte = __esm({
     init_shims();
     init_index_2835083a();
     init_service_svelte();
+    init_video_svelte();
     Home = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<div id="${"minimal-bootstrap-carousel"}" class="${"home1 hmslider1 carousel slide carousel-fade shop-slider full_width"}" data-ride="${"carousel"}">
-   <div class="${"carousel-inner"}" role="${"listbox"}"><div class="${"item active slide-1"}"><div class="${"carousel-caption"}"><div class="${"thm-container "}"><div class="${"box valign-top"}"><div class="${"content home1-slides"}"><h1 data-animation="${"animated fadeInUp"}">We can help your 
-                        business <span>GROW</span></h1>
-                     <p data-animation="${"animated fadeInDown"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in cididunt consectetet, consectetut labore et dolore.</p>
+   <div class="${"carousel-inner"}" role="${"listbox"}"><div class="${"item active slide-1"}"><div class="${"carousel-caption"}"><div class="${"thm-container "}"><div class="${"box valign-top"}"><div class="${"content home1-slides"}"><h1 data-animation="${"animated fadeInUp"}">Championing Civil <span>Infrastructure</span></h1>
+                     <p data-animation="${"animated fadeInDown"}">Experts in Civil Infrastructure Project Delivery </p>
+                     <a data-animation="${"animated fadeInUp"}" href="${"about"}" class="${"header-requestbtn learn-more hvr-bounce-to-right"}">Learn More</a> 
+                     <a data-animation="${"animated fadeInUp"}" href="${"services"}" class="${"header-requestbtn learn-more our-solution hvr-bounce-to-right"}">Our Solution</a></div></div></div></div></div>
+      <div class="${"item slide-2"}"><div class="${"carousel-caption"}"><div class="${"thm-container"}"><div class="${"box valign-top"}"><div class="${"content home1-slides"}"><h1 data-animation="${"animated fadeInUp"}">Construction Management <span>Technical Solutions</span></h1>
+                     <p data-animation="${"animated fadeInDown"}">Logistics, Advice, Stakeholder and Utility Coordination</p>
                      <a data-animation="${"animated fadeInUp"}" href="${"about"}" class="${"header-requestbtn learn-more hvr-bounce-to-right"}">learn more</a> 
                      <a data-animation="${"animated fadeInUp"}" href="${"services"}" class="${"header-requestbtn learn-more our-solution hvr-bounce-to-right"}">Our Solution</a></div></div></div></div></div>
-      <div class="${"item slide-2"}"><div class="${"carousel-caption"}"><div class="${"thm-container"}"><div class="${"box valign-top"}"><div class="${"content home1-slides"}"><h1 data-animation="${"animated fadeInUp"}">Innovation In <span>Power &amp; Engery</span></h1>
-                     <p data-animation="${"animated fadeInDown"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in cididunt consectetet, consectetut labore et dolore.</p>
-                     <a data-animation="${"animated fadeInUp"}" href="${"about"}" class="${"header-requestbtn learn-more hvr-bounce-to-right"}">learn more</a> 
-                     <a data-animation="${"animated fadeInUp"}" href="${"services"}" class="${"header-requestbtn learn-more our-solution hvr-bounce-to-right"}">Our Solution</a></div></div></div></div></div>
-      <div class="${"item slide-3"}"><div class="${"carousel-caption"}"><div class="${"thm-container"}"><div class="${"box valign-top"}"><div class="${"content home1-slides"}"><h1 data-animation="${"animated fadeInUp"}"><span>Research</span> In Oil Project </h1>
-                     <p data-animation="${"animated fadeInDown"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in cididunt consectetet, consectetut labore et dolore.</p>
+      <div class="${"item slide-3"}"><div class="${"carousel-caption"}"><div class="${"thm-container"}"><div class="${"box valign-top"}"><div class="${"content home1-slides"}"><h1 data-animation="${"animated fadeInUp"}"><span>Civil</span> Construction &amp; Public Works</h1>
+                     <p data-animation="${"animated fadeInDown"}">Physical Solutions built to last</p>
                      <a data-animation="${"animated fadeInUp"}" href="${"about"}" class="${"header-requestbtn learn-more hvr-bounce-to-right"}">learn more</a> 
                      <a data-animation="${"animated fadeInUp"}" href="${"services"}" class="${"header-requestbtn learn-more our-solution hvr-bounce-to-right"}">Our Solution</a></div></div></div></div></div></div>
     
@@ -5834,12 +5857,7 @@ var init_home_svelte = __esm({
         icon: "service-landscapingicon"
       }, {}, {})}</div></div></div></section>
 
-
-<section class="${"bestthing-section"}"><div class="${"container"}"><div class="${"row "}"><div class="${"col-lg-6 col-md-6 col-sm-12 col-xs-12 bestthing-text-column"}"><h2>THE NEXT BEST THING IN 
-               <span>INDUSTRY WORDPRESS</span></h2>
-            <p class="${"fnt-17"}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi dicta sunt explicabo.</p></div></div></div>
-   <div class="${"bestthing-img"}"><img src="${"images/wordpress-bg-img.png"}" class="${"img-responsive"}" alt="${"wordpress-image"}"></div></section>
-
+${validate_component(Video, "Video").$$render($$result, {}, {}, {})}
 
 <section class="${"recent-project-section projectsec1"}"><div class="${"container"}"><h3 class="${"black-color"}">Our Projects</h3></div>
    <ul class="${"nav nav-tabs"}" role="${"tablist"}"><li role="${"presentation"}" class="${"active"}"><a href="${"#all"}" aria-controls="${"all"}" role="${"tab"}" data-toggle="${"tab"}">All Projects</a></li>
@@ -6021,30 +6039,6 @@ var init_home_svelte = __esm({
             <a class="${"left carousel-control"}" href="${"#minimal-bootstrap-carousel1"}" role="${"button"}" data-slide="${"prev"}"><i class="${"fa fa-angle-left"}"></i> <span class="${"sr-only"}">Previous</span></a> <a class="${"right carousel-control"}" href="${"#minimal-bootstrap-carousel1"}" role="${"button"}" data-slide="${"next"}"><i class="${"fa fa-angle-right"}"></i> <span class="${"sr-only"}">Next</span></a></div></div></div></section>
 
 <section class="${"pad95-70-top-bottom"}"><div class="${"container"}">
-      <div class="${"row"}"><div class="${"col-md-12 text-center"}"><h3>latest news</h3></div>
-         <div class="${"col-md-4 col-sm-4 col-xs-12 news-column"}"><a href="${"blog"}" class="${"enitre_mouse"}"><div class="${"shadow_effect effect-apollo"}"><img src="${"images/home1-images/home1-news-img1.jpg"}" class="${"img-responsive"}" alt="${"news-image"}"></div></a>
-            <div class="${"yellow-strip"}"><div class="${"news-time"}"><h5>06</h5>
-                  <span>Nov</span></div>
-               <ul><li>By : admin</li>
-                  <li>Comments : 0</li></ul></div>
-            <h6><a href="${"blog"}">Duis vitae tellus suscipit, imperdiet est sed, semper urna.</a></h6>
-            <p class="${"line-height26"}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa nt ium doloremque laudantium totam rem aperiam</p></div>
-         <div class="${"col-md-4 col-sm-4 col-xs-12 news-column"}"><a href="${"blog"}" class="${"enitre_mouse"}"><div class="${"shadow_effect effect-apollo"}"><img src="${"images/home1-images/home1-news-img2.jpg"}" class="${"img-responsive"}" alt="${"news-image"}"></div></a>
-            <div class="${"yellow-strip"}"><div class="${"news-time"}"><h5>06</h5>
-                  <span>Nov</span></div>
-               <ul><li>By : admin</li>
-                  <li>Comments : 0</li></ul></div>
-            <h6><a href="${"blog"}">Duis vitae tellus suscipit, imperdiet est sed, semper urna.</a></h6>
-            <p class="${"line-height26"}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa nt ium doloremque laudantium totam rem aperiam</p></div>
-         <div class="${"col-md-4 col-sm-4 col-xs-12 news-column"}"><a href="${"blog"}" class="${"enitre_mouse"}"><div class="${"shadow_effect effect-apollo"}"><img src="${"images/home1-images/home1-news-img3.jpg"}" class="${"img-responsive"}" alt="${"news-image"}"></div></a>
-            <div class="${"yellow-strip"}"><div class="${"news-time"}"><h5>06</h5>
-                  <span>Nov</span></div>
-               <ul><li>By : admin</li>
-                  <li>Comments : 0</li></ul></div>
-            <h6><a href="${"blog"}">Duis vitae tellus suscipit, imperdiet est sed, semper urna.</a></h6>
-            <p class="${"line-height26"}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa nt ium doloremque laudantium totam rem aperiam</p></div></div>
-      
-      
       <div class="${"row"}"><div class="${"head-section client-head"}"><div class="${"col-md-3 col-sm-4 col-xs-12"}"><h3>Our Clients</h3></div>
             <div class="${"col-md-9 col-sm-8 col-xs-12"}"><p class="${"fnt-18"}">Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Aenean lacinia. Donec ullamcorper nulla non metus auctor fringilla.</p></div></div>
       <div class="${"client_hover"}"><div class="${"col-md-2 col-sm-4 col-xs-6"}"><span class="${"client_img image_hover"}"><img src="${"images/client-logo1.jpg"}" class="${"img-responsive zoom_img_effect"}" alt="${""}"></span></div>
@@ -6170,6 +6164,7 @@ var init_index_svelte = __esm({
     init_home_svelte();
     init_base_svelte();
     init_service_svelte();
+    init_video_svelte();
     init_header_svelte();
     init_nav_svelte();
     Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -6180,24 +6175,24 @@ var init_index_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/21.js
+// .svelte-kit/output/server/nodes/22.js
 var __exports3 = {};
 __export(__exports3, {
-  css: () => css5,
+  css: () => css6,
   entry: () => entry3,
   index: () => index3,
   js: () => js3,
   module: () => index_svelte_exports
 });
-var index3, entry3, js3, css5;
+var index3, entry3, js3, css6;
 var init__3 = __esm({
-  ".svelte-kit/output/server/nodes/21.js"() {
+  ".svelte-kit/output/server/nodes/22.js"() {
     init_shims();
     init_index_svelte();
-    index3 = 21;
-    entry3 = "pages/index.svelte-b3c7f1f4.js";
-    js3 = ["pages/index.svelte-b3c7f1f4.js", "chunks/index-d241cd96.js", "pages/components/footer.svelte-9573ec46.js", "pages/components/home.svelte-9d06e9fc.js", "pages/components/service.svelte-f0d2547e.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css5 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css", "assets/pages/components/service.svelte-5554b3a5.css"];
+    index3 = 22;
+    entry3 = "pages/index.svelte-8146ecd7.js";
+    js3 = ["pages/index.svelte-8146ecd7.js", "chunks/index-d241cd96.js", "pages/components/footer.svelte-9573ec46.js", "pages/components/home.svelte-04150ac7.js", "pages/components/service.svelte-f0d2547e.js", "pages/components/video.svelte-03a0fb18.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
+    css6 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css", "assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css"];
   }
 });
 
@@ -6239,6 +6234,7 @@ var init_about_svelte = __esm({
     init_index_2835083a();
     init_banner_svelte();
     init_base_svelte();
+    init_footer_svelte();
     init_header_svelte();
     init_nav_svelte();
     About = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -6318,7 +6314,8 @@ ${validate_component(Banner, "Banner").$$render($$result, { title: "About" }, {}
                   <span class="${"designation"}">Senior industry expert</span>
                   <hr>
                   <p class="${"line-height26 fnt-16"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis lacinia enim vel blandit. In placerat, ex nec.</p></div></div></div></section>
-      `;
+      
+   ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
     });
   }
 });
@@ -6326,21 +6323,21 @@ ${validate_component(Banner, "Banner").$$render($$result, { title: "About" }, {}
 // .svelte-kit/output/server/nodes/2.js
 var __exports4 = {};
 __export(__exports4, {
-  css: () => css6,
+  css: () => css7,
   entry: () => entry4,
   index: () => index4,
   js: () => js4,
   module: () => about_svelte_exports
 });
-var index4, entry4, js4, css6;
+var index4, entry4, js4, css7;
 var init__4 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     init_shims();
     init_about_svelte();
     index4 = 2;
-    entry4 = "pages/about.svelte-57c628b0.js";
-    js4 = ["pages/about.svelte-57c628b0.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css6 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    entry4 = "pages/about.svelte-37e2969e.js";
+    js4 = ["pages/about.svelte-37e2969e.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
+    css7 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -6403,13 +6400,13 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
 // .svelte-kit/output/server/nodes/3.js
 var __exports5 = {};
 __export(__exports5, {
-  css: () => css7,
+  css: () => css8,
   entry: () => entry5,
   index: () => index5,
   js: () => js5,
   module: () => agriculture_svelte_exports
 });
-var index5, entry5, js5, css7;
+var index5, entry5, js5, css8;
 var init__5 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     init_shims();
@@ -6417,7 +6414,7 @@ var init__5 = __esm({
     index5 = 3;
     entry5 = "pages/agriculture.svelte-70ef0f4f.js";
     js5 = ["pages/agriculture.svelte-70ef0f4f.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css7 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css8 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -6479,13 +6476,13 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
 // .svelte-kit/output/server/nodes/4.js
 var __exports6 = {};
 __export(__exports6, {
-  css: () => css8,
+  css: () => css9,
   entry: () => entry6,
   index: () => index6,
   js: () => js6,
   module: () => chemical_industry_svelte_exports
 });
-var index6, entry6, js6, css8;
+var index6, entry6, js6, css9;
 var init__6 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     init_shims();
@@ -6493,7 +6490,7 @@ var init__6 = __esm({
     index6 = 4;
     entry6 = "pages/chemical-industry.svelte-3c42a1f3.js";
     js6 = ["pages/chemical-industry.svelte-3c42a1f3.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css8 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css9 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -6561,13 +6558,13 @@ ${validate_component(Banner, "Banner").$$render($$result, { title: "About" }, {}
 // .svelte-kit/output/server/nodes/5.js
 var __exports7 = {};
 __export(__exports7, {
-  css: () => css9,
+  css: () => css10,
   entry: () => entry7,
   index: () => index7,
   js: () => js7,
   module: () => cnc_industry_svelte_exports
 });
-var index7, entry7, js7, css9;
+var index7, entry7, js7, css10;
 var init__7 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     init_shims();
@@ -6575,7 +6572,7 @@ var init__7 = __esm({
     index7 = 5;
     entry7 = "pages/cnc-industry.svelte-edb437f9.js";
     js7 = ["pages/cnc-industry.svelte-edb437f9.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css9 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css10 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -6628,13 +6625,13 @@ var init_coming_soon_svelte = __esm({
 // .svelte-kit/output/server/nodes/6.js
 var __exports8 = {};
 __export(__exports8, {
-  css: () => css10,
+  css: () => css11,
   entry: () => entry8,
   index: () => index8,
   js: () => js8,
   module: () => coming_soon_svelte_exports
 });
-var index8, entry8, js8, css10;
+var index8, entry8, js8, css11;
 var init__8 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     init_shims();
@@ -6642,7 +6639,7 @@ var init__8 = __esm({
     index8 = 6;
     entry8 = "pages/coming-soon.svelte-d937f1ee.js";
     js8 = ["pages/coming-soon.svelte-d937f1ee.js", "chunks/index-d241cd96.js"];
-    css10 = [];
+    css11 = [];
   }
 });
 
@@ -6689,24 +6686,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/15.js
+// .svelte-kit/output/server/nodes/16.js
 var __exports9 = {};
 __export(__exports9, {
-  css: () => css11,
+  css: () => css12,
   entry: () => entry9,
   index: () => index9,
   js: () => js9,
   module: () => contact_svelte_exports
 });
-var index9, entry9, js9, css11;
+var index9, entry9, js9, css12;
 var init__9 = __esm({
-  ".svelte-kit/output/server/nodes/15.js"() {
+  ".svelte-kit/output/server/nodes/16.js"() {
     init_shims();
     init_contact_svelte();
-    index9 = 15;
+    index9 = 16;
     entry9 = "pages/contact.svelte-b60ee458.js";
     js9 = ["pages/contact.svelte-b60ee458.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css11 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css12 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -6764,24 +6761,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/16.js
+// .svelte-kit/output/server/nodes/17.js
 var __exports10 = {};
 __export(__exports10, {
-  css: () => css12,
+  css: () => css13,
   entry: () => entry10,
   index: () => index10,
   js: () => js10,
   module: () => electronical_svelte_exports
 });
-var index10, entry10, js10, css12;
+var index10, entry10, js10, css13;
 var init__10 = __esm({
-  ".svelte-kit/output/server/nodes/16.js"() {
+  ".svelte-kit/output/server/nodes/17.js"() {
     init_shims();
     init_electronical_svelte();
-    index10 = 16;
+    index10 = 17;
     entry10 = "pages/electronical.svelte-3c93e2b1.js";
     js10 = ["pages/electronical.svelte-3c93e2b1.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css12 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css13 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -6838,24 +6835,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/17.js
+// .svelte-kit/output/server/nodes/18.js
 var __exports11 = {};
 __export(__exports11, {
-  css: () => css13,
+  css: () => css14,
   entry: () => entry11,
   index: () => index11,
   js: () => js11,
   module: () => energy_engineering_svelte_exports
 });
-var index11, entry11, js11, css13;
+var index11, entry11, js11, css14;
 var init__11 = __esm({
-  ".svelte-kit/output/server/nodes/17.js"() {
+  ".svelte-kit/output/server/nodes/18.js"() {
     init_shims();
     init_energy_engineering_svelte();
-    index11 = 17;
+    index11 = 18;
     entry11 = "pages/energy-engineering.svelte-ea327814.js";
     js11 = ["pages/energy-engineering.svelte-ea327814.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css13 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css14 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -6914,24 +6911,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/18.js
+// .svelte-kit/output/server/nodes/19.js
 var __exports12 = {};
 __export(__exports12, {
-  css: () => css14,
+  css: () => css15,
   entry: () => entry12,
   index: () => index12,
   js: () => js12,
   module: () => factory_farm_svelte_exports
 });
-var index12, entry12, js12, css14;
+var index12, entry12, js12, css15;
 var init__12 = __esm({
-  ".svelte-kit/output/server/nodes/18.js"() {
+  ".svelte-kit/output/server/nodes/19.js"() {
     init_shims();
     init_factory_farm_svelte();
-    index12 = 18;
+    index12 = 19;
     entry12 = "pages/factory-farm.svelte-fd1e4338.js";
     js12 = ["pages/factory-farm.svelte-fd1e4338.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css14 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css15 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7002,24 +6999,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/19.js
+// .svelte-kit/output/server/nodes/20.js
 var __exports13 = {};
 __export(__exports13, {
-  css: () => css15,
+  css: () => css16,
   entry: () => entry13,
   index: () => index13,
   js: () => js13,
   module: () => faq_svelte_exports
 });
-var index13, entry13, js13, css15;
+var index13, entry13, js13, css16;
 var init__13 = __esm({
-  ".svelte-kit/output/server/nodes/19.js"() {
+  ".svelte-kit/output/server/nodes/20.js"() {
     init_shims();
     init_faq_svelte();
-    index13 = 19;
+    index13 = 20;
     entry13 = "pages/faq.svelte-936acaea.js";
     js13 = ["pages/faq.svelte-936acaea.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css15 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css16 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7077,24 +7074,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/20.js
+// .svelte-kit/output/server/nodes/21.js
 var __exports14 = {};
 __export(__exports14, {
-  css: () => css16,
+  css: () => css17,
   entry: () => entry14,
   index: () => index14,
   js: () => js14,
   module: () => gas_pipeline_svelte_exports
 });
-var index14, entry14, js14, css16;
+var index14, entry14, js14, css17;
 var init__14 = __esm({
-  ".svelte-kit/output/server/nodes/20.js"() {
+  ".svelte-kit/output/server/nodes/21.js"() {
     init_shims();
     init_gas_pipeline_svelte();
-    index14 = 20;
+    index14 = 21;
     entry14 = "pages/gas-pipeline.svelte-8d2ea148.js";
     js14 = ["pages/gas-pipeline.svelte-8d2ea148.js", "chunks/index-d241cd96.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css16 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css17 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7133,24 +7130,24 @@ var init_maintenance_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/22.js
+// .svelte-kit/output/server/nodes/23.js
 var __exports15 = {};
 __export(__exports15, {
-  css: () => css17,
+  css: () => css18,
   entry: () => entry15,
   index: () => index15,
   js: () => js15,
   module: () => maintenance_svelte_exports
 });
-var index15, entry15, js15, css17;
+var index15, entry15, js15, css18;
 var init__15 = __esm({
-  ".svelte-kit/output/server/nodes/22.js"() {
+  ".svelte-kit/output/server/nodes/23.js"() {
     init_shims();
     init_maintenance_svelte();
-    index15 = 22;
+    index15 = 23;
     entry15 = "pages/maintenance.svelte-e44eac50.js";
     js15 = ["pages/maintenance.svelte-e44eac50.js", "chunks/index-d241cd96.js"];
-    css17 = [];
+    css18 = [];
   }
 });
 
@@ -7220,24 +7217,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/23.js
+// .svelte-kit/output/server/nodes/24.js
 var __exports16 = {};
 __export(__exports16, {
-  css: () => css18,
+  css: () => css19,
   entry: () => entry16,
   index: () => index16,
   js: () => js16,
   module: () => manufacturing_svelte_exports
 });
-var index16, entry16, js16, css18;
+var index16, entry16, js16, css19;
 var init__16 = __esm({
-  ".svelte-kit/output/server/nodes/23.js"() {
+  ".svelte-kit/output/server/nodes/24.js"() {
     init_shims();
     init_manufacturing_svelte();
-    index16 = 23;
+    index16 = 24;
     entry16 = "pages/manufacturing.svelte-5526f459.js";
     js16 = ["pages/manufacturing.svelte-5526f459.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css18 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css19 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7330,24 +7327,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/24.js
+// .svelte-kit/output/server/nodes/25.js
 var __exports17 = {};
 __export(__exports17, {
-  css: () => css19,
+  css: () => css20,
   entry: () => entry17,
   index: () => index17,
   js: () => js17,
   module: () => material_engineering_svelte_exports
 });
-var index17, entry17, js17, css19;
+var index17, entry17, js17, css20;
 var init__17 = __esm({
-  ".svelte-kit/output/server/nodes/24.js"() {
+  ".svelte-kit/output/server/nodes/25.js"() {
     init_shims();
     init_material_engineering_svelte();
-    index17 = 24;
+    index17 = 25;
     entry17 = "pages/material-engineering.svelte-63694f03.js";
     js17 = ["pages/material-engineering.svelte-63694f03.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css19 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css20 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7403,24 +7400,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/25.js
+// .svelte-kit/output/server/nodes/26.js
 var __exports18 = {};
 __export(__exports18, {
-  css: () => css20,
+  css: () => css21,
   entry: () => entry18,
   index: () => index18,
   js: () => js18,
   module: () => oil_industry_svelte_exports
 });
-var index18, entry18, js18, css20;
+var index18, entry18, js18, css21;
 var init__18 = __esm({
-  ".svelte-kit/output/server/nodes/25.js"() {
+  ".svelte-kit/output/server/nodes/26.js"() {
     init_shims();
     init_oil_industry_svelte();
-    index18 = 25;
+    index18 = 26;
     entry18 = "pages/oil-industry.svelte-b0cae45d.js";
     js18 = ["pages/oil-industry.svelte-b0cae45d.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css20 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css21 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7477,24 +7474,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/26.js
+// .svelte-kit/output/server/nodes/27.js
 var __exports19 = {};
 __export(__exports19, {
-  css: () => css21,
+  css: () => css22,
   entry: () => entry19,
   index: () => index19,
   js: () => js19,
   module: () => oil_plant_svelte_exports
 });
-var index19, entry19, js19, css21;
+var index19, entry19, js19, css22;
 var init__19 = __esm({
-  ".svelte-kit/output/server/nodes/26.js"() {
+  ".svelte-kit/output/server/nodes/27.js"() {
     init_shims();
     init_oil_plant_svelte();
-    index19 = 26;
+    index19 = 27;
     entry19 = "pages/oil-plant.svelte-b41e9c12.js";
     js19 = ["pages/oil-plant.svelte-b41e9c12.js", "chunks/index-d241cd96.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css21 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css22 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7524,24 +7521,24 @@ var init_page_404_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/27.js
+// .svelte-kit/output/server/nodes/28.js
 var __exports20 = {};
 __export(__exports20, {
-  css: () => css22,
+  css: () => css23,
   entry: () => entry20,
   index: () => index20,
   js: () => js20,
   module: () => page_404_svelte_exports
 });
-var index20, entry20, js20, css22;
+var index20, entry20, js20, css23;
 var init__20 = __esm({
-  ".svelte-kit/output/server/nodes/27.js"() {
+  ".svelte-kit/output/server/nodes/28.js"() {
     init_shims();
     init_page_404_svelte();
-    index20 = 27;
+    index20 = 28;
     entry20 = "pages/page-404.svelte-ba2e151f.js";
     js20 = ["pages/page-404.svelte-ba2e151f.js", "chunks/index-d241cd96.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css22 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css23 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7698,24 +7695,24 @@ var init_petro_chemicals_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/28.js
+// .svelte-kit/output/server/nodes/29.js
 var __exports21 = {};
 __export(__exports21, {
-  css: () => css23,
+  css: () => css24,
   entry: () => entry21,
   index: () => index21,
   js: () => js21,
   module: () => petro_chemicals_svelte_exports
 });
-var index21, entry21, js21, css23;
+var index21, entry21, js21, css24;
 var init__21 = __esm({
-  ".svelte-kit/output/server/nodes/28.js"() {
+  ".svelte-kit/output/server/nodes/29.js"() {
     init_shims();
     init_petro_chemicals_svelte();
-    index21 = 28;
+    index21 = 29;
     entry21 = "pages/petro-chemicals.svelte-c5ea0515.js";
     js21 = ["pages/petro-chemicals.svelte-c5ea0515.js", "chunks/index-d241cd96.js"];
-    css23 = [];
+    css24 = [];
   }
 });
 
@@ -7795,24 +7792,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/29.js
+// .svelte-kit/output/server/nodes/30.js
 var __exports22 = {};
 __export(__exports22, {
-  css: () => css24,
+  css: () => css25,
   entry: () => entry22,
   index: () => index22,
   js: () => js22,
   module: () => portfolio_2_svelte_exports
 });
-var index22, entry22, js22, css24;
+var index22, entry22, js22, css25;
 var init__22 = __esm({
-  ".svelte-kit/output/server/nodes/29.js"() {
+  ".svelte-kit/output/server/nodes/30.js"() {
     init_shims();
     init_portfolio_2_svelte();
-    index22 = 29;
+    index22 = 30;
     entry22 = "pages/portfolio-2.svelte-eb89a9f9.js";
     js22 = ["pages/portfolio-2.svelte-eb89a9f9.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css24 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css25 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7857,24 +7854,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/30.js
+// .svelte-kit/output/server/nodes/31.js
 var __exports23 = {};
 __export(__exports23, {
-  css: () => css25,
+  css: () => css26,
   entry: () => entry23,
   index: () => index23,
   js: () => js23,
   module: () => request_quote_svelte_exports
 });
-var index23, entry23, js23, css25;
+var index23, entry23, js23, css26;
 var init__23 = __esm({
-  ".svelte-kit/output/server/nodes/30.js"() {
+  ".svelte-kit/output/server/nodes/31.js"() {
     init_shims();
     init_request_quote_svelte();
-    index23 = 30;
+    index23 = 31;
     entry23 = "pages/request-quote.svelte-48a4f4dc.js";
     js23 = ["pages/request-quote.svelte-48a4f4dc.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css25 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css26 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -7923,24 +7920,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/31.js
+// .svelte-kit/output/server/nodes/32.js
 var __exports24 = {};
 __export(__exports24, {
-  css: () => css26,
+  css: () => css27,
   entry: () => entry24,
   index: () => index24,
   js: () => js24,
   module: () => services_svelte_exports
 });
-var index24, entry24, js24, css26;
+var index24, entry24, js24, css27;
 var init__24 = __esm({
-  ".svelte-kit/output/server/nodes/31.js"() {
+  ".svelte-kit/output/server/nodes/32.js"() {
     init_shims();
     init_services_svelte();
-    index24 = 31;
+    index24 = 32;
     entry24 = "pages/services.svelte-d8a22a57.js";
     js24 = ["pages/services.svelte-d8a22a57.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css26 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css27 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -8027,24 +8024,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/32.js
+// .svelte-kit/output/server/nodes/33.js
 var __exports25 = {};
 __export(__exports25, {
-  css: () => css27,
+  css: () => css28,
   entry: () => entry25,
   index: () => index25,
   js: () => js25,
   module: () => team_svelte_exports
 });
-var index25, entry25, js25, css27;
+var index25, entry25, js25, css28;
 var init__25 = __esm({
-  ".svelte-kit/output/server/nodes/32.js"() {
+  ".svelte-kit/output/server/nodes/33.js"() {
     init_shims();
     init_team_svelte();
-    index25 = 32;
+    index25 = 33;
     entry25 = "pages/team.svelte-d85476e0.js";
     js25 = ["pages/team.svelte-d85476e0.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css27 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css28 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
@@ -8112,37 +8109,37 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/33.js
+// .svelte-kit/output/server/nodes/34.js
 var __exports26 = {};
 __export(__exports26, {
-  css: () => css28,
+  css: () => css29,
   entry: () => entry26,
   index: () => index26,
   js: () => js26,
   module: () => testimonials_svelte_exports
 });
-var index26, entry26, js26, css28;
+var index26, entry26, js26, css29;
 var init__26 = __esm({
-  ".svelte-kit/output/server/nodes/33.js"() {
+  ".svelte-kit/output/server/nodes/34.js"() {
     init_shims();
     init_testimonials_svelte();
-    index26 = 33;
+    index26 = 34;
     entry26 = "pages/testimonials.svelte-57a86e44.js";
     js26 = ["pages/testimonials.svelte-57a86e44.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js", "pages/components/testimonial.svelte-26dc09cd.js"];
-    css28 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css29 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/7.js
 var __exports27 = {};
 __export(__exports27, {
-  css: () => css29,
+  css: () => css30,
   entry: () => entry27,
   index: () => index27,
   js: () => js27,
   module: () => banner_svelte_exports
 });
-var index27, entry27, js27, css29;
+var index27, entry27, js27, css30;
 var init__27 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     init_shims();
@@ -8150,20 +8147,20 @@ var init__27 = __esm({
     index27 = 7;
     entry27 = "pages/components/banner.svelte-1db243bc.js";
     js27 = ["pages/components/banner.svelte-1db243bc.js", "chunks/index-d241cd96.js"];
-    css29 = [];
+    css30 = [];
   }
 });
 
 // .svelte-kit/output/server/nodes/8.js
 var __exports28 = {};
 __export(__exports28, {
-  css: () => css30,
+  css: () => css31,
   entry: () => entry28,
   index: () => index28,
   js: () => js28,
   module: () => base_svelte_exports
 });
-var index28, entry28, js28, css30;
+var index28, entry28, js28, css31;
 var init__28 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     init_shims();
@@ -8171,20 +8168,20 @@ var init__28 = __esm({
     index28 = 8;
     entry28 = "pages/components/base.svelte-e9ee099e.js";
     js28 = ["pages/components/base.svelte-e9ee099e.js", "chunks/index-d241cd96.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css30 = [];
+    css31 = [];
   }
 });
 
 // .svelte-kit/output/server/nodes/9.js
 var __exports29 = {};
 __export(__exports29, {
-  css: () => css31,
+  css: () => css32,
   entry: () => entry29,
   index: () => index29,
   js: () => js29,
   module: () => footer_svelte_exports
 });
-var index29, entry29, js29, css31;
+var index29, entry29, js29, css32;
 var init__29 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     init_shims();
@@ -8192,20 +8189,20 @@ var init__29 = __esm({
     index29 = 9;
     entry29 = "pages/components/footer.svelte-9573ec46.js";
     js29 = ["pages/components/footer.svelte-9573ec46.js", "chunks/index-d241cd96.js"];
-    css31 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    css32 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/10.js
 var __exports30 = {};
 __export(__exports30, {
-  css: () => css32,
+  css: () => css33,
   entry: () => entry30,
   index: () => index30,
   js: () => js30,
   module: () => header_svelte_exports
 });
-var index30, entry30, js30, css32;
+var index30, entry30, js30, css33;
 var init__30 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     init_shims();
@@ -8213,41 +8210,41 @@ var init__30 = __esm({
     index30 = 10;
     entry30 = "pages/components/header.svelte-67945e16.js";
     js30 = ["pages/components/header.svelte-67945e16.js", "chunks/index-d241cd96.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css32 = [];
+    css33 = [];
   }
 });
 
 // .svelte-kit/output/server/nodes/11.js
 var __exports31 = {};
 __export(__exports31, {
-  css: () => css33,
+  css: () => css34,
   entry: () => entry31,
   index: () => index31,
   js: () => js31,
   module: () => home_svelte_exports
 });
-var index31, entry31, js31, css33;
+var index31, entry31, js31, css34;
 var init__31 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     init_shims();
     init_home_svelte();
     index31 = 11;
-    entry31 = "pages/components/home.svelte-9d06e9fc.js";
-    js31 = ["pages/components/home.svelte-9d06e9fc.js", "chunks/index-d241cd96.js", "pages/components/service.svelte-f0d2547e.js"];
-    css33 = ["assets/pages/components/service.svelte-5554b3a5.css"];
+    entry31 = "pages/components/home.svelte-04150ac7.js";
+    js31 = ["pages/components/home.svelte-04150ac7.js", "chunks/index-d241cd96.js", "pages/components/service.svelte-f0d2547e.js", "pages/components/video.svelte-03a0fb18.js"];
+    css34 = ["assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/12.js
 var __exports32 = {};
 __export(__exports32, {
-  css: () => css34,
+  css: () => css35,
   entry: () => entry32,
   index: () => index32,
   js: () => js32,
   module: () => nav_svelte_exports
 });
-var index32, entry32, js32, css34;
+var index32, entry32, js32, css35;
 var init__32 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     init_shims();
@@ -8255,20 +8252,20 @@ var init__32 = __esm({
     index32 = 12;
     entry32 = "pages/components/nav.svelte-d44a54c8.js";
     js32 = ["pages/components/nav.svelte-d44a54c8.js", "chunks/index-d241cd96.js"];
-    css34 = [];
+    css35 = [];
   }
 });
 
 // .svelte-kit/output/server/nodes/13.js
 var __exports33 = {};
 __export(__exports33, {
-  css: () => css35,
+  css: () => css36,
   entry: () => entry33,
   index: () => index33,
   js: () => js33,
   module: () => service_svelte_exports
 });
-var index33, entry33, js33, css35;
+var index33, entry33, js33, css36;
 var init__33 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     init_shims();
@@ -8276,20 +8273,20 @@ var init__33 = __esm({
     index33 = 13;
     entry33 = "pages/components/service.svelte-f0d2547e.js";
     js33 = ["pages/components/service.svelte-f0d2547e.js", "chunks/index-d241cd96.js"];
-    css35 = ["assets/pages/components/service.svelte-5554b3a5.css"];
+    css36 = ["assets/pages/components/service.svelte-5554b3a5.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/14.js
 var __exports34 = {};
 __export(__exports34, {
-  css: () => css36,
+  css: () => css37,
   entry: () => entry34,
   index: () => index34,
   js: () => js34,
   module: () => testimonial_svelte_exports
 });
-var index34, entry34, js34, css36;
+var index34, entry34, js34, css37;
 var init__34 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     init_shims();
@@ -8297,7 +8294,28 @@ var init__34 = __esm({
     index34 = 14;
     entry34 = "pages/components/testimonial.svelte-26dc09cd.js";
     js34 = ["pages/components/testimonial.svelte-26dc09cd.js", "chunks/index-d241cd96.js"];
-    css36 = [];
+    css37 = [];
+  }
+});
+
+// .svelte-kit/output/server/nodes/15.js
+var __exports35 = {};
+__export(__exports35, {
+  css: () => css38,
+  entry: () => entry35,
+  index: () => index35,
+  js: () => js35,
+  module: () => video_svelte_exports
+});
+var index35, entry35, js35, css38;
+var init__35 = __esm({
+  ".svelte-kit/output/server/nodes/15.js"() {
+    init_shims();
+    init_video_svelte();
+    index35 = 15;
+    entry35 = "pages/components/video.svelte-03a0fb18.js";
+    js35 = ["pages/components/video.svelte-03a0fb18.js", "chunks/index-d241cd96.js"];
+    css38 = ["assets/pages/components/video.svelte-4c5c571f.css"];
   }
 });
 
@@ -8315,6 +8333,7 @@ var init_main = __esm({
     init_footer_svelte();
     init_home_svelte();
     init_service_svelte();
+    init_video_svelte();
     init_base_svelte();
     init_header_svelte();
     init_nav_svelte();
@@ -8575,12 +8594,12 @@ function devalue(value) {
   }
   walk(value);
   var names = /* @__PURE__ */ new Map();
-  Array.from(counts).filter(function(entry35) {
-    return entry35[1] > 1;
+  Array.from(counts).filter(function(entry36) {
+    return entry36[1] > 1;
   }).sort(function(a, b) {
     return b[1] - a[1];
-  }).forEach(function(entry35, i2) {
-    names.set(entry35[0], getName(i2));
+  }).forEach(function(entry36, i2) {
+    names.set(entry36[0], getName(i2));
   });
   function stringify(thing) {
     if (names.has(thing)) {
@@ -9305,20 +9324,20 @@ function parse$1(str, options) {
   var obj = {};
   var opt = options || {};
   var dec = opt.decode || decode;
-  var index35 = 0;
-  while (index35 < str.length) {
-    var eqIdx = str.indexOf("=", index35);
+  var index36 = 0;
+  while (index36 < str.length) {
+    var eqIdx = str.indexOf("=", index36);
     if (eqIdx === -1) {
       break;
     }
-    var endIdx = str.indexOf(";", index35);
+    var endIdx = str.indexOf(";", index36);
     if (endIdx === -1) {
       endIdx = str.length;
     } else if (endIdx < eqIdx) {
-      index35 = str.lastIndexOf(";", eqIdx - 1) + 1;
+      index36 = str.lastIndexOf(";", eqIdx - 1) + 1;
       continue;
     }
-    var key2 = str.slice(index35, eqIdx).trim();
+    var key2 = str.slice(index36, eqIdx).trim();
     if (obj[key2] === void 0) {
       var val = str.slice(eqIdx + 1, endIdx).trim();
       if (val.charCodeAt(0) === 34) {
@@ -9326,7 +9345,7 @@ function parse$1(str, options) {
       }
       obj[key2] = tryDecode(val, dec);
     }
-    index35 = endIdx + 1;
+    index36 = endIdx + 1;
   }
   return obj;
 }
@@ -10147,8 +10166,8 @@ async function respond$1(opts) {
         if (error2) {
           while (i2--) {
             if (route.b[i2]) {
-              const index35 = route.b[i2];
-              const error_node = await options.manifest._.nodes[index35]();
+              const index36 = route.b[i2];
+              const error_node = await options.manifest._.nodes[index36]();
               let node_loaded;
               let j = i2;
               while (!(node_loaded = branch[j])) {
@@ -10614,10 +10633,10 @@ var Server = class {
 init_shims();
 var manifest = {
   appDir: "_app",
-  assets: /* @__PURE__ */ new Set(["css/ajax-loader.gif", "css/animate.css", "css/animate.min.css", "css/bootstrap.min.css", "css/demo.css", "css/effect_style.css", "css/elastislide.css", "css/font-awesome.min.css", "css/jquery.fancybox.css", "css/responsive-style.css", "css/responsive_bootstrap_carousel.css", "css/set1.css", "css/slick.min.css", "css/style.css", "fonts/FontAwesome.otf", "fonts/fontawesome-webfont.eot", "fonts/fontawesome-webfont.svg", "fonts/fontawesome-webfont.ttf", "fonts/fontawesome-webfont.woff", "fonts/fontawesome-webfont.woff2", "fonts/glyphicons-halflings-regular.eot", "fonts/glyphicons-halflings-regular.svg", "fonts/glyphicons-halflings-regular.ttf", "fonts/glyphicons-halflings-regular.woff", "fonts/glyphicons-halflings-regular.woff2", "images/404bg.jpg", "images/ImageAttribution.txt", "images/about-banner.jpg", "images/agri-img.jpg", "images/agricultural-img.jpg", "images/agricultural-large-img.jpg", "images/agricultural-scope-img.jpg", "images/black-logo.png", "images/black.png", "images/btn-left-divider.jpg", "images/chemical-banner.jpg", "images/chemical-icon-hover.png", "images/chemical-icon.png", "images/chemical-rght-img.jpg", "images/choose-arrow.png", "images/circle-after-img.png", "images/client-img1.jpg", "images/client-img2.jpg", "images/client-img3.jpg", "images/client-img4.jpg", "images/client-logo1.jpg", "images/client-logo2.jpg", "images/client-logo3.jpg", "images/client-logo4.jpg", "images/client-logo5.jpg", "images/client-logo6.jpg", "images/client-quote-img.png", "images/close_popup.png", "images/cnc-banner.jpg", "images/cnc-icon-hover.png", "images/cnc-icon.png", "images/cnc-right-img1.jpg", "images/cnc-right-img2.jpg", "images/coming-page-bg.jpg", "images/coming-page-bg.png", "images/contact-address-icon.png", "images/contact-banner.jpg", "images/contact-help-bg.jpg", "images/contact-help-cal.png", "images/contact-msg-icon.png", "images/contact-phn-icon.png", "images/coverage-img.png", "images/delete-icon.png", "images/delivery-icon.png", "images/delivery-icon1.png", "images/delivery-time-icon.png", "images/eco-project-image3.jpg", "images/electric-img.jpg", "images/electronic-img.jpg", "images/electronic-scope-img.jpg", "images/electronical-large-img.jpg", "images/energy-engineering-banner.jpg", "images/energy-icon-hover.png", "images/energy-icon.png", "images/energy-right-img.jpg", "images/factory-farm-img.jpg", "images/factory-farm-large-img.jpg", "images/factory-right-img.jpg", "images/faq-banner.jpg", "images/farm-img.jpg", "images/farm-scope-img.jpg", "images/footer-bg.jpg", "images/ftr-info-sprite.png", "images/ftr-logo.png", "images/gas-img.jpg", "images/gas-pipe-large-img.jpg", "images/gas-pipeline-img.jpg", "images/gas-scope-img.jpg", "images/gray-star.png", "images/hdr-call-icon.png", "images/hdr-loc-icon.png", "images/header-3-sticky-logo.png", "images/header2-logo.png", "images/header3-logo.png", "images/headquarter-img.png", "images/home1-images/eco-project-image1.jpg", "images/home1-images/eco-project-image2.jpg", "images/home1-images/eco-project-image3.jpg", "images/home1-images/eco-project-image4.jpg", "images/home1-images/home1-agriculture-project1.jpg", "images/home1-images/home1-electronic-project1.jpg", "images/home1-images/home1-farm-project1.jpg", "images/home1-images/home1-gaspipeline-project1.jpg", "images/home1-images/home1-news-img1.jpg", "images/home1-images/home1-news-img2.jpg", "images/home1-images/home1-news-img3.jpg", "images/home1-images/home1-oilplant-project1.jpg", "images/home1-images/home1-petrochemical-project1.jpg", "images/home1-images/home1-slide1.jpg", "images/home1-images/home1-slide2.jpg", "images/home1-images/home1-slide3.jpg", "images/home1-images/manufacturing-project-image1.jpg", "images/home1-images/manufacturing-project-image2.jpg", "images/home1-images/manufacturing-project-image3.jpg", "images/home1-images/manufacturing-project-image4.jpg", "images/home1-images/oil-project-image1.jpg", "images/home1-images/oil-project-image2.jpg", "images/home1-images/oil-project-image3.jpg", "images/home1-images/oil-project-image4.jpg", "images/home1-images/service-clearingicon.png", "images/home1-images/service-demolitionicon.png", "images/home1-images/service-drainageicon.png", "images/home1-images/service-erosion-controlicon.png", "images/home1-images/service-excavationicon.png", "images/home1-images/service-foundationsicon.png", "images/home1-images/service-haulingicon.png", "images/humble-begin-img.png", "images/index2-wordpress-bg.jpg", "images/logo.png", "images/maintenance-bg.png", "images/manufacture-icon-hover.png", "images/manufacture-icon.png", "images/manufacture-rght-img.jpg", "images/manufacturing-banner.jpg", "images/martial-img.jpg", "images/material-banner.jpg", "images/material-icon-hover.png", "images/material-icon.png", "images/material-rght-img.jpg", "images/mission-icon.png", "images/nav.png", "images/nav_thumbs.png", "images/office-map-img.png", "images/office-sprite.png", "images/oil-icon-hover.png", "images/oil-icon.png", "images/oil-industry-banner.jpg", "images/oil-industry-rght-img.jpg", "images/oil-pipe-img.jpg", "images/oil-plant-img.jpg", "images/oil_img1.jpg", "images/oil_img2.jpg", "images/opening-loc-img.png", "images/ourteam-img1.jpg", "images/ourteam-img2.jpg", "images/ourteam-img3.jpg", "images/ourteam-img4.jpg", "images/page404-bg.jpg", "images/pattern.png", "images/paypal-img.png", "images/pdf-icon.jpg", "images/petro-chemical-img.jpg", "images/petro-img.jpg", "images/plant-project-img.jpg", "images/portfolio-banner.jpg", "images/post-img1.jpg", "images/post-img2.jpg", "images/post-img3.jpg", "images/post-img4.jpg", "images/product-large-img.jpg", "images/product-thumbnails-img1.jpg", "images/project-1-img.jpg", "images/project-2-img.jpg", "images/project-3-img.jpg", "images/project-det-img.jpg", "images/quality-icon.png", "images/requestquote-banner.jpg", "images/search-btn.png", "images/search_popup_icon.png", "images/service-banner.jpg", "images/service-img1.jpg", "images/service-img2.jpg", "images/service-img3.jpg", "images/service-img4.jpg", "images/service-img5.jpg", "images/service-img6.jpg", "images/service-landscapingicon.png", "images/service-page-sprite.png", "images/service_img1.jpg", "images/services-gradingicon.png", "images/shop-banner.jpg", "images/shop-product1.jpg", "images/shop-product10.jpg", "images/shop-product11.jpg", "images/shop-product12.jpg", "images/shop-product2.jpg", "images/shop-product3.jpg", "images/shop-product4.jpg", "images/shop-product5.jpg", "images/shop-product6.jpg", "images/shop-product7.jpg", "images/shop-product8.jpg", "images/shop-product9.jpg", "images/specialization-img.jpg", "images/standard-labor-icon.png", "images/support-icon.png", "images/team-banner.jpg", "images/team-icon.png", "images/team-img1.jpg", "images/team-img2.jpg", "images/team-img3.jpg", "images/technology-icon.png", "images/technology-icon1.png", "images/testi-client-img1.png", "images/testi-client-img2.jpg", "images/testi-client-img3.jpg", "images/testi-quotes.png", "images/testimonial-banner.jpg", "images/value-icon.png", "images/views.png", "images/vision-icon.png", "images/white-logo.png", "images/white-search-btn.png", "images/who-are-img.jpg", "images/whoweare-img.jpg", "images/why-choose-bg.png", "images/wordpress-bg-img.png", "images/year-circles.png", "images/yellow-star.png", "images/yellow-star1.jpg", "images/yellow-star2.jpg", "images/yellow-star3.jpg", "images/zoom_icon.jpg", "js/bootstrap.js", "js/bootstrap.min.js", "js/comming-soon.js", "js/custom.js", "js/gallery.js", "js/imagelightbox.min.js", "js/isotope.min.js", "js/jquery.elastislide.js", "js/jquery.min.js", "js/jquery.tmpl.min.js", "js/jquery.touchSwipe.min.js", "js/main.js", "js/responsive_bootstrap_carousel.js", "js/slick.js", "js/theme.js", "js/theme1.js"]),
+  assets: /* @__PURE__ */ new Set(["css/ajax-loader.gif", "css/animate.css", "css/animate.min.css", "css/bootstrap.min.css", "css/demo.css", "css/effect_style.css", "css/elastislide.css", "css/font-awesome.min.css", "css/jquery.fancybox.css", "css/responsive-style.css", "css/responsive_bootstrap_carousel.css", "css/set1.css", "css/slick.min.css", "css/style.css", "fonts/FontAwesome.otf", "fonts/fontawesome-webfont.eot", "fonts/fontawesome-webfont.svg", "fonts/fontawesome-webfont.ttf", "fonts/fontawesome-webfont.woff", "fonts/fontawesome-webfont.woff2", "fonts/glyphicons-halflings-regular.eot", "fonts/glyphicons-halflings-regular.svg", "fonts/glyphicons-halflings-regular.ttf", "fonts/glyphicons-halflings-regular.woff", "fonts/glyphicons-halflings-regular.woff2", "images/404bg.jpg", "images/ImageAttribution.txt", "images/about-banner.jpg", "images/agri-img.jpg", "images/agricultural-img.jpg", "images/agricultural-large-img.jpg", "images/agricultural-scope-img.jpg", "images/black-logo.png", "images/black.png", "images/btn-left-divider.jpg", "images/chemical-banner.jpg", "images/chemical-icon-hover.png", "images/chemical-icon.png", "images/chemical-rght-img.jpg", "images/choose-arrow.png", "images/circle-after-img.png", "images/client-img1.jpg", "images/client-img2.jpg", "images/client-img3.jpg", "images/client-img4.jpg", "images/client-logo1.jpg", "images/client-logo2.jpg", "images/client-logo3.jpg", "images/client-logo4.jpg", "images/client-logo5.jpg", "images/client-logo6.jpg", "images/client-quote-img.png", "images/close_popup.png", "images/cnc-banner.jpg", "images/cnc-icon-hover.png", "images/cnc-icon.png", "images/cnc-right-img1.jpg", "images/cnc-right-img2.jpg", "images/coming-page-bg.jpg", "images/coming-page-bg.png", "images/contact-address-icon.png", "images/contact-banner.jpg", "images/contact-help-bg.jpg", "images/contact-help-cal.png", "images/contact-msg-icon.png", "images/contact-phn-icon.png", "images/coverage-img.png", "images/delete-icon.png", "images/delivery-icon.png", "images/delivery-icon1.png", "images/delivery-time-icon.png", "images/eco-project-image3.jpg", "images/electric-img.jpg", "images/electronic-img.jpg", "images/electronic-scope-img.jpg", "images/electronical-large-img.jpg", "images/energy-engineering-banner.jpg", "images/energy-icon-hover.png", "images/energy-icon.png", "images/energy-right-img.jpg", "images/factory-farm-img.jpg", "images/factory-farm-large-img.jpg", "images/factory-right-img.jpg", "images/faq-banner.jpg", "images/farm-img.jpg", "images/farm-scope-img.jpg", "images/footer-bg.jpg", "images/ftr-info-sprite.png", "images/ftr-logo.png", "images/gas-img.jpg", "images/gas-pipe-large-img.jpg", "images/gas-pipeline-img.jpg", "images/gas-scope-img.jpg", "images/gray-star.png", "images/hdr-call-icon.png", "images/hdr-loc-icon.png", "images/headquarter-img.png", "images/home1-images/eco-project-image1.jpg", "images/home1-images/eco-project-image2.jpg", "images/home1-images/eco-project-image3.jpg", "images/home1-images/eco-project-image4.jpg", "images/home1-images/home1-agriculture-project1.jpg", "images/home1-images/home1-electronic-project1.jpg", "images/home1-images/home1-farm-project1.jpg", "images/home1-images/home1-gaspipeline-project1.jpg", "images/home1-images/home1-news-img1.jpg", "images/home1-images/home1-news-img2.jpg", "images/home1-images/home1-news-img3.jpg", "images/home1-images/home1-oilplant-project1.jpg", "images/home1-images/home1-petrochemical-project1.jpg", "images/home1-images/home1-slide1.jpg", "images/home1-images/home1-slide2.jpg", "images/home1-images/home1-slide3.jpg", "images/home1-images/manufacturing-project-image1.jpg", "images/home1-images/manufacturing-project-image2.jpg", "images/home1-images/manufacturing-project-image3.jpg", "images/home1-images/manufacturing-project-image4.jpg", "images/home1-images/oil-project-image1.jpg", "images/home1-images/oil-project-image2.jpg", "images/home1-images/oil-project-image3.jpg", "images/home1-images/oil-project-image4.jpg", "images/home1-images/service-clearingicon.png", "images/home1-images/service-demolitionicon.png", "images/home1-images/service-drainageicon.png", "images/home1-images/service-erosion-controlicon.png", "images/home1-images/service-excavationicon.png", "images/home1-images/service-foundationsicon.png", "images/home1-images/service-gradingicon.png", "images/home1-images/service-haulingicon.png", "images/home1-images/service-landscapingicon.png", "images/humble-begin-img.png", "images/index2-wordpress-bg.jpg", "images/logo.png", "images/maintenance-bg.png", "images/manufacture-icon-hover.png", "images/manufacture-icon.png", "images/manufacture-rght-img.jpg", "images/manufacturing-banner.jpg", "images/martial-img.jpg", "images/material-banner.jpg", "images/material-icon-hover.png", "images/material-icon.png", "images/material-rght-img.jpg", "images/mission-icon.png", "images/nav.png", "images/nav_thumbs.png", "images/office-map-img.png", "images/office-sprite.png", "images/oil-icon-hover.png", "images/oil-icon.png", "images/oil-industry-banner.jpg", "images/oil-industry-rght-img.jpg", "images/oil-pipe-img.jpg", "images/oil-plant-img.jpg", "images/oil_img1.jpg", "images/oil_img2.jpg", "images/opening-loc-img.png", "images/ourteam-img1.jpg", "images/ourteam-img2.jpg", "images/ourteam-img3.jpg", "images/ourteam-img4.jpg", "images/page404-bg.jpg", "images/pattern.png", "images/paypal-img.png", "images/pdf-icon.jpg", "images/petro-chemical-img.jpg", "images/petro-img.jpg", "images/plant-project-img.jpg", "images/portfolio-banner.jpg", "images/product-large-img.jpg", "images/product-thumbnails-img1.jpg", "images/project-1-img.jpg", "images/project-2-img.jpg", "images/project-3-img.jpg", "images/project-det-img.jpg", "images/quality-icon.png", "images/requestquote-banner.jpg", "images/search-btn.png", "images/search_popup_icon.png", "images/service-banner.jpg", "images/service-img1.jpg", "images/service-img2.jpg", "images/service-img3.jpg", "images/service-img4.jpg", "images/service-img5.jpg", "images/service-img6.jpg", "images/service-page-sprite.png", "images/service_img1.jpg", "images/shop-banner.jpg", "images/specialization-img.jpg", "images/standard-labor-icon.png", "images/support-icon.png", "images/team-banner.jpg", "images/team-icon.png", "images/team-img1.jpg", "images/team-img2.jpg", "images/team-img3.jpg", "images/technology-icon.png", "images/technology-icon1.png", "images/testi-client-img1.png", "images/testi-client-img2.jpg", "images/testi-client-img3.jpg", "images/testi-quotes.png", "images/testimonial-banner.jpg", "images/value-icon.png", "images/views.png", "images/vision-icon.png", "images/white-logo.png", "images/white-search-btn.png", "images/who-are-img.jpg", "images/whoweare-img.jpg", "images/why-choose-bg.png", "images/wordpress-bg-img.png", "images/year-circles.png", "images/zoom_icon.jpg", "js/bootstrap.js", "js/bootstrap.min.js", "js/custom.js", "js/gallery.js", "js/imagelightbox.min.js", "js/isotope.min.js", "js/jquery.elastislide.js", "js/jquery.min.js", "js/jquery.tmpl.min.js", "js/jquery.touchSwipe.min.js", "js/main.js", "js/responsive_bootstrap_carousel.js", "js/slick.js", "js/theme.js", "js/theme1.js"]),
   mimeTypes: { ".gif": "image/gif", ".css": "text/css", ".otf": "font/otf", ".eot": "application/vnd.ms-fontobject", ".svg": "image/svg+xml", ".ttf": "font/ttf", ".woff": "font/woff", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".txt": "text/plain", ".png": "image/png", ".js": "application/javascript" },
   _: {
-    entry: { "file": "start-cf49bb75.js", "js": ["start-cf49bb75.js", "chunks/index-d241cd96.js"], "css": [] },
+    entry: { "file": "start-14fa04c0.js", "js": ["start-14fa04c0.js", "chunks/index-d241cd96.js"], "css": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -10652,7 +10671,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__31(), __exports31)),
       () => Promise.resolve().then(() => (init__32(), __exports32)),
       () => Promise.resolve().then(() => (init__33(), __exports33)),
-      () => Promise.resolve().then(() => (init__34(), __exports34))
+      () => Promise.resolve().then(() => (init__34(), __exports34)),
+      () => Promise.resolve().then(() => (init__35(), __exports35))
     ],
     routes: [
       {
@@ -11013,6 +11033,17 @@ var manifest = {
         path: "/components/testimonial",
         shadow: null,
         a: [0, 33],
+        b: [1]
+      },
+      {
+        type: "page",
+        id: "components/video",
+        pattern: /^\/components\/video\/?$/,
+        names: [],
+        types: [],
+        path: "/components/video",
+        shadow: null,
+        a: [0, 34],
         b: [1]
       }
     ],

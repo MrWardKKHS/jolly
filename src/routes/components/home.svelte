@@ -1,5 +1,6 @@
 <script>
    import Service from "./service.svelte"
+   import Video from "./video.svelte";
 </script>
 
 <div id="minimal-bootstrap-carousel" class="home1 hmslider1 carousel slide carousel-fade shop-slider full_width" data-ride="carousel">
@@ -10,11 +11,10 @@
             <div class="thm-container ">
                <div class="box valign-top">
                   <div class="content home1-slides">
-                     <h1 data-animation="animated fadeInUp">We can help your 
-                        business <span>GROW</span>
+                     <h1 data-animation="animated fadeInUp">Championing Civil <span>Infrastructure</span>
                      </h1>
-                     <p data-animation="animated fadeInDown">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in cididunt consectetet, consectetut labore et dolore.</p>
-                     <a data-animation="animated fadeInUp" href="about" class="header-requestbtn learn-more hvr-bounce-to-right">learn more</a> 
+                     <p data-animation="animated fadeInDown">Experts in Civil Infrastructure Project Delivery </p>
+                     <a data-animation="animated fadeInUp" href="about" class="header-requestbtn learn-more hvr-bounce-to-right">Learn More</a> 
                      <a data-animation="animated fadeInUp" href="services" class="header-requestbtn learn-more our-solution hvr-bounce-to-right">Our Solution</a> 
                   </div>
                </div>
@@ -26,8 +26,8 @@
             <div class="thm-container">
                <div class="box valign-top">
                   <div class="content home1-slides">
-                     <h1 data-animation="animated fadeInUp">Innovation In <span>Power & Engery</span> </h1>
-                     <p data-animation="animated fadeInDown">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in cididunt consectetet, consectetut labore et dolore.</p>
+                     <h1 data-animation="animated fadeInUp">Construction Management <span>Technical Solutions</span> </h1>
+                     <p data-animation="animated fadeInDown">Logistics, Advice, Stakeholder and Utility Coordination</p>
                      <a data-animation="animated fadeInUp" href="about" class="header-requestbtn learn-more hvr-bounce-to-right">learn more</a> 
                      <a data-animation="animated fadeInUp" href="services" class="header-requestbtn learn-more our-solution hvr-bounce-to-right">Our Solution</a> 
                   </div>
@@ -40,8 +40,8 @@
             <div class="thm-container">
                <div class="box valign-top">
                   <div class="content home1-slides">
-                     <h1 data-animation="animated fadeInUp"><span>Research</span> In Oil Project </h1>
-                     <p data-animation="animated fadeInDown">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in cididunt consectetet, consectetut labore et dolore.</p>
+                     <h1 data-animation="animated fadeInUp"><span>Civil</span> Construction & Public Works</h1>
+                     <p data-animation="animated fadeInDown">Physical Solutions built to last</p>
                      <a data-animation="animated fadeInUp" href="about" class="header-requestbtn learn-more hvr-bounce-to-right">learn more</a> 
                      <a data-animation="animated fadeInUp" href="services" class="header-requestbtn learn-more our-solution hvr-bounce-to-right">Our Solution</a> 
                   </div>
@@ -91,23 +91,7 @@
    </div>
 </section>
 <!--=========Services end============-->
-<!--=========Wordpress Bestthing Start============-->
-<section class="bestthing-section">
-   <div class="container">
-      <div class="row ">
-         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bestthing-text-column">
-            <h2>THE NEXT BEST THING IN 
-               <span>INDUSTRY WORDPRESS</span>
-            </h2>
-            <p class="fnt-17">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi dicta sunt explicabo.</p>
-         </div>
-      </div>
-   </div>
-   <div class="bestthing-img">
-      <img src="images/wordpress-bg-img.png" class="img-responsive" alt="wordpress-image">
-   </div>
-</section>
-<!--=========Wordpress Bestthing end============-->
+<Video></Video>
 <!--=========Recent Project Start============-->
 <section class="recent-project-section projectsec1">
    <div class="container">
@@ -860,65 +844,7 @@
 <!--=========Testimonial end============-->
 <section class="pad95-70-top-bottom">
    <div class="container">
-      <!--=========Latest News Start============-->
-      <div class="row">
-         <div class="col-md-12 text-center">
-            <h3>latest news</h3>
-         </div>
-         <div class="col-md-4 col-sm-4 col-xs-12 news-column">
-            <a href="blog" class="enitre_mouse">
-               <div class="shadow_effect effect-apollo"> <img src="images/home1-images/home1-news-img1.jpg" class="img-responsive" alt="news-image"> </div>
-            </a>
-            <div class="yellow-strip">
-               <div class="news-time">
-                  <h5>06</h5>
-                  <span>Nov</span>
-               </div>
-               <ul>
-                  <li>By : admin</li>
-                  <li>Comments : 0</li>
-               </ul>
-            </div>
-            <h6><a href="blog">Duis vitae tellus suscipit, imperdiet est sed, semper urna.</a></h6>
-            <p class="line-height26"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa nt ium doloremque laudantium totam rem aperiam</p>
-         </div>
-         <div class="col-md-4 col-sm-4 col-xs-12 news-column">
-            <a href="blog" class="enitre_mouse">
-               <div class="shadow_effect effect-apollo"> <img src="images/home1-images/home1-news-img2.jpg" class="img-responsive" alt="news-image"> </div>
-            </a>
-            <div class="yellow-strip">
-               <div class="news-time">
-                  <h5>06</h5>
-                  <span>Nov</span>
-               </div>
-               <ul>
-                  <li>By : admin</li>
-                  <li>Comments : 0</li>
-               </ul>
-            </div>
-            <h6><a href="blog">Duis vitae tellus suscipit, imperdiet est sed, semper urna.</a></h6>
-            <p class="line-height26"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa nt ium doloremque laudantium totam rem aperiam</p>
-         </div>
-         <div class="col-md-4 col-sm-4 col-xs-12 news-column">
-            <a href="blog" class="enitre_mouse">
-               <div class="shadow_effect effect-apollo"> <img src="images/home1-images/home1-news-img3.jpg" class="img-responsive" alt="news-image"> </div>
-            </a>
-            <div class="yellow-strip">
-               <div class="news-time">
-                  <h5>06</h5>
-                  <span>Nov</span>
-               </div>
-               <ul>
-                  <li>By : admin</li>
-                  <li>Comments : 0</li>
-               </ul>
-            </div>
-            <h6><a href="blog">Duis vitae tellus suscipit, imperdiet est sed, semper urna.</a></h6>
-            <p class="line-height26"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa nt ium doloremque laudantium totam rem aperiam</p>
-         </div>
-      </div>
-      <!--=========Latest News end============-->
-      <!--=========Our Client Start============-->
+       <!--=========Our Client Start============-->
       <div class="row">
          <div class="head-section client-head">
             <div class="col-md-3 col-sm-4 col-xs-12">
