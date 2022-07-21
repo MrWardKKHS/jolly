@@ -40,9 +40,6 @@
                 <a href="\" class="hvr-bounce-to-bottom"><i class="fa fa-google-plus" aria-hidden="true"></i></a> 
                 <a href="\" class="hvr-bounce-to-bottom"><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
              </div>
-             <div class="search-column">
-                <button name="button" type="button" class="search-btn"  data-toggle="modal" data-target=".bs-example-modal-lg"></button>
-             </div>
              <span class="display-none">
              <a class="header-requestbtn hvr-bounce-to-right" href="request-quote">Request A Quote</a></span>
           </div>

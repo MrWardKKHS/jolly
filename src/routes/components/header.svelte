@@ -20,9 +20,6 @@
                    <a href="\" ><i class="fa fa-youtube" aria-hidden="true"></i></a> 
                    <a href="\" ><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
                 </div>
-                <div class="search-column">
-                   <button name="button" type="button" class="search-btn"  data-toggle="modal" data-target=".bs-example-modal-lg"></button>
-                </div>
              </div>
              <span class="display-block">
              <a class="header-requestbtn hvr-bounce-to-right " href="request-quote">Request A Quote</a>
@@ -32,3 +29,11 @@
     </div>
     <Nav/>
  </header>
+
+ <style>
+@media only screen and (max-width: 767px) {
+	.header-socials {
+      display: none;
+   }
+}
+ </style>

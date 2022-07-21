@@ -173,7 +173,7 @@ var init_multipart_parser = __esm({
         let i2 = 0;
         const length_ = data.length;
         let previousIndex = this.index;
-        let { lookbehind, boundary, boundaryChars, index: index36, state, flags } = this;
+        let { lookbehind, boundary, boundaryChars, index: index37, state, flags } = this;
         const boundaryLength = this.boundary.length;
         const boundaryEnd = boundaryLength - 1;
         const bufferLength = data.length;
@@ -207,20 +207,20 @@ var init_multipart_parser = __esm({
           c = data[i2];
           switch (state) {
             case S.START_BOUNDARY:
-              if (index36 === boundary.length - 2) {
+              if (index37 === boundary.length - 2) {
                 if (c === HYPHEN) {
                   flags |= F.LAST_BOUNDARY;
                 } else if (c !== CR) {
                   return;
                 }
-                index36++;
+                index37++;
                 break;
-              } else if (index36 - 1 === boundary.length - 2) {
+              } else if (index37 - 1 === boundary.length - 2) {
                 if (flags & F.LAST_BOUNDARY && c === HYPHEN) {
                   state = S.END;
                   flags = 0;
                 } else if (!(flags & F.LAST_BOUNDARY) && c === LF) {
-                  index36 = 0;
+                  index37 = 0;
                   callback("onPartBegin");
                   state = S.HEADER_FIELD_START;
                 } else {
@@ -228,29 +228,29 @@ var init_multipart_parser = __esm({
                 }
                 break;
               }
-              if (c !== boundary[index36 + 2]) {
-                index36 = -2;
+              if (c !== boundary[index37 + 2]) {
+                index37 = -2;
               }
-              if (c === boundary[index36 + 2]) {
-                index36++;
+              if (c === boundary[index37 + 2]) {
+                index37++;
               }
               break;
             case S.HEADER_FIELD_START:
               state = S.HEADER_FIELD;
               mark("onHeaderField");
-              index36 = 0;
+              index37 = 0;
             case S.HEADER_FIELD:
               if (c === CR) {
                 clear("onHeaderField");
                 state = S.HEADERS_ALMOST_DONE;
                 break;
               }
-              index36++;
+              index37++;
               if (c === HYPHEN) {
                 break;
               }
               if (c === COLON) {
-                if (index36 === 1) {
+                if (index37 === 1) {
                   return;
                 }
                 dataCallback("onHeaderField", true);
@@ -292,8 +292,8 @@ var init_multipart_parser = __esm({
               state = S.PART_DATA;
               mark("onPartData");
             case S.PART_DATA:
-              previousIndex = index36;
-              if (index36 === 0) {
+              previousIndex = index37;
+              if (index37 === 0) {
                 i2 += boundaryEnd;
                 while (i2 < bufferLength && !(data[i2] in boundaryChars)) {
                   i2 += boundaryLength;
@@ -301,27 +301,27 @@ var init_multipart_parser = __esm({
                 i2 -= boundaryEnd;
                 c = data[i2];
               }
-              if (index36 < boundary.length) {
-                if (boundary[index36] === c) {
-                  if (index36 === 0) {
+              if (index37 < boundary.length) {
+                if (boundary[index37] === c) {
+                  if (index37 === 0) {
                     dataCallback("onPartData", true);
                   }
-                  index36++;
+                  index37++;
                 } else {
-                  index36 = 0;
+                  index37 = 0;
                 }
-              } else if (index36 === boundary.length) {
-                index36++;
+              } else if (index37 === boundary.length) {
+                index37++;
                 if (c === CR) {
                   flags |= F.PART_BOUNDARY;
                 } else if (c === HYPHEN) {
                   flags |= F.LAST_BOUNDARY;
                 } else {
-                  index36 = 0;
+                  index37 = 0;
                 }
-              } else if (index36 - 1 === boundary.length) {
+              } else if (index37 - 1 === boundary.length) {
                 if (flags & F.PART_BOUNDARY) {
-                  index36 = 0;
+                  index37 = 0;
                   if (c === LF) {
                     flags &= ~F.PART_BOUNDARY;
                     callback("onPartEnd");
@@ -335,14 +335,14 @@ var init_multipart_parser = __esm({
                     state = S.END;
                     flags = 0;
                   } else {
-                    index36 = 0;
+                    index37 = 0;
                   }
                 } else {
-                  index36 = 0;
+                  index37 = 0;
                 }
               }
-              if (index36 > 0) {
-                lookbehind[index36 - 1] = c;
+              if (index37 > 0) {
+                lookbehind[index37 - 1] = c;
               } else if (previousIndex > 0) {
                 const _lookbehind = new Uint8Array(lookbehind.buffer, lookbehind.byteOffset, lookbehind.byteLength);
                 callback("onPartData", 0, previousIndex, _lookbehind);
@@ -360,7 +360,7 @@ var init_multipart_parser = __esm({
         dataCallback("onHeaderField");
         dataCallback("onHeaderValue");
         dataCallback("onPartData");
-        this.index = index36;
+        this.index = index37;
         this.state = state;
         this.flags = flags;
       }
@@ -498,9 +498,9 @@ async function consumeBody(data) {
   }
 }
 function fromRawHeaders(headers = []) {
-  return new Headers2(headers.reduce((result, value, index36, array2) => {
-    if (index36 % 2 === 0) {
-      result.push(array2.slice(index36, index36 + 2));
+  return new Headers2(headers.reduce((result, value, index37, array2) => {
+    if (index37 % 2 === 0) {
+      result.push(array2.slice(index37, index37 + 2));
     }
     return result;
   }, []).filter(([name, value]) => {
@@ -1615,10 +1615,10 @@ var init_polyfills = __esm({
           [PullSteps](readRequest) {
             const stream = this._controlledReadableByteStream;
             if (this._queueTotalSize > 0) {
-              const entry36 = this._queue.shift();
-              this._queueTotalSize -= entry36.byteLength;
+              const entry37 = this._queue.shift();
+              this._queueTotalSize -= entry37.byteLength;
               ReadableByteStreamControllerHandleQueueDrain(this);
-              const view = new Uint8Array(entry36.buffer, entry36.byteOffset, entry36.byteLength);
+              const view = new Uint8Array(entry37.buffer, entry37.byteOffset, entry37.byteLength);
               readRequest._chunkSteps(view);
               return;
             }
@@ -5509,7 +5509,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css39) => css39.code).join("\n"),
+          code: Array.from(result.css).map((css41) => css41.code).join("\n"),
           map: null
         },
         head: result.title + result.head
@@ -5581,8 +5581,8 @@ var init__ = __esm({
     init_shims();
     init_layout_svelte();
     index = 0;
-    entry = "layout.svelte-cf117eef.js";
-    js = ["layout.svelte-cf117eef.js", "chunks/index-d241cd96.js"];
+    entry = "layout.svelte-507dd2a9.js";
+    js = ["layout.svelte-507dd2a9.js", "chunks/index-a54bfd4c.js"];
     css = [];
   }
 });
@@ -5635,8 +5635,8 @@ var init__2 = __esm({
     init_shims();
     init_error_svelte();
     index2 = 1;
-    entry2 = "error.svelte-717d5f4a.js";
-    js2 = ["error.svelte-717d5f4a.js", "chunks/index-d241cd96.js"];
+    entry2 = "error.svelte-127039f7.js";
+    js2 = ["error.svelte-127039f7.js", "chunks/index-a54bfd4c.js"];
     css2 = [];
   }
 });
@@ -5652,46 +5652,75 @@ var init_footer_svelte = __esm({
     init_shims();
     init_index_2835083a();
     css3 = {
-      code: `.solution-available.svelte-1c65brq.svelte-1c65brq{padding:20px 0px 21px}.solution-available.svelte-1c65brq h5.svelte-1c65brq{font-size:30px;color:#000;font-weight:400;font-family:'Open Sans', sans-serif;text-transform:none;margin:10px 20px;display:inline-block}.solution-available.svelte-1c65brq h5 span.svelte-1c65brq{font-weight:700}a.header-requestbtn.contactus-btn.svelte-1c65brq.svelte-1c65brq{background:#fff;color:#000;width:200px;float:none;display:inline-block;font-size:16px;margin:-15px 0px 0px;text-align:center}a.header-requestbtn.contactus-btn.svelte-1c65brq.svelte-1c65brq:hover{color:#fff}.ftr-section.svelte-1c65brq.svelte-1c65brq{background:#0b0c0c;width:100%;float:left;padding:80px 0px 0px;background-size:cover}.ftr-section.svelte-1c65brq h6.svelte-1c65brq{font-size:18px;color:#b6b6b7;text-transform:none;font-weight:600;margin-bottom:25px}.ftr-section.svelte-1c65brq p.svelte-1c65brq{color:#757575}ul.footer-info.svelte-1c65brq.svelte-1c65brq{width:100%;float:left;margin:0px 0px 70px;padding:0px;border-bottom:1px solid #373737}ul.footer-info.svelte-1c65brq li.svelte-1c65brq{list-style:none;float:left;width:auto;font-size:18px;color:#c8c8c8;padding:8px 40px 23px 35px;border-right:1px solid #373737;margin-right:49px;position:relative}ul.footer-info.svelte-1c65brq li.svelte-1c65brq:last-child{border-right:0px;margin:0px}ul.footer-info.svelte-1c65brq li.svelte-1c65brq:before{position:absolute;font-family:'FontAwesome';top:3px;left:0px;font-size:20px !important;color:#f2ae2b}ul.footer-info.svelte-1c65brq li.ftr-loc.svelte-1c65brq{font-size:16px;padding:0px 40px 12px 35px}ul.footer-info.svelte-1c65brq li.ftr-loc.svelte-1c65brq:before{content:"\\f041";top:9px}ul.footer-info.svelte-1c65brq li.ftr-phn.svelte-1c65brq:before{content:"\\f095";top:8px}ul.footer-info.svelte-1c65brq li.ftr-msg.svelte-1c65brq:before{content:"\\f0e0";font-size:15px!important;top:10px}ul.footer-info.svelte-1c65brq li.ftr-support.svelte-1c65brq:before{content:"\\f017";top:7px}.ftr-about-text.svelte-1c65brq.svelte-1c65brq{padding-right:70px;float:left}a.ftr-read-more.svelte-1c65brq.svelte-1c65brq{font-size:14px;color:#c8c8c8;font-weight:700;font-family:'Lato', sans-serif;border:1px solid #676868;padding:8px 20px;display:block;float:left;text-decoration:none}a.ftr-read-more.svelte-1c65brq.svelte-1c65brq:hover{color:#f2ae2b;border:1px solid #f2ae2b}ul.footer-link.svelte-1c65brq.svelte-1c65brq{width:100%;float:left;margin:0px;padding:0px}ul.footer-link.svelte-1c65brq li.svelte-1c65brq{list-style:none;float:left;font-size:15px;margin-bottom:10px;width:100%}ul.footer-link.svelte-1c65brq li a.svelte-1c65brq{color:#757575;text-decoration:none}ul.footer-link.svelte-1c65brq li a.svelte-1c65brq:hover{color:#f2ae2b !important}.header-socials.footer-socials.svelte-1c65brq.svelte-1c65brq{margin:0px 0px 30px;width:100%;float:left}.header-socials.footer-socials.svelte-1c65brq i.svelte-1c65brq{width:30px;height:30px;line-height:28px;border:2px solid #515151;border-radius:30px;margin:0px 3px 0px 0px;color:#fff;text-align:center}.header-socials.footer-socials.svelte-1c65brq i.svelte-1c65brq:hover{color:#f2ae2b;border:2px solid #f2ae2b}.ftr-logo.svelte-1c65brq.svelte-1c65brq{width:auto;float:left}.footer-btm.svelte-1c65brq.svelte-1c65brq{width:100%;float:left;border-top:1px solid #373737;padding:22px 0px 26px;margin:60px 0px 0px}`,
+      code: `.solution-available.svelte-rnyrhp.svelte-rnyrhp{padding:20px 0px 21px}.solution-available.svelte-rnyrhp h5.svelte-rnyrhp{font-size:30px;color:#000;font-weight:400;font-family:'Open Sans', sans-serif;text-transform:none;margin:10px 20px;display:inline-block}.solution-available.svelte-rnyrhp h5 span.svelte-rnyrhp{font-weight:700}a.header-requestbtn.contactus-btn.svelte-rnyrhp.svelte-rnyrhp{background:#fff;color:#000;width:200px;float:none;display:inline-block;font-size:16px;margin:-15px 0px 0px;text-align:center}a.header-requestbtn.contactus-btn.svelte-rnyrhp.svelte-rnyrhp:hover{color:#fff}.ftr-section.svelte-rnyrhp.svelte-rnyrhp{background:#0b0c0c;width:100%;float:left;padding:80px 0px 0px;background-size:cover}.ftr-section.svelte-rnyrhp h6.svelte-rnyrhp{font-size:18px;color:#b6b6b7;text-transform:none;font-weight:600;margin-bottom:25px}.ftr-section.svelte-rnyrhp p.svelte-rnyrhp{color:#757575}ul.footer-info.svelte-rnyrhp.svelte-rnyrhp{width:100%;margin:0px 0px 70px;padding:0px;border-bottom:1px solid #373737;display:grid;grid-template-columns:1fr 1fr 1fr}ul.footer-info.svelte-rnyrhp li.svelte-rnyrhp{list-style:none;width:auto;font-size:18px;color:#c8c8c8;padding:8px 40px 23px 35px;border-right:1px solid #373737;margin-right:49px;position:relative}ul.footer-info.svelte-rnyrhp li.svelte-rnyrhp:last-child{border-right:0px;margin:0px}ul.footer-info.svelte-rnyrhp li.svelte-rnyrhp:before{position:absolute;font-family:'FontAwesome';top:3px;left:0px;font-size:20px !important;color:#f2ae2b}ul.footer-info.svelte-rnyrhp li.ftr-loc.svelte-rnyrhp{font-size:16px;padding:0px 40px 12px 35px}ul.footer-info.svelte-rnyrhp li.ftr-loc.svelte-rnyrhp:before{content:"\\f041";top:9px}ul.footer-info.svelte-rnyrhp li.ftr-phn.svelte-rnyrhp:before{content:"\\f095";top:8px}ul.footer-info.svelte-rnyrhp li.ftr-msg.svelte-rnyrhp:before{content:"\\f0e0";font-size:15px!important;top:10px}ul.footer-info.svelte-rnyrhp li.ftr-support.svelte-rnyrhp:before{content:"\\f017";top:7px}.ftr-about-text.svelte-rnyrhp.svelte-rnyrhp{padding-right:70px;float:left}a.ftr-read-more.svelte-rnyrhp.svelte-rnyrhp{font-size:14px;color:#c8c8c8;font-weight:700;font-family:'Lato', sans-serif;border:1px solid #676868;padding:8px 20px;display:block;float:left;text-decoration:none}a.ftr-read-more.svelte-rnyrhp.svelte-rnyrhp:hover{color:#f2ae2b;border:1px solid #f2ae2b}ul.footer-link.svelte-rnyrhp.svelte-rnyrhp{width:100%;float:left;margin:0px;padding:0px}ul.footer-link.svelte-rnyrhp li.svelte-rnyrhp{list-style:none;float:left;font-size:15px;margin-bottom:10px;width:100%}ul.footer-link.svelte-rnyrhp li a.svelte-rnyrhp{color:#757575;text-decoration:none}ul.footer-link.svelte-rnyrhp li a.svelte-rnyrhp:hover{color:#f2ae2b !important}.header-socials.footer-socials.svelte-rnyrhp.svelte-rnyrhp{margin:0px 0px 30px;width:100%;float:left}.header-socials.footer-socials.svelte-rnyrhp i.svelte-rnyrhp{width:30px;height:30px;line-height:28px;border:2px solid #515151;border-radius:30px;margin:0px 3px 0px 0px;color:#fff;text-align:center}.header-socials.footer-socials.svelte-rnyrhp i.svelte-rnyrhp:hover{color:#f2ae2b;border:2px solid #f2ae2b}.ftr-logo.svelte-rnyrhp.svelte-rnyrhp{width:auto;float:left}.footer-btm.svelte-rnyrhp.svelte-rnyrhp{width:100%;float:left;border-top:1px solid #373737;padding:22px 0px 26px;margin:60px 0px 0px}@media only screen and (max-width: 767px){a.header-requestbtn.contactus-btn.svelte-rnyrhp.svelte-rnyrhp{margin:5px 0px 0px}ul.footer-info.svelte-rnyrhp.svelte-rnyrhp{display:flex;flex-direction:column}}`,
       map: null
     };
     Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css3);
-      return `<footer><div class="${"yellow-background solution-available text-center svelte-1c65brq"}"><div class="${"container"}"><h5 class="${"svelte-1c65brq"}">For Any Solution We Are <span class="${"svelte-1c65brq"}">Available</span> For You</h5>
-         <a data-animation="${"animated fadeInUp"}" class="${"header-requestbtn contactus-btn hvr-bounce-to-right svelte-1c65brq"}" href="${"contact"}">Contact us</a></div></div>
-   <div class="${"ftr-section svelte-1c65brq"}"><div class="${"container"}"><ul class="${"footer-info svelte-1c65brq"}"><li class="${"ftr-loc svelte-1c65brq"}">121  Maxwell Farm Road,<br> Washington DC, USA</li>
-            <li class="${"ftr-phn svelte-1c65brq"}">+1 (123) 456-7890</li>
-            <li class="${"ftr-msg svelte-1c65brq"}">info@indofact.com</li>
-            <li class="${"ftr-support svelte-1c65brq"}">9 To 5 Working Hours</li></ul>
-         <div class="${"row"}"><div class="${"col-md-4 col-sm-6 col-xs-12 ftr-about-text svelte-1c65brq"}"><h6 class="${"svelte-1c65brq"}">About Us</h6>
-               <p class="${"marbtm20 line-height26 svelte-1c65brq"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-               <a class="${"ftr-read-more svelte-1c65brq"}" href="${"about"}">Read More</a></div>
-            <div class="${"col-md-3 col-sm-6 col-xs-12 ftr-sol-column"}"><h6 class="${"svelte-1c65brq"}">Our Solutions</h6>
-               <ul class="${"footer-link svelte-1c65brq"}"><li class="${"svelte-1c65brq"}"><a href="${"manufacturing"}" class="${"svelte-1c65brq"}">- Manufacturing</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"cnc-industry"}" class="${"svelte-1c65brq"}">- CNC Industry</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"chemical-industry"}" class="${"svelte-1c65brq"}">- Chemical Industry</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"energy-engineering"}" class="${"svelte-1c65brq"}">- Energy Engineering</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"oil-industry"}" class="${"svelte-1c65brq"}">- Oil Industry</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"material-engineering"}" class="${"svelte-1c65brq"}">- Material Engineering</a></li></ul></div>
-            <div class="${"col-md-2 col-sm-6 col-xs-12 ftr-link-column"}"><h6 class="${"svelte-1c65brq"}">Quick Links</h6>
-               <ul class="${"footer-link svelte-1c65brq"}"><li class="${"svelte-1c65brq"}"><a href="${"about"}" class="${"svelte-1c65brq"}">- About Us</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"blog"}" class="${"svelte-1c65brq"}">- News</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"testimonials"}" class="${"svelte-1c65brq"}">- Testimonials</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"request-quote"}" class="${"svelte-1c65brq"}">- Request A Quote</a></li>
-                  <li class="${"svelte-1c65brq"}"><a href="${"faq"}" class="${"svelte-1c65brq"}">- FAQ</a></li></ul></div>
-            <div class="${"col-md-3 col-sm-6 col-xs-12 ftr-follow-column pull-right"}"><h6 class="${"svelte-1c65brq"}">Follow Us</h6>
-               <div class="${"header-socials footer-socials svelte-1c65brq"}"><a href="${"\\"}"><i class="${"fa fa-facebook svelte-1c65brq"}" aria-hidden="${"true"}"></i></a> 
-                  <a href="${"\\"}"><i class="${"fa fa-twitter svelte-1c65brq"}" aria-hidden="${"true"}"></i></a> 
-                  <a href="${"\\"}"><i class="${"fa fa-google-plus svelte-1c65brq"}" aria-hidden="${"true"}"></i></a> 
-                  <a href="${"\\"}"><i class="${"fa fa-linkedin svelte-1c65brq"}" aria-hidden="${"true"}"></i></a></div>
-               <span class="${"ftr-logo img svelte-1c65brq"}"><img src="${"images/ftr-logo.png"}" class="${"img-responsive"}" alt="${"logo-image"}"></span></div></div>
-         <div class="${"footer-btm svelte-1c65brq"}"><div class="${"col-md-6 col-sm-6 col-xs-12 pad-left_zero pad-right_zero"}"><p class="${"svelte-1c65brq"}">Copyright \xA9 2022 Alex Ward All Rights Reserved.</p></div>
-            <div class="${"col-md-4 col-sm-6 col-xs-12 pad-left_zero pad-right_zero pull-right"}"><p class="${"text-right svelte-1c65brq"}">Theme by: <a href="${"https://themeforest.net/user/themechampion"}">ThemeChampion</a></p></div></div></div></div></footer>
+      return `<footer><div class="${"yellow-background solution-available text-center svelte-rnyrhp"}"><div class="${"container"}"><h5 class="${"svelte-rnyrhp"}">For Any Solution We Are <span class="${"svelte-rnyrhp"}">Available</span> For You</h5>
+         <a data-animation="${"animated fadeInUp"}" class="${"header-requestbtn contactus-btn hvr-bounce-to-right svelte-rnyrhp"}" href="${"contact"}">Contact us</a></div></div>
+   <div class="${"ftr-section svelte-rnyrhp"}"><div class="${"container"}"><ul class="${"footer-info svelte-rnyrhp"}"><li class="${"ftr-loc svelte-rnyrhp"}">121  Maxwell Farm Road,<br> Washington DC, USA</li>
+               <li class="${"ftr-phn svelte-rnyrhp"}">+1 (123) 456-7890</li>
+               <li class="${"ftr-msg svelte-rnyrhp"}">info@indofact.com</li>
+               <li class="${"svelte-rnyrhp"}"></li>
+               <li class="${"ftr-support svelte-rnyrhp"}">9 To 5 Working Hours</li>
+               <li class="${"svelte-rnyrhp"}"></li></ul>
+         <div class="${"row"}"><div class="${"col-md-4 col-sm-6 col-xs-12 ftr-about-text svelte-rnyrhp"}"><h6 class="${"svelte-rnyrhp"}">About Us</h6>
+               <p class="${"marbtm20 line-height26 svelte-rnyrhp"}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+               <a class="${"ftr-read-more svelte-rnyrhp"}" href="${"about"}">Read More</a></div>
+            <div class="${"col-md-3 col-sm-6 col-xs-12 ftr-sol-column"}"><h6 class="${"svelte-rnyrhp"}">Our Solutions</h6>
+               <ul class="${"footer-link svelte-rnyrhp"}"><li class="${"svelte-rnyrhp"}"><a href="${"manufacturing"}" class="${"svelte-rnyrhp"}">- Manufacturing</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"cnc-industry"}" class="${"svelte-rnyrhp"}">- CNC Industry</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"chemical-industry"}" class="${"svelte-rnyrhp"}">- Chemical Industry</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"energy-engineering"}" class="${"svelte-rnyrhp"}">- Energy Engineering</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"oil-industry"}" class="${"svelte-rnyrhp"}">- Oil Industry</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"material-engineering"}" class="${"svelte-rnyrhp"}">- Material Engineering</a></li></ul></div>
+            <div class="${"col-md-2 col-sm-6 col-xs-12 ftr-link-column"}"><h6 class="${"svelte-rnyrhp"}">Quick Links</h6>
+               <ul class="${"footer-link svelte-rnyrhp"}"><li class="${"svelte-rnyrhp"}"><a href="${"about"}" class="${"svelte-rnyrhp"}">- About Us</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"blog"}" class="${"svelte-rnyrhp"}">- News</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"testimonials"}" class="${"svelte-rnyrhp"}">- Testimonials</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"request-quote"}" class="${"svelte-rnyrhp"}">- Request A Quote</a></li>
+                  <li class="${"svelte-rnyrhp"}"><a href="${"faq"}" class="${"svelte-rnyrhp"}">- FAQ</a></li></ul></div>
+            <div class="${"col-md-3 col-sm-6 col-xs-12 ftr-follow-column pull-right"}"><h6 class="${"svelte-rnyrhp"}">Follow Us</h6>
+               <div class="${"header-socials footer-socials svelte-rnyrhp"}"><a href="${"\\"}"><i class="${"fa fa-facebook svelte-rnyrhp"}" aria-hidden="${"true"}"></i></a> 
+                  <a href="${"\\"}"><i class="${"fa fa-twitter svelte-rnyrhp"}" aria-hidden="${"true"}"></i></a> 
+                  <a href="${"\\"}"><i class="${"fa fa-google-plus svelte-rnyrhp"}" aria-hidden="${"true"}"></i></a> 
+                  <a href="${"\\"}"><i class="${"fa fa-linkedin svelte-rnyrhp"}" aria-hidden="${"true"}"></i></a></div>
+               <span class="${"ftr-logo img svelte-rnyrhp"}"><img src="${"images/ftr-logo.png"}" class="${"img-responsive"}" alt="${"logo-image"}"></span></div></div>
+         <div class="${"footer-btm svelte-rnyrhp"}"><div class="${"col-md-6 col-sm-6 col-xs-12 pad-left_zero pad-right_zero"}"><p class="${"svelte-rnyrhp"}">Copyright \xA9 2022 Alex Ward All Rights Reserved.</p></div></div></div></div></footer>
 
 <div class="${"modal fade bs-example-modal-lg"}" tabindex="${"-1"}" role="${"dialog"}"><div class="${"modal-dialog modal-lg"}"><div class="${"modal-content"}"><div class="${"modal-body"}"><h3>Search</h3>
             <div class="${"search-form"}"><input type="${"text"}" class="${"search_lightbox_input"}" placeholder="${"Search..."}">
                <input type="${"text"}" class="${"search_lghtbox_btn"}"></div></div></div></div>
 </div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/components/projectItem.svelte.js
+var projectItem_svelte_exports = {};
+__export(projectItem_svelte_exports, {
+  default: () => ProjectItem
+});
+var ProjectItem;
+var init_projectItem_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/components/projectItem.svelte.js"() {
+    init_shims();
+    init_index_2835083a();
+    ProjectItem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { href } = $$props;
+      let { img } = $$props;
+      let { active = false } = $$props;
+      if ($$props.href === void 0 && $$bindings.href && href !== void 0)
+        $$bindings.href(href);
+      if ($$props.img === void 0 && $$bindings.img && img !== void 0)
+        $$bindings.img(img);
+      if ($$props.active === void 0 && $$bindings.active && active !== void 0)
+        $$bindings.active(active);
+      return `<div class="${["item", active === "true" ? "active" : ""].join(" ").trim()}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero "}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}"${add_attribute("href", href, 0)}><img class="${"img-full img-responsive"}" src="${"images/home1-images/" + escape(img)}" alt="${"Project1"}">
+          <div class="${"tour-layer delay-1"}"></div>
+          <div class="${"vertical-align"}"><div class="${"border"}"><h5>${slots.default ? slots.default({}) : `No title`}</h5></div>
+                <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div>`;
     });
   }
 });
@@ -5764,6 +5793,7 @@ var init_home_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/home.svelte.js"() {
     init_shims();
     init_index_2835083a();
+    init_projectItem_svelte();
     init_service_svelte();
     init_video_svelte();
     Home = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -5860,137 +5890,43 @@ var init_home_svelte = __esm({
 ${validate_component(Video, "Video").$$render($$result, {}, {}, {})}
 
 <section class="${"recent-project-section projectsec1"}"><div class="${"container"}"><h3 class="${"black-color"}">Our Projects</h3></div>
-   <ul class="${"nav nav-tabs"}" role="${"tablist"}"><li role="${"presentation"}" class="${"active"}"><a href="${"#all"}" aria-controls="${"all"}" role="${"tab"}" data-toggle="${"tab"}">All Projects</a></li>
-      <li role="${"presentation"}"><a href="${"#eco"}" aria-controls="${"eco"}" role="${"tab"}" data-toggle="${"tab"}">Eco</a></li>
-      <li role="${"presentation"}"><a href="${"#manufacturing"}" aria-controls="${"manufacturing"}" role="${"tab"}" data-toggle="${"tab"}">Manufacturing</a></li>
-      <li role="${"presentation"}"><a href="${"#industry"}" aria-controls="${"industry"}" role="${"tab"}" data-toggle="${"tab"}">Industry</a></li>
-      <li role="${"presentation"}"><a href="${"#oil"}" aria-controls="${"oil"}" role="${"tab"}" data-toggle="${"tab"}">Oil</a></li>
-      <li role="${"presentation"}"><a href="${"#gas"}" aria-controls="${"gas"}" role="${"tab"}" data-toggle="${"tab"}">Gas</a></li></ul>
    
-   <div class="${"tab-content"}"><div role="${"tabpanel"}" class="${"tab-pane active"}" id="${"all"}"><div class="${"full_wrapper carousel slide four_shows_one_move home1-project"}" id="${"our_project"}" data-ride="${"carousel"}"><div class="${"controls"}"><a class="${"left fa fa-angle-left next_prve_control"}" href="${"#our_project"}" data-slide="${"prev"}"></a><a class="${"right fa fa-angle-right next_prve_control"}" href="${"#our_project"}" data-slide="${"next"}"></a></div>
+   <div class="${"tab-content"}"><div role="${"tabpanel"}" class="${"tab-pane active"}" id="${"all"}"><div class="${"full_wrapper carousel slide four_shows_one_move home1-project"}" id="${"our_project"}" data-ride="${"carousel"}"><div class="${"controls"}"><a class="${"left fa fa-angle-left next_prve_control"}" href="${"#our_project"}" data-slide="${"prev"}"></a>
+               <a class="${"right fa fa-angle-right next_prve_control"}" href="${"#our_project"}" data-slide="${"next"}"></a></div>
             
-            <div class="${"carousel-inner"}"><div class="${"item active"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero "}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"oil-plant"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-petrochemical-project1.jpg"}" alt="${"Project1"}">
-                        <div class="${"tour-layer delay-1"}"></div>
-                        <div class="${"vertical-align"}"><div class="${"border"}"><h5>PETRO CHEMICALS</h5></div>
-                              <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"electronical"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-electronic-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>ELECTRONIC PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"factory-farm"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-farm-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>FACTORY FARM</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"gas-pipeline"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-gaspipeline-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>GAS &amp; PIPELINE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"oil-plant"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-oilplant-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>OIL PLANT PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"petro-chemicals"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-petrochemical-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>PETRO CHEMICALS</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div></div></div></div>
-      <div role="${"tabpanel"}" class="${"tab-pane"}" id="${"eco"}"><div class="${"full_wrapper carousel slide four_shows_one_move home1-project"}" id="${"our_project1"}" data-ride="${"carousel"}"><div class="${"controls"}"><a class="${"left fa fa-angle-left next_prve_control"}" href="${"#our_project1"}" data-slide="${"prev"}"></a><a class="${"right fa fa-angle-right next_prve_control"}" href="${"#our_project1"}" data-slide="${"next"}"></a></div>
-            
-            <div class="${"carousel-inner"}"><div class="${"item active"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"agriculture"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/eco-project-image1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>AGRICULTURE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"factory-farm"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/eco-project-image2.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>FACTORY FARM</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"oil-plant"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/eco-project-image3.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>OIL PLANT PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"oil-plant"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/eco-project-image4.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>OIL PLANT PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div></div></div></div>
-      <div role="${"tabpanel"}" class="${"tab-pane"}" id="${"manufacturing"}"><div class="${"full_wrapper carousel slide four_shows_one_move home1-project"}" id="${"our_project2"}" data-ride="${"carousel"}"><div class="${"controls"}"><a class="${"left fa fa-angle-left next_prve_control"}" href="${"#our_project2"}" data-slide="${"prev"}"></a><a class="${"right fa fa-angle-right next_prve_control"}" href="${"#our_project2"}" data-slide="${"next"}"></a></div>
-            
-            <div class="${"carousel-inner"}"><div class="${"item active"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"agriculture"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/manufacturing-project-image1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>AGRICULTURE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"electronical"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/manufacturing-project-image2.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>ELECTRONIC PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"factory-farm"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/manufacturing-project-image3.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>FACTORY FARM</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"gas-pipeline"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/manufacturing-project-image4.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>GAS &amp; PIPELINE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div></div></div></div>
-      <div role="${"tabpanel"}" class="${"tab-pane"}" id="${"industry"}"><div class="${"full_wrapper carousel slide four_shows_one_move home1-project"}" id="${"our_project3"}" data-ride="${"carousel"}"><div class="${"controls"}"><a class="${"left fa fa-angle-left next_prve_control"}" href="${"#our_project3"}" data-slide="${"prev"}"></a><a class="${"right fa fa-angle-right next_prve_control"}" href="${"#our_project3"}" data-slide="${"next"}"></a></div>
-            
-            <div class="${"carousel-inner"}"><div class="${"item active"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"agriculture"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-agriculture-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>AGRICULTURE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"electronical"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-electronic-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>ELECTRONIC PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"factory-farm"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-farm-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>FACTORY FARM</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"gas-pipeline"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-gaspipeline-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>GAS &amp; PIPELINE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"oil-plant"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-oilplant-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>OIL PLANT PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"oil-plant"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-petrochemical-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>PETRO CHEMICALS</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div></div></div></div>
-      <div role="${"tabpanel"}" class="${"tab-pane"}" id="${"oil"}"><div class="${"full_wrapper carousel slide four_shows_one_move home1-project"}" id="${"our_project4"}" data-ride="${"carousel"}"><div class="${"controls"}"><a class="${"left fa fa-angle-left next_prve_control"}" href="${"#our_project4"}" data-slide="${"prev"}"></a><a class="${"right fa fa-angle-right next_prve_control"}" href="${"#our_project4"}" data-slide="${"next"}"></a></div>
-            
-            <div class="${"carousel-inner"}"><div class="${"item active"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero "}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"agriculture"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/oil-project-image1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>AGRICULTURE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"electronical"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/oil-project-image2.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>ELECTRONIC PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"factory-farm"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/oil-project-image3.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>FACTORY FARM</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"gas-pipeline"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/oil-project-image4.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>GAS &amp; PIPELINE</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div></div></div></div>
-      <div role="${"tabpanel"}" class="${"tab-pane"}" id="${"gas"}"><div class="${"full_wrapper carousel slide four_shows_one_move home1-project"}" id="${"our_project5"}" data-ride="${"carousel"}"><div class="${"controls"}"><a class="${"left fa fa-angle-left next_prve_control"}" href="${"#our_project5"}" data-slide="${"prev"}"></a><a class="${"right fa fa-angle-right next_prve_control"}" href="${"#our_project5"}" data-slide="${"next"}"></a></div>
-            
-            <div class="${"carousel-inner"}"><div class="${"item active"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"electronical"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-electronic-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>ELECTRONIC PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"factory-farm"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-farm-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>FACTORY FARM</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"oil-plant"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-oilplant-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>OIL PLANT PROJECT</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div>
-               <div class="${"item"}"><div class="${"col-lg-3 col-md-3 col-sm-6 col-xs-12 img pad_zero"}"><div class="${"grid"}"><div class="${"image-zoom-on-hover"}"><div class="${"gal-item"}"><a class="${"black-hover"}" href="${"petro-chemicals"}"><img class="${"img-full img-responsive"}" src="${"images/home1-images/home1-petrochemical-project1.jpg"}" alt="${"Project1"}">
-                           <div class="${"tour-layer delay-1"}"></div>
-                           <div class="${"vertical-align"}"><div class="${"border"}"><h5>PETRO CHEMICALS</h5></div>
-                                 <div class="${"view-all hvr-bounce-to-right slide_learn_btn view_project_btn"}"><span>View Project</span></div></div></a></div></div></div></div></div></div></div></div></div></section>
+            <div class="${"carousel-inner"}">${validate_component(ProjectItem, "ProjectItem").$$render($$result, {
+        href: "#",
+        img: "home1-electronic-project1.jpg",
+        active: "true"
+      }, {}, {
+        default: () => {
+          return `Project 1`;
+        }
+      })}
+               ${validate_component(ProjectItem, "ProjectItem").$$render($$result, {
+        href: "#",
+        img: "home1-electronic-project1.jpg"
+      }, {}, {
+        default: () => {
+          return `Project 2`;
+        }
+      })}
+               ${validate_component(ProjectItem, "ProjectItem").$$render($$result, {
+        href: "#",
+        img: "home1-electronic-project1.jpg"
+      }, {}, {
+        default: () => {
+          return `Project 3`;
+        }
+      })}
+               ${validate_component(ProjectItem, "ProjectItem").$$render($$result, {
+        href: "#",
+        img: "home1-electronic-project1.jpg"
+      }, {}, {
+        default: () => {
+          return `Project 4`;
+        }
+      })}</div></div></div></div></section>
 
 
 <section class="${"hight-level-section"}"><div class="${"container"}"><div class="${"row"}"><div class="${"col-md-12 text-center"}"><h2>In <span>quality assurance a constant effort </span> is made to enhance the quality practices in the organization.</h2></div>
@@ -6089,7 +6025,6 @@ var init_nav_svelte = __esm({
                 <a href="${"\\"}" class="${"hvr-bounce-to-bottom"}"><i class="${"fa fa-twitter"}" aria-hidden="${"true"}"></i></a> 
                 <a href="${"\\"}" class="${"hvr-bounce-to-bottom"}"><i class="${"fa fa-google-plus"}" aria-hidden="${"true"}"></i></a> 
                 <a href="${"\\"}" class="${"hvr-bounce-to-bottom"}"><i class="${"fa fa-linkedin"}" aria-hidden="${"true"}"></i></a></div>
-             <div class="${"search-column"}"><button name="${"button"}" type="${"button"}" class="${"search-btn"}" data-toggle="${"modal"}" data-target="${".bs-example-modal-lg"}"></button></div>
              <span class="${"display-none"}"><a class="${"header-requestbtn hvr-bounce-to-right"}" href="${"request-quote"}">Request A Quote</a></span></div></div></div></nav>`;
     });
   }
@@ -6100,23 +6035,28 @@ var header_svelte_exports = {};
 __export(header_svelte_exports, {
   default: () => Header
 });
-var Header;
+var css6, Header;
 var init_header_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/header.svelte.js"() {
     init_shims();
     init_index_2835083a();
     init_nav_svelte();
+    css6 = {
+      code: "@media only screen and (max-width: 767px){.header-socials.svelte-1sh5qgq{display:none}}",
+      map: null
+    };
     Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      $$result.css.add(css6);
       return `<header class="${"header1"}"><div class="${"container"}"><div class="${"row "}"><div class="${"col-lg-3 col-md-3 col-sm-12 col-xs-12 display-block "}"><a href="${"\\"}" class="${"logo"}"><img src="${"images/logo.png"}" class="${"img-responsive"}" alt="${"logo"}"></a></div>
           <div class="${"col-lg-8 col-md-9 col-sm-12 col-xs-12 pull-right"}"><ul class="${"header-info"}"><li class="${"address"}">121 Hihi Road, <br> Hihi, New Zealand</li>
                 <li class="${"phn"}">+64 (21) 678-902<br><a href="${"mailto:info@indofact.com"}">info@jollydiggers.com</a></li></ul>
-             <div class="${"mob-social display-none"}"><div class="${"header-socials "}"><a href="${"\\"}"><i class="${"fa fa-facebook"}" aria-hidden="${"true"}"></i></a> 
+             <div class="${"mob-social display-none"}"><div class="${"header-socials  svelte-1sh5qgq"}"><a href="${"\\"}"><i class="${"fa fa-facebook"}" aria-hidden="${"true"}"></i></a> 
                    <a href="${"\\"}"><i class="${"fa fa-twitter"}" aria-hidden="${"true"}"></i></a> 
                    <a href="${"\\"}"><i class="${"fa fa-youtube"}" aria-hidden="${"true"}"></i></a> 
-                   <a href="${"\\"}"><i class="${"fa fa-linkedin"}" aria-hidden="${"true"}"></i></a></div>
-                <div class="${"search-column"}"><button name="${"button"}" type="${"button"}" class="${"search-btn"}" data-toggle="${"modal"}" data-target="${".bs-example-modal-lg"}"></button></div></div>
+                   <a href="${"\\"}"><i class="${"fa fa-linkedin"}" aria-hidden="${"true"}"></i></a></div></div>
              <span class="${"display-block"}"><a class="${"header-requestbtn hvr-bounce-to-right "}" href="${"request-quote"}">Request A Quote</a></span></div></div></div>
-    ${validate_component(Nav, "Nav").$$render($$result, {}, {}, {})}</header>`;
+    ${validate_component(Nav, "Nav").$$render($$result, {}, {}, {})}
+ </header>`;
     });
   }
 });
@@ -6163,6 +6103,7 @@ var init_index_svelte = __esm({
     init_footer_svelte();
     init_home_svelte();
     init_base_svelte();
+    init_projectItem_svelte();
     init_service_svelte();
     init_video_svelte();
     init_header_svelte();
@@ -6175,24 +6116,24 @@ var init_index_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/22.js
+// .svelte-kit/output/server/nodes/23.js
 var __exports3 = {};
 __export(__exports3, {
-  css: () => css6,
+  css: () => css7,
   entry: () => entry3,
   index: () => index3,
   js: () => js3,
   module: () => index_svelte_exports
 });
-var index3, entry3, js3, css6;
+var index3, entry3, js3, css7;
 var init__3 = __esm({
-  ".svelte-kit/output/server/nodes/22.js"() {
+  ".svelte-kit/output/server/nodes/23.js"() {
     init_shims();
     init_index_svelte();
-    index3 = 22;
-    entry3 = "pages/index.svelte-8146ecd7.js";
-    js3 = ["pages/index.svelte-8146ecd7.js", "chunks/index-d241cd96.js", "pages/components/footer.svelte-9573ec46.js", "pages/components/home.svelte-04150ac7.js", "pages/components/service.svelte-f0d2547e.js", "pages/components/video.svelte-03a0fb18.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css6 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css", "assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css"];
+    index3 = 23;
+    entry3 = "pages/index.svelte-c97c823d.js";
+    js3 = ["pages/index.svelte-c97c823d.js", "chunks/index-a54bfd4c.js", "pages/components/footer.svelte-3c18ffe7.js", "pages/components/home.svelte-1318ff2d.js", "pages/components/projectItem.svelte-76594284.js", "pages/components/service.svelte-0d3033d8.js", "pages/components/video.svelte-896d84bd.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js"];
+    css7 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6323,21 +6264,21 @@ ${validate_component(Banner, "Banner").$$render($$result, { title: "About" }, {}
 // .svelte-kit/output/server/nodes/2.js
 var __exports4 = {};
 __export(__exports4, {
-  css: () => css7,
+  css: () => css8,
   entry: () => entry4,
   index: () => index4,
   js: () => js4,
   module: () => about_svelte_exports
 });
-var index4, entry4, js4, css7;
+var index4, entry4, js4, css8;
 var init__4 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     init_shims();
     init_about_svelte();
     index4 = 2;
-    entry4 = "pages/about.svelte-37e2969e.js";
-    js4 = ["pages/about.svelte-37e2969e.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css7 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    entry4 = "pages/about.svelte-3e1b3141.js";
+    js4 = ["pages/about.svelte-3e1b3141.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css8 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6400,21 +6341,21 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
 // .svelte-kit/output/server/nodes/3.js
 var __exports5 = {};
 __export(__exports5, {
-  css: () => css8,
+  css: () => css9,
   entry: () => entry5,
   index: () => index5,
   js: () => js5,
   module: () => agriculture_svelte_exports
 });
-var index5, entry5, js5, css8;
+var index5, entry5, js5, css9;
 var init__5 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     init_shims();
     init_agriculture_svelte();
     index5 = 3;
-    entry5 = "pages/agriculture.svelte-70ef0f4f.js";
-    js5 = ["pages/agriculture.svelte-70ef0f4f.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css8 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    entry5 = "pages/agriculture.svelte-01fbf4c4.js";
+    js5 = ["pages/agriculture.svelte-01fbf4c4.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css9 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6476,21 +6417,21 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
 // .svelte-kit/output/server/nodes/4.js
 var __exports6 = {};
 __export(__exports6, {
-  css: () => css9,
+  css: () => css10,
   entry: () => entry6,
   index: () => index6,
   js: () => js6,
   module: () => chemical_industry_svelte_exports
 });
-var index6, entry6, js6, css9;
+var index6, entry6, js6, css10;
 var init__6 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     init_shims();
     init_chemical_industry_svelte();
     index6 = 4;
-    entry6 = "pages/chemical-industry.svelte-3c42a1f3.js";
-    js6 = ["pages/chemical-industry.svelte-3c42a1f3.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css9 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    entry6 = "pages/chemical-industry.svelte-3f24320c.js";
+    js6 = ["pages/chemical-industry.svelte-3f24320c.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css10 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6558,21 +6499,21 @@ ${validate_component(Banner, "Banner").$$render($$result, { title: "About" }, {}
 // .svelte-kit/output/server/nodes/5.js
 var __exports7 = {};
 __export(__exports7, {
-  css: () => css10,
+  css: () => css11,
   entry: () => entry7,
   index: () => index7,
   js: () => js7,
   module: () => cnc_industry_svelte_exports
 });
-var index7, entry7, js7, css10;
+var index7, entry7, js7, css11;
 var init__7 = __esm({
   ".svelte-kit/output/server/nodes/5.js"() {
     init_shims();
     init_cnc_industry_svelte();
     index7 = 5;
-    entry7 = "pages/cnc-industry.svelte-edb437f9.js";
-    js7 = ["pages/cnc-industry.svelte-edb437f9.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css10 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    entry7 = "pages/cnc-industry.svelte-e1cb6d73.js";
+    js7 = ["pages/cnc-industry.svelte-e1cb6d73.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js"];
+    css11 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6625,21 +6566,21 @@ var init_coming_soon_svelte = __esm({
 // .svelte-kit/output/server/nodes/6.js
 var __exports8 = {};
 __export(__exports8, {
-  css: () => css11,
+  css: () => css12,
   entry: () => entry8,
   index: () => index8,
   js: () => js8,
   module: () => coming_soon_svelte_exports
 });
-var index8, entry8, js8, css11;
+var index8, entry8, js8, css12;
 var init__8 = __esm({
   ".svelte-kit/output/server/nodes/6.js"() {
     init_shims();
     init_coming_soon_svelte();
     index8 = 6;
-    entry8 = "pages/coming-soon.svelte-d937f1ee.js";
-    js8 = ["pages/coming-soon.svelte-d937f1ee.js", "chunks/index-d241cd96.js"];
-    css11 = [];
+    entry8 = "pages/coming-soon.svelte-d83ffc34.js";
+    js8 = ["pages/coming-soon.svelte-d83ffc34.js", "chunks/index-a54bfd4c.js"];
+    css12 = [];
   }
 });
 
@@ -6679,31 +6620,31 @@ ${validate_component(Banner, "Banner").$$render($$result, { title: "About" }, {}
                   <div class="${"col-lg-12 col-md-12 form-field"}"><textarea name="${"name"}" cols="${"1"}" rows="${"2"}" class="${"form-comment"}" placeholder="${"Comment*"}"></textarea></div>
                   <div class="${"col-md-12 form-field no-margin"}"><input name="${"name"}" type="${"button"}" class="${"form-submit-btn"}" value="${"Submit Now"}"></div></div></div></div></section>
 	
-      <div class="${"contact_map"}"><iframe src="${"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.7399040776495!2d-6.261147484122739!3d53.34791197997939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!3m2!1sen!2sus!4v1462581622087"}"></iframe></div>
+      <div class="${"contact_map"}"><iframe src="${"https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2678.8652419815016!2d174.55800778451027!3d-37.01634196723602!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snz!4v1658399107169!5m2!1sen!2snz"}"></iframe></div>
       
 ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
     });
   }
 });
 
-// .svelte-kit/output/server/nodes/16.js
+// .svelte-kit/output/server/nodes/17.js
 var __exports9 = {};
 __export(__exports9, {
-  css: () => css12,
+  css: () => css13,
   entry: () => entry9,
   index: () => index9,
   js: () => js9,
   module: () => contact_svelte_exports
 });
-var index9, entry9, js9, css12;
+var index9, entry9, js9, css13;
 var init__9 = __esm({
-  ".svelte-kit/output/server/nodes/16.js"() {
+  ".svelte-kit/output/server/nodes/17.js"() {
     init_shims();
     init_contact_svelte();
-    index9 = 16;
-    entry9 = "pages/contact.svelte-b60ee458.js";
-    js9 = ["pages/contact.svelte-b60ee458.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css12 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index9 = 17;
+    entry9 = "pages/contact.svelte-e9dcc33a.js";
+    js9 = ["pages/contact.svelte-e9dcc33a.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css13 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6761,24 +6702,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/17.js
+// .svelte-kit/output/server/nodes/18.js
 var __exports10 = {};
 __export(__exports10, {
-  css: () => css13,
+  css: () => css14,
   entry: () => entry10,
   index: () => index10,
   js: () => js10,
   module: () => electronical_svelte_exports
 });
-var index10, entry10, js10, css13;
+var index10, entry10, js10, css14;
 var init__10 = __esm({
-  ".svelte-kit/output/server/nodes/17.js"() {
+  ".svelte-kit/output/server/nodes/18.js"() {
     init_shims();
     init_electronical_svelte();
-    index10 = 17;
-    entry10 = "pages/electronical.svelte-3c93e2b1.js";
-    js10 = ["pages/electronical.svelte-3c93e2b1.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css13 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index10 = 18;
+    entry10 = "pages/electronical.svelte-cc255ec4.js";
+    js10 = ["pages/electronical.svelte-cc255ec4.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css14 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6835,24 +6776,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/18.js
+// .svelte-kit/output/server/nodes/19.js
 var __exports11 = {};
 __export(__exports11, {
-  css: () => css14,
+  css: () => css15,
   entry: () => entry11,
   index: () => index11,
   js: () => js11,
   module: () => energy_engineering_svelte_exports
 });
-var index11, entry11, js11, css14;
+var index11, entry11, js11, css15;
 var init__11 = __esm({
-  ".svelte-kit/output/server/nodes/18.js"() {
+  ".svelte-kit/output/server/nodes/19.js"() {
     init_shims();
     init_energy_engineering_svelte();
-    index11 = 18;
-    entry11 = "pages/energy-engineering.svelte-ea327814.js";
-    js11 = ["pages/energy-engineering.svelte-ea327814.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css14 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index11 = 19;
+    entry11 = "pages/energy-engineering.svelte-0fc3dd24.js";
+    js11 = ["pages/energy-engineering.svelte-0fc3dd24.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css15 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6911,24 +6852,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/19.js
+// .svelte-kit/output/server/nodes/20.js
 var __exports12 = {};
 __export(__exports12, {
-  css: () => css15,
+  css: () => css16,
   entry: () => entry12,
   index: () => index12,
   js: () => js12,
   module: () => factory_farm_svelte_exports
 });
-var index12, entry12, js12, css15;
+var index12, entry12, js12, css16;
 var init__12 = __esm({
-  ".svelte-kit/output/server/nodes/19.js"() {
+  ".svelte-kit/output/server/nodes/20.js"() {
     init_shims();
     init_factory_farm_svelte();
-    index12 = 19;
-    entry12 = "pages/factory-farm.svelte-fd1e4338.js";
-    js12 = ["pages/factory-farm.svelte-fd1e4338.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css15 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index12 = 20;
+    entry12 = "pages/factory-farm.svelte-4187f111.js";
+    js12 = ["pages/factory-farm.svelte-4187f111.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css16 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -6999,24 +6940,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/20.js
+// .svelte-kit/output/server/nodes/21.js
 var __exports13 = {};
 __export(__exports13, {
-  css: () => css16,
+  css: () => css17,
   entry: () => entry13,
   index: () => index13,
   js: () => js13,
   module: () => faq_svelte_exports
 });
-var index13, entry13, js13, css16;
+var index13, entry13, js13, css17;
 var init__13 = __esm({
-  ".svelte-kit/output/server/nodes/20.js"() {
+  ".svelte-kit/output/server/nodes/21.js"() {
     init_shims();
     init_faq_svelte();
-    index13 = 20;
-    entry13 = "pages/faq.svelte-936acaea.js";
-    js13 = ["pages/faq.svelte-936acaea.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css16 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index13 = 21;
+    entry13 = "pages/faq.svelte-d59bb42d.js";
+    js13 = ["pages/faq.svelte-d59bb42d.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css17 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7074,24 +7015,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/21.js
+// .svelte-kit/output/server/nodes/22.js
 var __exports14 = {};
 __export(__exports14, {
-  css: () => css17,
+  css: () => css18,
   entry: () => entry14,
   index: () => index14,
   js: () => js14,
   module: () => gas_pipeline_svelte_exports
 });
-var index14, entry14, js14, css17;
+var index14, entry14, js14, css18;
 var init__14 = __esm({
-  ".svelte-kit/output/server/nodes/21.js"() {
+  ".svelte-kit/output/server/nodes/22.js"() {
     init_shims();
     init_gas_pipeline_svelte();
-    index14 = 21;
-    entry14 = "pages/gas-pipeline.svelte-8d2ea148.js";
-    js14 = ["pages/gas-pipeline.svelte-8d2ea148.js", "chunks/index-d241cd96.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css17 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index14 = 22;
+    entry14 = "pages/gas-pipeline.svelte-ab549e0d.js";
+    js14 = ["pages/gas-pipeline.svelte-ab549e0d.js", "chunks/index-a54bfd4c.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css18 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7130,24 +7071,24 @@ var init_maintenance_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/23.js
+// .svelte-kit/output/server/nodes/24.js
 var __exports15 = {};
 __export(__exports15, {
-  css: () => css18,
+  css: () => css19,
   entry: () => entry15,
   index: () => index15,
   js: () => js15,
   module: () => maintenance_svelte_exports
 });
-var index15, entry15, js15, css18;
+var index15, entry15, js15, css19;
 var init__15 = __esm({
-  ".svelte-kit/output/server/nodes/23.js"() {
+  ".svelte-kit/output/server/nodes/24.js"() {
     init_shims();
     init_maintenance_svelte();
-    index15 = 23;
-    entry15 = "pages/maintenance.svelte-e44eac50.js";
-    js15 = ["pages/maintenance.svelte-e44eac50.js", "chunks/index-d241cd96.js"];
-    css18 = [];
+    index15 = 24;
+    entry15 = "pages/maintenance.svelte-1ce53e81.js";
+    js15 = ["pages/maintenance.svelte-1ce53e81.js", "chunks/index-a54bfd4c.js"];
+    css19 = [];
   }
 });
 
@@ -7217,24 +7158,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/24.js
+// .svelte-kit/output/server/nodes/25.js
 var __exports16 = {};
 __export(__exports16, {
-  css: () => css19,
+  css: () => css20,
   entry: () => entry16,
   index: () => index16,
   js: () => js16,
   module: () => manufacturing_svelte_exports
 });
-var index16, entry16, js16, css19;
+var index16, entry16, js16, css20;
 var init__16 = __esm({
-  ".svelte-kit/output/server/nodes/24.js"() {
+  ".svelte-kit/output/server/nodes/25.js"() {
     init_shims();
     init_manufacturing_svelte();
-    index16 = 24;
-    entry16 = "pages/manufacturing.svelte-5526f459.js";
-    js16 = ["pages/manufacturing.svelte-5526f459.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css19 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index16 = 25;
+    entry16 = "pages/manufacturing.svelte-38c2f397.js";
+    js16 = ["pages/manufacturing.svelte-38c2f397.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css20 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7327,24 +7268,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/25.js
+// .svelte-kit/output/server/nodes/26.js
 var __exports17 = {};
 __export(__exports17, {
-  css: () => css20,
+  css: () => css21,
   entry: () => entry17,
   index: () => index17,
   js: () => js17,
   module: () => material_engineering_svelte_exports
 });
-var index17, entry17, js17, css20;
+var index17, entry17, js17, css21;
 var init__17 = __esm({
-  ".svelte-kit/output/server/nodes/25.js"() {
+  ".svelte-kit/output/server/nodes/26.js"() {
     init_shims();
     init_material_engineering_svelte();
-    index17 = 25;
-    entry17 = "pages/material-engineering.svelte-63694f03.js";
-    js17 = ["pages/material-engineering.svelte-63694f03.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css20 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index17 = 26;
+    entry17 = "pages/material-engineering.svelte-41a23304.js";
+    js17 = ["pages/material-engineering.svelte-41a23304.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css21 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7400,24 +7341,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/26.js
+// .svelte-kit/output/server/nodes/27.js
 var __exports18 = {};
 __export(__exports18, {
-  css: () => css21,
+  css: () => css22,
   entry: () => entry18,
   index: () => index18,
   js: () => js18,
   module: () => oil_industry_svelte_exports
 });
-var index18, entry18, js18, css21;
+var index18, entry18, js18, css22;
 var init__18 = __esm({
-  ".svelte-kit/output/server/nodes/26.js"() {
+  ".svelte-kit/output/server/nodes/27.js"() {
     init_shims();
     init_oil_industry_svelte();
-    index18 = 26;
-    entry18 = "pages/oil-industry.svelte-b0cae45d.js";
-    js18 = ["pages/oil-industry.svelte-b0cae45d.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css21 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index18 = 27;
+    entry18 = "pages/oil-industry.svelte-f67f0e29.js";
+    js18 = ["pages/oil-industry.svelte-f67f0e29.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css22 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7474,24 +7415,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/27.js
+// .svelte-kit/output/server/nodes/28.js
 var __exports19 = {};
 __export(__exports19, {
-  css: () => css22,
+  css: () => css23,
   entry: () => entry19,
   index: () => index19,
   js: () => js19,
   module: () => oil_plant_svelte_exports
 });
-var index19, entry19, js19, css22;
+var index19, entry19, js19, css23;
 var init__19 = __esm({
-  ".svelte-kit/output/server/nodes/27.js"() {
+  ".svelte-kit/output/server/nodes/28.js"() {
     init_shims();
     init_oil_plant_svelte();
-    index19 = 27;
-    entry19 = "pages/oil-plant.svelte-b41e9c12.js";
-    js19 = ["pages/oil-plant.svelte-b41e9c12.js", "chunks/index-d241cd96.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css22 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index19 = 28;
+    entry19 = "pages/oil-plant.svelte-bd2c9a7c.js";
+    js19 = ["pages/oil-plant.svelte-bd2c9a7c.js", "chunks/index-a54bfd4c.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css23 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7521,24 +7462,24 @@ var init_page_404_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/28.js
+// .svelte-kit/output/server/nodes/29.js
 var __exports20 = {};
 __export(__exports20, {
-  css: () => css23,
+  css: () => css24,
   entry: () => entry20,
   index: () => index20,
   js: () => js20,
   module: () => page_404_svelte_exports
 });
-var index20, entry20, js20, css23;
+var index20, entry20, js20, css24;
 var init__20 = __esm({
-  ".svelte-kit/output/server/nodes/28.js"() {
+  ".svelte-kit/output/server/nodes/29.js"() {
     init_shims();
     init_page_404_svelte();
-    index20 = 28;
-    entry20 = "pages/page-404.svelte-ba2e151f.js";
-    js20 = ["pages/page-404.svelte-ba2e151f.js", "chunks/index-d241cd96.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css23 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index20 = 29;
+    entry20 = "pages/page-404.svelte-f76c87dc.js";
+    js20 = ["pages/page-404.svelte-f76c87dc.js", "chunks/index-a54bfd4c.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css24 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7695,24 +7636,24 @@ var init_petro_chemicals_svelte = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/29.js
+// .svelte-kit/output/server/nodes/30.js
 var __exports21 = {};
 __export(__exports21, {
-  css: () => css24,
+  css: () => css25,
   entry: () => entry21,
   index: () => index21,
   js: () => js21,
   module: () => petro_chemicals_svelte_exports
 });
-var index21, entry21, js21, css24;
+var index21, entry21, js21, css25;
 var init__21 = __esm({
-  ".svelte-kit/output/server/nodes/29.js"() {
+  ".svelte-kit/output/server/nodes/30.js"() {
     init_shims();
     init_petro_chemicals_svelte();
-    index21 = 29;
-    entry21 = "pages/petro-chemicals.svelte-c5ea0515.js";
-    js21 = ["pages/petro-chemicals.svelte-c5ea0515.js", "chunks/index-d241cd96.js"];
-    css24 = [];
+    index21 = 30;
+    entry21 = "pages/petro-chemicals.svelte-8a889f75.js";
+    js21 = ["pages/petro-chemicals.svelte-8a889f75.js", "chunks/index-a54bfd4c.js"];
+    css25 = [];
   }
 });
 
@@ -7792,24 +7733,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/30.js
+// .svelte-kit/output/server/nodes/31.js
 var __exports22 = {};
 __export(__exports22, {
-  css: () => css25,
+  css: () => css26,
   entry: () => entry22,
   index: () => index22,
   js: () => js22,
   module: () => portfolio_2_svelte_exports
 });
-var index22, entry22, js22, css25;
+var index22, entry22, js22, css26;
 var init__22 = __esm({
-  ".svelte-kit/output/server/nodes/30.js"() {
+  ".svelte-kit/output/server/nodes/31.js"() {
     init_shims();
     init_portfolio_2_svelte();
-    index22 = 30;
-    entry22 = "pages/portfolio-2.svelte-eb89a9f9.js";
-    js22 = ["pages/portfolio-2.svelte-eb89a9f9.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css25 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index22 = 31;
+    entry22 = "pages/portfolio-2.svelte-f42a8d67.js";
+    js22 = ["pages/portfolio-2.svelte-f42a8d67.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css26 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7854,24 +7795,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/31.js
+// .svelte-kit/output/server/nodes/32.js
 var __exports23 = {};
 __export(__exports23, {
-  css: () => css26,
+  css: () => css27,
   entry: () => entry23,
   index: () => index23,
   js: () => js23,
   module: () => request_quote_svelte_exports
 });
-var index23, entry23, js23, css26;
+var index23, entry23, js23, css27;
 var init__23 = __esm({
-  ".svelte-kit/output/server/nodes/31.js"() {
+  ".svelte-kit/output/server/nodes/32.js"() {
     init_shims();
     init_request_quote_svelte();
-    index23 = 31;
-    entry23 = "pages/request-quote.svelte-48a4f4dc.js";
-    js23 = ["pages/request-quote.svelte-48a4f4dc.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css26 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index23 = 32;
+    entry23 = "pages/request-quote.svelte-00803bac.js";
+    js23 = ["pages/request-quote.svelte-00803bac.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css27 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -7920,24 +7861,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/32.js
+// .svelte-kit/output/server/nodes/33.js
 var __exports24 = {};
 __export(__exports24, {
-  css: () => css27,
+  css: () => css28,
   entry: () => entry24,
   index: () => index24,
   js: () => js24,
   module: () => services_svelte_exports
 });
-var index24, entry24, js24, css27;
+var index24, entry24, js24, css28;
 var init__24 = __esm({
-  ".svelte-kit/output/server/nodes/32.js"() {
+  ".svelte-kit/output/server/nodes/33.js"() {
     init_shims();
     init_services_svelte();
-    index24 = 32;
-    entry24 = "pages/services.svelte-d8a22a57.js";
-    js24 = ["pages/services.svelte-d8a22a57.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css27 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index24 = 33;
+    entry24 = "pages/services.svelte-5e0a2842.js";
+    js24 = ["pages/services.svelte-5e0a2842.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css28 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -8024,24 +7965,24 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/33.js
+// .svelte-kit/output/server/nodes/34.js
 var __exports25 = {};
 __export(__exports25, {
-  css: () => css28,
+  css: () => css29,
   entry: () => entry25,
   index: () => index25,
   js: () => js25,
   module: () => team_svelte_exports
 });
-var index25, entry25, js25, css28;
+var index25, entry25, js25, css29;
 var init__25 = __esm({
-  ".svelte-kit/output/server/nodes/33.js"() {
+  ".svelte-kit/output/server/nodes/34.js"() {
     init_shims();
     init_team_svelte();
-    index25 = 33;
-    entry25 = "pages/team.svelte-d85476e0.js";
-    js25 = ["pages/team.svelte-d85476e0.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js"];
-    css28 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index25 = 34;
+    entry25 = "pages/team.svelte-ff96c8e3.js";
+    js25 = ["pages/team.svelte-ff96c8e3.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js"];
+    css29 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
@@ -8109,213 +8050,234 @@ ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
   }
 });
 
-// .svelte-kit/output/server/nodes/34.js
+// .svelte-kit/output/server/nodes/35.js
 var __exports26 = {};
 __export(__exports26, {
-  css: () => css29,
+  css: () => css30,
   entry: () => entry26,
   index: () => index26,
   js: () => js26,
   module: () => testimonials_svelte_exports
 });
-var index26, entry26, js26, css29;
+var index26, entry26, js26, css30;
 var init__26 = __esm({
-  ".svelte-kit/output/server/nodes/34.js"() {
+  ".svelte-kit/output/server/nodes/35.js"() {
     init_shims();
     init_testimonials_svelte();
-    index26 = 34;
-    entry26 = "pages/testimonials.svelte-57a86e44.js";
-    js26 = ["pages/testimonials.svelte-57a86e44.js", "chunks/index-d241cd96.js", "pages/components/banner.svelte-1db243bc.js", "pages/components/base.svelte-e9ee099e.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js", "pages/components/footer.svelte-9573ec46.js", "pages/components/testimonial.svelte-26dc09cd.js"];
-    css29 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    index26 = 35;
+    entry26 = "pages/testimonials.svelte-fcd0185f.js";
+    js26 = ["pages/testimonials.svelte-fcd0185f.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e6c1d3b0.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-3c18ffe7.js", "pages/components/testimonial.svelte-323ade94.js"];
+    css30 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/7.js
 var __exports27 = {};
 __export(__exports27, {
-  css: () => css30,
+  css: () => css31,
   entry: () => entry27,
   index: () => index27,
   js: () => js27,
   module: () => banner_svelte_exports
 });
-var index27, entry27, js27, css30;
+var index27, entry27, js27, css31;
 var init__27 = __esm({
   ".svelte-kit/output/server/nodes/7.js"() {
     init_shims();
     init_banner_svelte();
     index27 = 7;
-    entry27 = "pages/components/banner.svelte-1db243bc.js";
-    js27 = ["pages/components/banner.svelte-1db243bc.js", "chunks/index-d241cd96.js"];
-    css30 = [];
+    entry27 = "pages/components/banner.svelte-a6151de2.js";
+    js27 = ["pages/components/banner.svelte-a6151de2.js", "chunks/index-a54bfd4c.js"];
+    css31 = [];
   }
 });
 
 // .svelte-kit/output/server/nodes/8.js
 var __exports28 = {};
 __export(__exports28, {
-  css: () => css31,
+  css: () => css32,
   entry: () => entry28,
   index: () => index28,
   js: () => js28,
   module: () => base_svelte_exports
 });
-var index28, entry28, js28, css31;
+var index28, entry28, js28, css32;
 var init__28 = __esm({
   ".svelte-kit/output/server/nodes/8.js"() {
     init_shims();
     init_base_svelte();
     index28 = 8;
-    entry28 = "pages/components/base.svelte-e9ee099e.js";
-    js28 = ["pages/components/base.svelte-e9ee099e.js", "chunks/index-d241cd96.js", "pages/components/header.svelte-67945e16.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css31 = [];
+    entry28 = "pages/components/base.svelte-e6c1d3b0.js";
+    js28 = ["pages/components/base.svelte-e6c1d3b0.js", "chunks/index-a54bfd4c.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js"];
+    css32 = ["assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/9.js
 var __exports29 = {};
 __export(__exports29, {
-  css: () => css32,
+  css: () => css33,
   entry: () => entry29,
   index: () => index29,
   js: () => js29,
   module: () => footer_svelte_exports
 });
-var index29, entry29, js29, css32;
+var index29, entry29, js29, css33;
 var init__29 = __esm({
   ".svelte-kit/output/server/nodes/9.js"() {
     init_shims();
     init_footer_svelte();
     index29 = 9;
-    entry29 = "pages/components/footer.svelte-9573ec46.js";
-    js29 = ["pages/components/footer.svelte-9573ec46.js", "chunks/index-d241cd96.js"];
-    css32 = ["assets/footer.svelte_svelte_type_style_lang-ca0f9a3d.css"];
+    entry29 = "pages/components/footer.svelte-3c18ffe7.js";
+    js29 = ["pages/components/footer.svelte-3c18ffe7.js", "chunks/index-a54bfd4c.js"];
+    css33 = ["assets/footer.svelte_svelte_type_style_lang-448489b5.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/10.js
 var __exports30 = {};
 __export(__exports30, {
-  css: () => css33,
+  css: () => css34,
   entry: () => entry30,
   index: () => index30,
   js: () => js30,
   module: () => header_svelte_exports
 });
-var index30, entry30, js30, css33;
+var index30, entry30, js30, css34;
 var init__30 = __esm({
   ".svelte-kit/output/server/nodes/10.js"() {
     init_shims();
     init_header_svelte();
     index30 = 10;
-    entry30 = "pages/components/header.svelte-67945e16.js";
-    js30 = ["pages/components/header.svelte-67945e16.js", "chunks/index-d241cd96.js", "pages/components/nav.svelte-d44a54c8.js"];
-    css33 = [];
+    entry30 = "pages/components/header.svelte-0b7a98ef.js";
+    js30 = ["pages/components/header.svelte-0b7a98ef.js", "chunks/index-a54bfd4c.js", "pages/components/nav.svelte-090a3a26.js"];
+    css34 = ["assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/11.js
 var __exports31 = {};
 __export(__exports31, {
-  css: () => css34,
+  css: () => css35,
   entry: () => entry31,
   index: () => index31,
   js: () => js31,
   module: () => home_svelte_exports
 });
-var index31, entry31, js31, css34;
+var index31, entry31, js31, css35;
 var init__31 = __esm({
   ".svelte-kit/output/server/nodes/11.js"() {
     init_shims();
     init_home_svelte();
     index31 = 11;
-    entry31 = "pages/components/home.svelte-04150ac7.js";
-    js31 = ["pages/components/home.svelte-04150ac7.js", "chunks/index-d241cd96.js", "pages/components/service.svelte-f0d2547e.js", "pages/components/video.svelte-03a0fb18.js"];
-    css34 = ["assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css"];
+    entry31 = "pages/components/home.svelte-1318ff2d.js";
+    js31 = ["pages/components/home.svelte-1318ff2d.js", "chunks/index-a54bfd4c.js", "pages/components/projectItem.svelte-76594284.js", "pages/components/service.svelte-0d3033d8.js", "pages/components/video.svelte-896d84bd.js"];
+    css35 = ["assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/12.js
 var __exports32 = {};
 __export(__exports32, {
-  css: () => css35,
+  css: () => css36,
   entry: () => entry32,
   index: () => index32,
   js: () => js32,
   module: () => nav_svelte_exports
 });
-var index32, entry32, js32, css35;
+var index32, entry32, js32, css36;
 var init__32 = __esm({
   ".svelte-kit/output/server/nodes/12.js"() {
     init_shims();
     init_nav_svelte();
     index32 = 12;
-    entry32 = "pages/components/nav.svelte-d44a54c8.js";
-    js32 = ["pages/components/nav.svelte-d44a54c8.js", "chunks/index-d241cd96.js"];
-    css35 = [];
+    entry32 = "pages/components/nav.svelte-090a3a26.js";
+    js32 = ["pages/components/nav.svelte-090a3a26.js", "chunks/index-a54bfd4c.js"];
+    css36 = [];
   }
 });
 
 // .svelte-kit/output/server/nodes/13.js
 var __exports33 = {};
 __export(__exports33, {
-  css: () => css36,
+  css: () => css37,
   entry: () => entry33,
   index: () => index33,
   js: () => js33,
-  module: () => service_svelte_exports
+  module: () => projectItem_svelte_exports
 });
-var index33, entry33, js33, css36;
+var index33, entry33, js33, css37;
 var init__33 = __esm({
   ".svelte-kit/output/server/nodes/13.js"() {
     init_shims();
-    init_service_svelte();
+    init_projectItem_svelte();
     index33 = 13;
-    entry33 = "pages/components/service.svelte-f0d2547e.js";
-    js33 = ["pages/components/service.svelte-f0d2547e.js", "chunks/index-d241cd96.js"];
-    css36 = ["assets/pages/components/service.svelte-5554b3a5.css"];
+    entry33 = "pages/components/projectItem.svelte-76594284.js";
+    js33 = ["pages/components/projectItem.svelte-76594284.js", "chunks/index-a54bfd4c.js"];
+    css37 = [];
   }
 });
 
 // .svelte-kit/output/server/nodes/14.js
 var __exports34 = {};
 __export(__exports34, {
-  css: () => css37,
+  css: () => css38,
   entry: () => entry34,
   index: () => index34,
   js: () => js34,
-  module: () => testimonial_svelte_exports
+  module: () => service_svelte_exports
 });
-var index34, entry34, js34, css37;
+var index34, entry34, js34, css38;
 var init__34 = __esm({
   ".svelte-kit/output/server/nodes/14.js"() {
     init_shims();
-    init_testimonial_svelte();
+    init_service_svelte();
     index34 = 14;
-    entry34 = "pages/components/testimonial.svelte-26dc09cd.js";
-    js34 = ["pages/components/testimonial.svelte-26dc09cd.js", "chunks/index-d241cd96.js"];
-    css37 = [];
+    entry34 = "pages/components/service.svelte-0d3033d8.js";
+    js34 = ["pages/components/service.svelte-0d3033d8.js", "chunks/index-a54bfd4c.js"];
+    css38 = ["assets/pages/components/service.svelte-5554b3a5.css"];
   }
 });
 
 // .svelte-kit/output/server/nodes/15.js
 var __exports35 = {};
 __export(__exports35, {
-  css: () => css38,
+  css: () => css39,
   entry: () => entry35,
   index: () => index35,
   js: () => js35,
-  module: () => video_svelte_exports
+  module: () => testimonial_svelte_exports
 });
-var index35, entry35, js35, css38;
+var index35, entry35, js35, css39;
 var init__35 = __esm({
   ".svelte-kit/output/server/nodes/15.js"() {
     init_shims();
-    init_video_svelte();
+    init_testimonial_svelte();
     index35 = 15;
-    entry35 = "pages/components/video.svelte-03a0fb18.js";
-    js35 = ["pages/components/video.svelte-03a0fb18.js", "chunks/index-d241cd96.js"];
-    css38 = ["assets/pages/components/video.svelte-4c5c571f.css"];
+    entry35 = "pages/components/testimonial.svelte-323ade94.js";
+    js35 = ["pages/components/testimonial.svelte-323ade94.js", "chunks/index-a54bfd4c.js"];
+    css39 = [];
+  }
+});
+
+// .svelte-kit/output/server/nodes/16.js
+var __exports36 = {};
+__export(__exports36, {
+  css: () => css40,
+  entry: () => entry36,
+  index: () => index36,
+  js: () => js36,
+  module: () => video_svelte_exports
+});
+var index36, entry36, js36, css40;
+var init__36 = __esm({
+  ".svelte-kit/output/server/nodes/16.js"() {
+    init_shims();
+    init_video_svelte();
+    index36 = 16;
+    entry36 = "pages/components/video.svelte-896d84bd.js";
+    js36 = ["pages/components/video.svelte-896d84bd.js", "chunks/index-a54bfd4c.js"];
+    css40 = ["assets/pages/components/video.svelte-4c5c571f.css"];
   }
 });
 
@@ -8332,6 +8294,7 @@ var init_main = __esm({
     init_index_2835083a();
     init_footer_svelte();
     init_home_svelte();
+    init_projectItem_svelte();
     init_service_svelte();
     init_video_svelte();
     init_base_svelte();
@@ -8594,12 +8557,12 @@ function devalue(value) {
   }
   walk(value);
   var names = /* @__PURE__ */ new Map();
-  Array.from(counts).filter(function(entry36) {
-    return entry36[1] > 1;
+  Array.from(counts).filter(function(entry37) {
+    return entry37[1] > 1;
   }).sort(function(a, b) {
     return b[1] - a[1];
-  }).forEach(function(entry36, i2) {
-    names.set(entry36[0], getName(i2));
+  }).forEach(function(entry37, i2) {
+    names.set(entry37[0], getName(i2));
   });
   function stringify(thing) {
     if (names.has(thing)) {
@@ -9324,20 +9287,20 @@ function parse$1(str, options) {
   var obj = {};
   var opt = options || {};
   var dec = opt.decode || decode;
-  var index36 = 0;
-  while (index36 < str.length) {
-    var eqIdx = str.indexOf("=", index36);
+  var index37 = 0;
+  while (index37 < str.length) {
+    var eqIdx = str.indexOf("=", index37);
     if (eqIdx === -1) {
       break;
     }
-    var endIdx = str.indexOf(";", index36);
+    var endIdx = str.indexOf(";", index37);
     if (endIdx === -1) {
       endIdx = str.length;
     } else if (endIdx < eqIdx) {
-      index36 = str.lastIndexOf(";", eqIdx - 1) + 1;
+      index37 = str.lastIndexOf(";", eqIdx - 1) + 1;
       continue;
     }
-    var key2 = str.slice(index36, eqIdx).trim();
+    var key2 = str.slice(index37, eqIdx).trim();
     if (obj[key2] === void 0) {
       var val = str.slice(eqIdx + 1, endIdx).trim();
       if (val.charCodeAt(0) === 34) {
@@ -9345,7 +9308,7 @@ function parse$1(str, options) {
       }
       obj[key2] = tryDecode(val, dec);
     }
-    index36 = endIdx + 1;
+    index37 = endIdx + 1;
   }
   return obj;
 }
@@ -10166,8 +10129,8 @@ async function respond$1(opts) {
         if (error2) {
           while (i2--) {
             if (route.b[i2]) {
-              const index36 = route.b[i2];
-              const error_node = await options.manifest._.nodes[index36]();
+              const index37 = route.b[i2];
+              const error_node = await options.manifest._.nodes[index37]();
               let node_loaded;
               let j = i2;
               while (!(node_loaded = branch[j])) {
@@ -10573,7 +10536,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\r\n<html lang="en">\r\n	<head>\r\n		<meta charset="utf-8" />\r\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\r\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\r\n		' + head + "\r\n	</head>\r\n	<body>\r\n		<div>" + body + "</div>\r\n	</body>\r\n</html>\r\n";
 var read = null;
 set_paths({ "base": "", "assets": "" });
 var Server = class {
@@ -10633,10 +10596,10 @@ var Server = class {
 init_shims();
 var manifest = {
   appDir: "_app",
-  assets: /* @__PURE__ */ new Set(["css/ajax-loader.gif", "css/animate.css", "css/animate.min.css", "css/bootstrap.min.css", "css/demo.css", "css/effect_style.css", "css/elastislide.css", "css/font-awesome.min.css", "css/jquery.fancybox.css", "css/responsive-style.css", "css/responsive_bootstrap_carousel.css", "css/set1.css", "css/slick.min.css", "css/style.css", "fonts/FontAwesome.otf", "fonts/fontawesome-webfont.eot", "fonts/fontawesome-webfont.svg", "fonts/fontawesome-webfont.ttf", "fonts/fontawesome-webfont.woff", "fonts/fontawesome-webfont.woff2", "fonts/glyphicons-halflings-regular.eot", "fonts/glyphicons-halflings-regular.svg", "fonts/glyphicons-halflings-regular.ttf", "fonts/glyphicons-halflings-regular.woff", "fonts/glyphicons-halflings-regular.woff2", "images/404bg.jpg", "images/ImageAttribution.txt", "images/about-banner.jpg", "images/agri-img.jpg", "images/agricultural-img.jpg", "images/agricultural-large-img.jpg", "images/agricultural-scope-img.jpg", "images/black-logo.png", "images/black.png", "images/btn-left-divider.jpg", "images/chemical-banner.jpg", "images/chemical-icon-hover.png", "images/chemical-icon.png", "images/chemical-rght-img.jpg", "images/choose-arrow.png", "images/circle-after-img.png", "images/client-img1.jpg", "images/client-img2.jpg", "images/client-img3.jpg", "images/client-img4.jpg", "images/client-logo1.jpg", "images/client-logo2.jpg", "images/client-logo3.jpg", "images/client-logo4.jpg", "images/client-logo5.jpg", "images/client-logo6.jpg", "images/client-quote-img.png", "images/close_popup.png", "images/cnc-banner.jpg", "images/cnc-icon-hover.png", "images/cnc-icon.png", "images/cnc-right-img1.jpg", "images/cnc-right-img2.jpg", "images/coming-page-bg.jpg", "images/coming-page-bg.png", "images/contact-address-icon.png", "images/contact-banner.jpg", "images/contact-help-bg.jpg", "images/contact-help-cal.png", "images/contact-msg-icon.png", "images/contact-phn-icon.png", "images/coverage-img.png", "images/delete-icon.png", "images/delivery-icon.png", "images/delivery-icon1.png", "images/delivery-time-icon.png", "images/eco-project-image3.jpg", "images/electric-img.jpg", "images/electronic-img.jpg", "images/electronic-scope-img.jpg", "images/electronical-large-img.jpg", "images/energy-engineering-banner.jpg", "images/energy-icon-hover.png", "images/energy-icon.png", "images/energy-right-img.jpg", "images/factory-farm-img.jpg", "images/factory-farm-large-img.jpg", "images/factory-right-img.jpg", "images/faq-banner.jpg", "images/farm-img.jpg", "images/farm-scope-img.jpg", "images/footer-bg.jpg", "images/ftr-info-sprite.png", "images/ftr-logo.png", "images/gas-img.jpg", "images/gas-pipe-large-img.jpg", "images/gas-pipeline-img.jpg", "images/gas-scope-img.jpg", "images/gray-star.png", "images/hdr-call-icon.png", "images/hdr-loc-icon.png", "images/headquarter-img.png", "images/home1-images/eco-project-image1.jpg", "images/home1-images/eco-project-image2.jpg", "images/home1-images/eco-project-image3.jpg", "images/home1-images/eco-project-image4.jpg", "images/home1-images/home1-agriculture-project1.jpg", "images/home1-images/home1-electronic-project1.jpg", "images/home1-images/home1-farm-project1.jpg", "images/home1-images/home1-gaspipeline-project1.jpg", "images/home1-images/home1-news-img1.jpg", "images/home1-images/home1-news-img2.jpg", "images/home1-images/home1-news-img3.jpg", "images/home1-images/home1-oilplant-project1.jpg", "images/home1-images/home1-petrochemical-project1.jpg", "images/home1-images/home1-slide1.jpg", "images/home1-images/home1-slide2.jpg", "images/home1-images/home1-slide3.jpg", "images/home1-images/manufacturing-project-image1.jpg", "images/home1-images/manufacturing-project-image2.jpg", "images/home1-images/manufacturing-project-image3.jpg", "images/home1-images/manufacturing-project-image4.jpg", "images/home1-images/oil-project-image1.jpg", "images/home1-images/oil-project-image2.jpg", "images/home1-images/oil-project-image3.jpg", "images/home1-images/oil-project-image4.jpg", "images/home1-images/service-clearingicon.png", "images/home1-images/service-demolitionicon.png", "images/home1-images/service-drainageicon.png", "images/home1-images/service-erosion-controlicon.png", "images/home1-images/service-excavationicon.png", "images/home1-images/service-foundationsicon.png", "images/home1-images/service-gradingicon.png", "images/home1-images/service-haulingicon.png", "images/home1-images/service-landscapingicon.png", "images/humble-begin-img.png", "images/index2-wordpress-bg.jpg", "images/logo.png", "images/maintenance-bg.png", "images/manufacture-icon-hover.png", "images/manufacture-icon.png", "images/manufacture-rght-img.jpg", "images/manufacturing-banner.jpg", "images/martial-img.jpg", "images/material-banner.jpg", "images/material-icon-hover.png", "images/material-icon.png", "images/material-rght-img.jpg", "images/mission-icon.png", "images/nav.png", "images/nav_thumbs.png", "images/office-map-img.png", "images/office-sprite.png", "images/oil-icon-hover.png", "images/oil-icon.png", "images/oil-industry-banner.jpg", "images/oil-industry-rght-img.jpg", "images/oil-pipe-img.jpg", "images/oil-plant-img.jpg", "images/oil_img1.jpg", "images/oil_img2.jpg", "images/opening-loc-img.png", "images/ourteam-img1.jpg", "images/ourteam-img2.jpg", "images/ourteam-img3.jpg", "images/ourteam-img4.jpg", "images/page404-bg.jpg", "images/pattern.png", "images/paypal-img.png", "images/pdf-icon.jpg", "images/petro-chemical-img.jpg", "images/petro-img.jpg", "images/plant-project-img.jpg", "images/portfolio-banner.jpg", "images/product-large-img.jpg", "images/product-thumbnails-img1.jpg", "images/project-1-img.jpg", "images/project-2-img.jpg", "images/project-3-img.jpg", "images/project-det-img.jpg", "images/quality-icon.png", "images/requestquote-banner.jpg", "images/search-btn.png", "images/search_popup_icon.png", "images/service-banner.jpg", "images/service-img1.jpg", "images/service-img2.jpg", "images/service-img3.jpg", "images/service-img4.jpg", "images/service-img5.jpg", "images/service-img6.jpg", "images/service-page-sprite.png", "images/service_img1.jpg", "images/shop-banner.jpg", "images/specialization-img.jpg", "images/standard-labor-icon.png", "images/support-icon.png", "images/team-banner.jpg", "images/team-icon.png", "images/team-img1.jpg", "images/team-img2.jpg", "images/team-img3.jpg", "images/technology-icon.png", "images/technology-icon1.png", "images/testi-client-img1.png", "images/testi-client-img2.jpg", "images/testi-client-img3.jpg", "images/testi-quotes.png", "images/testimonial-banner.jpg", "images/value-icon.png", "images/views.png", "images/vision-icon.png", "images/white-logo.png", "images/white-search-btn.png", "images/who-are-img.jpg", "images/whoweare-img.jpg", "images/why-choose-bg.png", "images/wordpress-bg-img.png", "images/year-circles.png", "images/zoom_icon.jpg", "js/bootstrap.js", "js/bootstrap.min.js", "js/custom.js", "js/gallery.js", "js/imagelightbox.min.js", "js/isotope.min.js", "js/jquery.elastislide.js", "js/jquery.min.js", "js/jquery.tmpl.min.js", "js/jquery.touchSwipe.min.js", "js/main.js", "js/responsive_bootstrap_carousel.js", "js/slick.js", "js/theme.js", "js/theme1.js"]),
-  mimeTypes: { ".gif": "image/gif", ".css": "text/css", ".otf": "font/otf", ".eot": "application/vnd.ms-fontobject", ".svg": "image/svg+xml", ".ttf": "font/ttf", ".woff": "font/woff", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".txt": "text/plain", ".png": "image/png", ".js": "application/javascript" },
+  assets: /* @__PURE__ */ new Set(["css/ajax-loader.gif", "css/animate.css", "css/animate.min.css", "css/bootstrap.min.css", "css/demo.css", "css/effect_style.css", "css/elastislide.css", "css/font-awesome.min.css", "css/jquery.fancybox.css", "css/responsive-style.css", "css/responsive_bootstrap_carousel.css", "css/set1.css", "css/slick.min.css", "css/style.css", "favicon.png", "fonts/FontAwesome.otf", "fonts/fontawesome-webfont.eot", "fonts/fontawesome-webfont.svg", "fonts/fontawesome-webfont.ttf", "fonts/fontawesome-webfont.woff", "fonts/fontawesome-webfont.woff2", "fonts/glyphicons-halflings-regular.eot", "fonts/glyphicons-halflings-regular.svg", "fonts/glyphicons-halflings-regular.ttf", "fonts/glyphicons-halflings-regular.woff", "fonts/glyphicons-halflings-regular.woff2", "images/404bg.jpg", "images/ImageAttribution.txt", "images/about-banner.jpg", "images/agri-img.jpg", "images/agricultural-img.jpg", "images/agricultural-large-img.jpg", "images/agricultural-scope-img.jpg", "images/black-logo.png", "images/black.png", "images/btn-left-divider.jpg", "images/chemical-banner.jpg", "images/chemical-icon-hover.png", "images/chemical-icon.png", "images/chemical-rght-img.jpg", "images/choose-arrow.png", "images/circle-after-img.png", "images/client-img1.jpg", "images/client-img2.jpg", "images/client-img3.jpg", "images/client-img4.jpg", "images/client-logo1.jpg", "images/client-logo2.jpg", "images/client-logo3.jpg", "images/client-logo4.jpg", "images/client-logo5.jpg", "images/client-logo6.jpg", "images/client-quote-img.png", "images/close_popup.png", "images/cnc-banner.jpg", "images/cnc-icon-hover.png", "images/cnc-icon.png", "images/cnc-right-img1.jpg", "images/cnc-right-img2.jpg", "images/coming-page-bg.jpg", "images/coming-page-bg.png", "images/contact-address-icon.png", "images/contact-banner.jpg", "images/contact-help-bg.jpg", "images/contact-help-cal.png", "images/contact-msg-icon.png", "images/contact-phn-icon.png", "images/coverage-img.png", "images/delete-icon.png", "images/delivery-icon.png", "images/delivery-icon1.png", "images/delivery-time-icon.png", "images/eco-project-image3.jpg", "images/electric-img.jpg", "images/electronic-img.jpg", "images/electronic-scope-img.jpg", "images/electronical-large-img.jpg", "images/energy-engineering-banner.jpg", "images/energy-icon-hover.png", "images/energy-icon.png", "images/energy-right-img.jpg", "images/factory-farm-img.jpg", "images/factory-farm-large-img.jpg", "images/factory-right-img.jpg", "images/faq-banner.jpg", "images/farm-img.jpg", "images/farm-scope-img.jpg", "images/footer-bg.jpg", "images/ftr-info-sprite.png", "images/ftr-logo.png", "images/gas-img.jpg", "images/gas-pipe-large-img.jpg", "images/gas-pipeline-img.jpg", "images/gas-scope-img.jpg", "images/gray-star.png", "images/hdr-call-icon.png", "images/hdr-loc-icon.png", "images/headquarter-img.png", "images/home1-images/eco-project-image1.jpg", "images/home1-images/eco-project-image2.jpg", "images/home1-images/eco-project-image3.jpg", "images/home1-images/eco-project-image4.jpg", "images/home1-images/home1-agriculture-project1.jpg", "images/home1-images/home1-electronic-project1.jpg", "images/home1-images/home1-farm-project1.jpg", "images/home1-images/home1-gaspipeline-project1.jpg", "images/home1-images/home1-news-img1.jpg", "images/home1-images/home1-news-img2.jpg", "images/home1-images/home1-news-img3.jpg", "images/home1-images/home1-oilplant-project1.jpg", "images/home1-images/home1-petrochemical-project1.jpg", "images/home1-images/home1-slide1.jpg", "images/home1-images/home1-slide2.jpg", "images/home1-images/home1-slide3.jpg", "images/home1-images/manufacturing-project-image1.jpg", "images/home1-images/manufacturing-project-image2.jpg", "images/home1-images/manufacturing-project-image3.jpg", "images/home1-images/manufacturing-project-image4.jpg", "images/home1-images/oil-project-image1.jpg", "images/home1-images/oil-project-image2.jpg", "images/home1-images/oil-project-image3.jpg", "images/home1-images/oil-project-image4.jpg", "images/home1-images/service-clearingicon.png", "images/home1-images/service-demolitionicon.png", "images/home1-images/service-drainageicon.png", "images/home1-images/service-erosion-controlicon.png", "images/home1-images/service-excavationicon.png", "images/home1-images/service-foundationsicon.png", "images/home1-images/service-gradingicon.png", "images/home1-images/service-haulingicon.png", "images/home1-images/service-landscapingicon.png", "images/humble-begin-img.png", "images/index2-wordpress-bg.jpg", "images/logo.png", "images/maintenance-bg.png", "images/manufacture-icon-hover.png", "images/manufacture-icon.png", "images/manufacture-rght-img.jpg", "images/manufacturing-banner.jpg", "images/martial-img.jpg", "images/material-banner.jpg", "images/material-icon-hover.png", "images/material-icon.png", "images/material-rght-img.jpg", "images/mission-icon.png", "images/nav.png", "images/nav_thumbs.png", "images/office-map-img.png", "images/office-sprite.png", "images/oil-icon-hover.png", "images/oil-icon.png", "images/oil-industry-banner.jpg", "images/oil-industry-rght-img.jpg", "images/oil-pipe-img.jpg", "images/oil-plant-img.jpg", "images/oil_img1.jpg", "images/oil_img2.jpg", "images/opening-loc-img.png", "images/ourteam-img1.jpg", "images/ourteam-img2.jpg", "images/ourteam-img3.jpg", "images/ourteam-img4.jpg", "images/page404-bg.jpg", "images/pattern.png", "images/paypal-img.png", "images/pdf-icon.jpg", "images/petro-chemical-img.jpg", "images/petro-img.jpg", "images/plant-project-img.jpg", "images/portfolio-banner.jpg", "images/product-large-img.jpg", "images/product-thumbnails-img1.jpg", "images/project-1-img.jpg", "images/project-2-img.jpg", "images/project-3-img.jpg", "images/project-det-img.jpg", "images/quality-icon.png", "images/requestquote-banner.jpg", "images/search-btn.png", "images/search_popup_icon.png", "images/service-banner.jpg", "images/service-img1.jpg", "images/service-img2.jpg", "images/service-img3.jpg", "images/service-img4.jpg", "images/service-img5.jpg", "images/service-img6.jpg", "images/service-page-sprite.png", "images/service_img1.jpg", "images/shop-banner.jpg", "images/specialization-img.jpg", "images/standard-labor-icon.png", "images/support-icon.png", "images/team-banner.jpg", "images/team-icon.png", "images/team-img1.jpg", "images/team-img2.jpg", "images/team-img3.jpg", "images/technology-icon.png", "images/technology-icon1.png", "images/testi-client-img1.png", "images/testi-client-img2.jpg", "images/testi-client-img3.jpg", "images/testi-quotes.png", "images/testimonial-banner.jpg", "images/value-icon.png", "images/views.png", "images/vision-icon.png", "images/white-logo.png", "images/white-search-btn.png", "images/who-are-img.jpg", "images/whoweare-img.jpg", "images/why-choose-bg.png", "images/wordpress-bg-img.png", "images/year-circles.png", "images/zoom_icon.jpg", "js/bootstrap.js", "js/bootstrap.min.js", "js/custom.js", "js/gallery.js", "js/imagelightbox.min.js", "js/isotope.min.js", "js/jquery.elastislide.js", "js/jquery.min.js", "js/jquery.tmpl.min.js", "js/jquery.touchSwipe.min.js", "js/main.js", "js/responsive_bootstrap_carousel.js", "js/slick.js", "js/theme.js", "js/theme1.js"]),
+  mimeTypes: { ".gif": "image/gif", ".css": "text/css", ".png": "image/png", ".otf": "font/otf", ".eot": "application/vnd.ms-fontobject", ".svg": "image/svg+xml", ".ttf": "font/ttf", ".woff": "font/woff", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".txt": "text/plain", ".js": "application/javascript" },
   _: {
-    entry: { "file": "start-14fa04c0.js", "js": ["start-14fa04c0.js", "chunks/index-d241cd96.js"], "css": [] },
+    entry: { "file": "start-ad65ce34.js", "js": ["start-ad65ce34.js", "chunks/index-a54bfd4c.js"], "css": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -10672,7 +10635,8 @@ var manifest = {
       () => Promise.resolve().then(() => (init__32(), __exports32)),
       () => Promise.resolve().then(() => (init__33(), __exports33)),
       () => Promise.resolve().then(() => (init__34(), __exports34)),
-      () => Promise.resolve().then(() => (init__35(), __exports35))
+      () => Promise.resolve().then(() => (init__35(), __exports35)),
+      () => Promise.resolve().then(() => (init__36(), __exports36))
     ],
     routes: [
       {
@@ -11015,13 +10979,24 @@ var manifest = {
       },
       {
         type: "page",
+        id: "components/projectItem",
+        pattern: /^\/components\/projectItem\/?$/,
+        names: [],
+        types: [],
+        path: "/components/projectItem",
+        shadow: null,
+        a: [0, 32],
+        b: [1]
+      },
+      {
+        type: "page",
         id: "components/service",
         pattern: /^\/components\/service\/?$/,
         names: [],
         types: [],
         path: "/components/service",
         shadow: null,
-        a: [0, 32],
+        a: [0, 33],
         b: [1]
       },
       {
@@ -11032,7 +11007,7 @@ var manifest = {
         types: [],
         path: "/components/testimonial",
         shadow: null,
-        a: [0, 33],
+        a: [0, 34],
         b: [1]
       },
       {
@@ -11043,7 +11018,7 @@ var manifest = {
         types: [],
         path: "/components/video",
         shadow: null,
-        a: [0, 34],
+        a: [0, 35],
         b: [1]
       }
     ],

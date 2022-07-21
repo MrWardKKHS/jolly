@@ -13,7 +13,7 @@ import Header from "./header.svelte";
 	<link href="css/responsive_bootstrap_carousel.css" rel="stylesheet" media="all">
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="css/set1.css" />
-	<title>Svelte app</title>
+	<title>Civil Logic - Experts in Civil Infrastructure</title>
 	<link rel='icon' type='image/png' href='/favicon.png'>
 </svelte:head>
 

@@ -8,10 +8,12 @@
    <div class="ftr-section">
       <div class="container">
          <ul class="footer-info">
-            <li class="ftr-loc">121  Maxwell Farm Road,<br/> Washington DC, USA</li>
-            <li class="ftr-phn">+1 (123) 456-7890</li>
-            <li class="ftr-msg">info@indofact.com</li>
-            <li class="ftr-support">9 To 5 Working Hours</li>
+               <li class="ftr-loc">121  Maxwell Farm Road,<br/> Washington DC, USA</li>
+               <li class="ftr-phn">+1 (123) 456-7890</li>
+               <li class="ftr-msg">info@indofact.com</li>
+               <li></li>
+               <li class="ftr-support">9 To 5 Working Hours</li>
+               <li></li>
          </ul>
          <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12  ftr-about-text">
@@ -42,7 +44,7 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12 ftr-follow-column pull-right">
                <h6>Follow Us</h6>
-               <div class="header-socials footer-socials"> 
+               <div class="header-socials footer-socials">
                   <a href="\"><i class="fa fa-facebook" aria-hidden="true"></i></a> 
                   <a href="\"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
                   <a href="\"><i class="fa fa-google-plus" aria-hidden="true"></i></a> 
@@ -54,9 +56,6 @@
          <div class="footer-btm">
             <div class="col-md-6 col-sm-6 col-xs-12 pad-left_zero pad-right_zero">
                <p>Copyright © 2022 Alex Ward All Rights Reserved.</p>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12 pad-left_zero pad-right_zero pull-right">
-               <p class="text-right">Theme by: <a href="https://themeforest.net/user/themechampion">ThemeChampion</a></p>
             </div>
          </div>
       </div>
@@ -125,14 +124,14 @@
 }
  ul.footer-info{
      width:100%;
-     float:left;
      margin:0px 0px 70px;
      padding:0px;
      border-bottom:1px solid #373737;
+     display: grid;
+     grid-template-columns: 1fr 1fr 1fr;
 }
  ul.footer-info li{
      list-style:none;
-     float:left;
      width:auto;
      font-size:18px;
      color:#c8c8c8;
@@ -242,5 +241,14 @@
      border-top:1px solid #373737;
      padding:22px 0px 26px;
      margin:60px 0px 0px;
+}
+@media only screen and (max-width: 767px) {
+   a.header-requestbtn.contactus-btn{
+     margin: 5px 0px 0px;
+}
+ul.footer-info {
+   display: flex;
+   flex-direction: column;
+}
 }
 </style>

@@ -14,8 +14,8 @@
 	position: relative;
 	-webkit-transition-property: color;
 	transition-property: color;
-	-webkit-transition-duration: 0.9s;
-	transition-duration: 0.9s;
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
 }
 .hvr-bounce-to-right:before {
 	content: "";
@@ -32,8 +32,8 @@
 	transform-origin: 0 50%;
 	-webkit-transition-property: transform;
 	transition-property: transform;
-	-webkit-transition-duration: 0.9s;
-	transition-duration: 0.9s;
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
 	-webkit-transition-timing-function: ease-out;
 	transition-timing-function: ease-out;
 }
@@ -43,8 +43,8 @@
 .hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {
 	-webkit-transform: scaleX(1);
 	transform: scaleX(1);
-	-webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
-	transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+	-webkit-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
 }
 
 
@@ -766,13 +766,9 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 .home1-project#our_project .controls, .home1-project#our_project1 .controls, .home1-project#our_project2 .controls, .home1-project#our_project3 .controls, .home1-project#our_project4 .controls, .home1-project#our_project5 .controls{
 	position: absolute;
     right: 6.3%;
-    top: -130px;
+    top: -78px;
 }
 
-.home2-project#our_project .controls, .home2-project#our_project1 .controls, .home2-project#our_project2 .controls, .home2-project#our_project3 .controls, .home2-project#our_project4 .controls, .home2-project#our_project5 .controls{
-	width:100%; bottom:-80px; display:inline-block;
-	position:absolute; text-align:center;
-}
 
 .portfolio-5 .projt-column{
 	width:20%;
@@ -798,9 +794,6 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 }
 .portfolio-5 .projt-column {
     width: 25%;
-}
-.home2 #our_project .controls {
-    right: 20px;
 }
 
 .homeprj1-slide:hover a.view-all.slide_learn_btn.view_project_btn {
@@ -835,9 +828,6 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 .portfolio-5 .projt-column {
     width: 33.3%;
 }
-.home2 #our_project .controls {
-    right: 10px;
-}
 
 .portfolio-2:hover a.view-all.slide_learn_btn.view_project_btn {
     top: -140px!important;
@@ -853,9 +843,6 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 @media only screen and (min-width: 467px) and (max-width: 767px) {
 	.homeprj1-slide:hover a.view-all.slide_learn_btn.view_project_btn {
     top: -130px!important;
-}
-.home1-project#our_project .controls, .home1-project#our_project1 .controls, .home1-project#our_project2 .controls, .home1-project#our_project3 .controls, .home1-project#our_project4 .controls, .home1-project#our_project5 .controls {
-    top: -157px;
 }
 
 .portfolio-2:hover a.view-all.slide_learn_btn.view_project_btn {
@@ -878,41 +865,7 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 #minimal-bootstrap-carousel.home1 .carousel-caption:after{
 	display:none;
 }
-/*#minimal-bootstrap-carousel.home1 .carousel-caption .thm-container .box .content.home1-slides {
-    text-align: center;
-    margin-right:0px;
-    margin-top: 0px;
-}
-	#minimal-bootstrap-carousel .carousel-inner .item {
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: 450px;
-	min-height: 700px;
-}
-#minimal-bootstrap-carousel.home1 .carousel-caption .thm-container .box .content.home1-slides h1 {
-    color: #fff;
-}
-#minimal-bootstrap-carousel.home1 .carousel-caption .thm-container .box .content.home1-slides p {
-    color: #fff;
-}
 
-#minimal-bootstrap-carousel .carousel-caption p {
-    font-size: 17px; line-height:28px; color:#fff;
-}
-#minimal-bootstrap-carousel .carousel-caption .thm-container .box .content {
-	float:none; display:inline-block;
-    width: 80%;
-}
-#minimal-bootstrap-carousel .carousel-caption .thm-container .box.valign-top, #minimal-bootstrap-carousel .carousel-caption .thm-container .box.valign-middle{
-    vertical-align: top;
-    padding-top:300px;
-}
-#minimal-bootstrap-carousel .carousel-caption .thm-container .box .content.text-left {
-    text-align: center;
-}
-#minimal-bootstrap-carousel .carousel-control {
-    top: 15%;
-}*/
 #minimal-bootstrap-carousel.home1 .carousel-caption .thm-container .box .content.home1-slides p {
 	display:none;
 }
@@ -944,9 +897,6 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 .filter-section .filter-container .filter > li {
 	width:100%; text-align: left; font-size:13px;
 }
-.home2 #our_project .controls {
-    right: 10px;
-}
 
 #minimal-bootstrap-carousel .carousel-caption p {
 	display:none;
@@ -964,12 +914,6 @@ a.view-all.slide_learn_btn.view_project_btn:hover{
 }
 .recent-project-section:hover a.view-all.slide_learn_btn.view_project_btn {
 	top: -200px;
-}
-.home2 #our_project .controls {
-	margin:60px 0px 0px;
-}
-.home2.recent-project-section h3 {
-	margin-bottom:50px;
 }
 
 

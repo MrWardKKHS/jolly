@@ -512,7 +512,7 @@
     }
      #main-navigation-wrapper .navbar-nav .dopdown-nav-toggler:before {
          position: absolute;
-         font-family: 'FontAwesome';
+         font-family: 'PT Serif';
          border: none;
          content: "\f078";
          top: 15px;
@@ -521,7 +521,7 @@
     }
      #main-navigation-wrapper .navbar-nav .dopdown-nav-toggler.dopdown-nav-toggler-active:before {
          position: absolute;
-         font-family: 'FontAwesome';
+         font-family: 'PT Serif';
          border: none;
          content: "\f077";
          top: 15px;
