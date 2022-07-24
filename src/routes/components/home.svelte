@@ -68,25 +68,9 @@ import Service from "./service.svelte"
             </div>
          </div>
          <div class="col-md-12">
-            <Service title="EXCAVIATION" href="excavation" icon='service-excavationicon'>
-               We provide a complete range of services including <span>site preparation, trenching, backfilling, grading, and soil stabilization.</span> We have the equipment and experience to handle any size job, big or small. 
-            </Service>
-            <Service title="GRADING" href="grading" icon='service-gradingicon'>
-               We have the equipment and experience necessary to grade your site according to your specifications. We will work with you to create a grading plan that meets your needs and budget.
-            </Service>
-            <Service title="HAULING" href="hauling" icon='service-haulingicon'>
-               A professional hauling service that specializes in the transportation of earth and other media. Experienced drivers who are familiar with the local area and can get your load to its destination safely and on time.
-            </Service>
-            <Service title="CLEARING" href="clearing" icon='service-clearingicon'>
-              Speedy grubbing and vegetation removal. Clear your land of unwanted growth and prepare it for new construction or landscaping projects.
-            </Service>
-            <Service title="DEMOLITION" href="demolition" icon='service-demolitionicon'></Service>
-            <Service title="EROSION CONTROL" href="erosion-control" icon='service-erosion-controlicon'>
-               Installation of erosion control systems, barriers, fencing, and vegetation depending on your needs. Regular maintenance and inspections ensure that your system is functioning properly and to make any necessary repairs are made. 
-            </Service>
-            <Service title="DRAINAGE" href="drainage" icon='service-drainageicon'></Service>
-            <Service title="FOUNDATIONS" href="foundations" icon='service-foundationsicon'></Service>
-            <Service title="LANDSCAPING" href="landscaping" icon='service-landscapingicon'></Service>
+            <Service title="MANAGEMENT and PLANNING" href="" icon=''></Service>
+            <Service title="PHYSICAL DELIVERY" href="" icon=''></Service>
+            <Service title="TECHNICAL SUPPORT" href="" icon=''></Service>
          </div>
       </div>
    </div>
@@ -121,20 +105,30 @@ import Service from "./service.svelte"
 <!--=========High Quality Start============-->
 <section class="hight-level-section">
    <div class="container">
-      <div class="row">
-         <div class="col-md-12 text-center">
-            <h2>In <span>quality assurance a constant effort </span> is made to enhance the quality practices in the organization.</h2>
+      <div class="row" style="display: flex;">
+         <div>
+            <div class="col-md-12 text-center">
+               <h2>Who we <span>are</span></h2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-xs-12">
+               <p class="fnt-17">With three decades of experience in infrastructure delivery we are practical, pragmatic and hands on. We are the partner you want if you’re setting up, setting out, or straight up stuck.</p>
+            </div>
          </div>
-         <div class="col-lg-6 col-md-6 col-xs-12 col-xs-12">
-            <p class="fnt-17">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+         <div>
+            <div class="col-md-12 text-center">
+               <h2>What we <span>do</span></h2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-xs-12">
+               <p class="fnt-17">From wherever you are to project completion, we get your project across the line. There is no problem too big, too small, too obscure, or too embarrassing, we pride ourselves on problem solving.  </p>
+            </div>
          </div>
-         <div class="col-lg-6 col-md-6 col-xs-12 col-xs-12 text-center">
+         <!-- <div class="col-lg-6 col-md-6 col-xs-12 col-xs-12 text-center">
             <ul class="icon_size">
                <li class="vision-icon"><i class="fa fa-eye"></i>Vision</li>
                <li class="value-icon"><i class="fa fa-line-chart"></i>Values</li>
                <li class="mission-icon"><i class="fa fa-rocket"></i> Mission</li>
             </ul>
-         </div>
+         </div> -->
       </div>
    </div>
 </section>
