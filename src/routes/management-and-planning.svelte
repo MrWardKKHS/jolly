@@ -2,6 +2,7 @@
    import Banner from "./components/banner.svelte";
    import Base from "./components/base.svelte";
    import Footer from "./components/footer.svelte";
+   import ServieLeft from "./components/servieLeft.svelte";
 </script>
       
 <Base/>
@@ -15,7 +16,7 @@
                <span class="image_hover ">
                <img src="images/management-rght-img.jpg" class="img-responsive zoom_img_effect" alt="manufacture-image">
                </span>
-               <h5>Expert management and planning services for all phases of he construction process. From inital conception to final inspection we have the experience you need</h5>
+               <h5>Expert management and planning services for all phases of the construction process. From inital conception to final inspection we have the experience you need</h5>
                <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
                <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.</p>
             </div>
@@ -78,43 +79,14 @@
                   <p>Have you any question or querry</p>
                   <h3>GET FREE 
                      CONSULTATION 
-                     WITH OUR AGENT
+                     WITH OUR TEAM
                   </h3>
                   <a data-animation="animated fadeInUp" class="header-requestbtn black-request-btn hvr-bounce-to-right" href="request-quote">Request A Quote</a>
                </div>
             </div>
          </div>
          <!--=========Servie Right end============-->
-      <!--=========Servie Left Start============-->
-         <div class="col-md-4 left-column">
-            <ul class="category-list">
-               <li><a href="manufacturing" class="active-category">Manufacturing</a></li>
-               <li><a href="cnc-industry">CNC Industry</a></li>
-               <li><a href="chemical-industry">Chemical Industry</a></li>
-               <li><a href="energy-engineering">Energy Engineering</a></li>
-               <li><a href="oil-industry">Oil Industry</a></li>
-               <li><a href="material-engineering">Material Engineering</a></li>
-            </ul>
-            <div class="contact-help">
-               <div class="office-info-col wdt-100">
-                  <h4>CONTACT US </h4>
-                  <ul class="office-information">
-                     <li class="office-loc">
-                        <span class="info-txt">121  Maxwell Farm Road, Washington DC, USA</span>
-                     </li>
-                     <li class="office-phn">
-                        <span class="info-txt fnt_17">+1 (123) 456-7890</span>
-                     </li>
-                     <li class="office-msg">
-                        <span class="info-txt fnt_17">info@indofact.com</span>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-            <a class="pdf-button" href="\">DOWNLOAD BROCHURE</a>
-         </div>
-         <!--=========Servie Left end============-->
-      
+         <ServieLeft activeCategory="management-and-planning"></ServieLeft>
       </div>
    </div>
 </section>

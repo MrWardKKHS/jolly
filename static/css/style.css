@@ -896,30 +896,7 @@ ul.header-info li.address{
      background:url(../images/material-icon.png) no-repeat 0px 0px;
 }
 /*======services end=======*/
-/*======bestthing-section=======*/
- .bestthing-section{
-     position:relative;
-     padding:81px 0px 63px;
-     height:387px;
-	 background:#f1f1f1;
-}
- .bestthing-text-column{
-     z-index:1;
-}
- .bestthing-img{
-     padding-right:0px;
-     position:absolute;
-     right:0px;
-     top:0px;
-     width:50.7%;
-     max-width:683px;
-}
- .bestthing-img img{
-     width:100%;
-     float:left;
-     height:387px;
-}
-/*======bestthing-section end=======*/
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------*/
 /*05 - Recent-Project */

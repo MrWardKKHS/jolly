@@ -1,6 +1,6 @@
 <script>
    import ProjectItem from "./projectItem.svelte";
-import Service from "./service.svelte"
+   import Service from "./service.svelte"
    import Video from "./video.svelte";
 </script>
 
@@ -68,9 +68,9 @@ import Service from "./service.svelte"
             </div>
          </div>
          <div class="col-md-12">
-            <Service title="MANAGEMENT and PLANNING" href="" icon=''></Service>
-            <Service title="PHYSICAL DELIVERY" href="" icon=''></Service>
-            <Service title="TECHNICAL SUPPORT" href="" icon=''></Service>
+            <Service title="MANAGEMENT and PLANNING" href="management-and-planning" icon=''></Service>
+            <Service title="PHYSICAL DELIVERY" href="physical-delivery" icon=''></Service>
+            <Service title="TECHNICAL SUPPORT" href="technical-support" icon=''></Service>
          </div>
       </div>
    </div>
