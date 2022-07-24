@@ -5448,7 +5448,7 @@ var init_shims = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-2835083a.js
+// .svelte-kit/output/server/chunks/index-d427ef78.js
 function run(fn) {
   return fn();
 }
@@ -5524,9 +5524,12 @@ function add_attribute(name, value, boolean) {
   const assignment = boolean && value === true ? "" : `="${escape_attribute_value(value.toString())}"`;
   return ` ${name}${assignment}`;
 }
+function add_classes(classes) {
+  return classes ? ` class="${classes}"` : "";
+}
 var current_component, escaped, missing_component, on_destroy;
-var init_index_2835083a = __esm({
-  ".svelte-kit/output/server/chunks/index-2835083a.js"() {
+var init_index_d427ef78 = __esm({
+  ".svelte-kit/output/server/chunks/index-d427ef78.js"() {
     init_shims();
     Promise.resolve();
     escaped = {
@@ -5559,7 +5562,7 @@ var Layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/fallbacks/layout.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${slots.default ? slots.default({}) : ``}`;
     });
@@ -5581,8 +5584,8 @@ var init__ = __esm({
     init_shims();
     init_layout_svelte();
     index = 0;
-    entry = "layout.svelte-aef2cc9e.js";
-    js = ["layout.svelte-aef2cc9e.js", "chunks/index-a54bfd4c.js"];
+    entry = "layout.svelte-507dd2a9.js";
+    js = ["layout.svelte-507dd2a9.js", "chunks/index-a54bfd4c.js"];
     css = [];
   }
 });
@@ -5600,7 +5603,7 @@ var Error2;
 var init_error_svelte = __esm({
   ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { status } = $$props;
       let { error: error2 } = $$props;
@@ -5635,8 +5638,8 @@ var init__2 = __esm({
     init_shims();
     init_error_svelte();
     index2 = 1;
-    entry2 = "error.svelte-df4a7a28.js";
-    js2 = ["error.svelte-df4a7a28.js", "chunks/index-a54bfd4c.js"];
+    entry2 = "error.svelte-127039f7.js";
+    js2 = ["error.svelte-127039f7.js", "chunks/index-a54bfd4c.js"];
     css2 = [];
   }
 });
@@ -5650,7 +5653,7 @@ var css3, Footer;
 var init_footer_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/footer.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     css3 = {
       code: `.solution-available.svelte-rnyrhp.svelte-rnyrhp{padding:20px 0px 21px}.solution-available.svelte-rnyrhp h5.svelte-rnyrhp{font-size:30px;color:#000;font-weight:400;font-family:'Open Sans', sans-serif;text-transform:none;margin:10px 20px;display:inline-block}.solution-available.svelte-rnyrhp h5 span.svelte-rnyrhp{font-weight:700}a.header-requestbtn.contactus-btn.svelte-rnyrhp.svelte-rnyrhp{background:#fff;color:#000;width:200px;float:none;display:inline-block;font-size:16px;margin:-15px 0px 0px;text-align:center}a.header-requestbtn.contactus-btn.svelte-rnyrhp.svelte-rnyrhp:hover{color:#fff}.ftr-section.svelte-rnyrhp.svelte-rnyrhp{background:#0b0c0c;width:100%;float:left;padding:80px 0px 0px;background-size:cover}.ftr-section.svelte-rnyrhp h6.svelte-rnyrhp{font-size:18px;color:#b6b6b7;text-transform:none;font-weight:600;margin-bottom:25px}.ftr-section.svelte-rnyrhp p.svelte-rnyrhp{color:#757575}ul.footer-info.svelte-rnyrhp.svelte-rnyrhp{width:100%;margin:0px 0px 70px;padding:0px;border-bottom:1px solid #373737;display:grid;grid-template-columns:1fr 1fr 1fr}ul.footer-info.svelte-rnyrhp li.svelte-rnyrhp{list-style:none;width:auto;font-size:18px;color:#c8c8c8;padding:8px 40px 23px 35px;border-right:1px solid #373737;margin-right:49px;position:relative}ul.footer-info.svelte-rnyrhp li.svelte-rnyrhp:last-child{border-right:0px;margin:0px}ul.footer-info.svelte-rnyrhp li.svelte-rnyrhp:before{position:absolute;font-family:'FontAwesome';top:3px;left:0px;font-size:20px !important;color:#f2ae2b}ul.footer-info.svelte-rnyrhp li.ftr-loc.svelte-rnyrhp{font-size:16px;padding:0px 40px 12px 35px}ul.footer-info.svelte-rnyrhp li.ftr-loc.svelte-rnyrhp:before{content:"\\f041";top:9px}ul.footer-info.svelte-rnyrhp li.ftr-phn.svelte-rnyrhp:before{content:"\\f095";top:8px}ul.footer-info.svelte-rnyrhp li.ftr-msg.svelte-rnyrhp:before{content:"\\f0e0";font-size:15px!important;top:10px}ul.footer-info.svelte-rnyrhp li.ftr-support.svelte-rnyrhp:before{content:"\\f017";top:7px}.ftr-about-text.svelte-rnyrhp.svelte-rnyrhp{padding-right:70px;float:left}a.ftr-read-more.svelte-rnyrhp.svelte-rnyrhp{font-size:14px;color:#c8c8c8;font-weight:700;font-family:'Lato', sans-serif;border:1px solid #676868;padding:8px 20px;display:block;float:left;text-decoration:none}a.ftr-read-more.svelte-rnyrhp.svelte-rnyrhp:hover{color:#f2ae2b;border:1px solid #f2ae2b}ul.footer-link.svelte-rnyrhp.svelte-rnyrhp{width:100%;float:left;margin:0px;padding:0px}ul.footer-link.svelte-rnyrhp li.svelte-rnyrhp{list-style:none;float:left;font-size:15px;margin-bottom:10px;width:100%}ul.footer-link.svelte-rnyrhp li a.svelte-rnyrhp{color:#757575;text-decoration:none}ul.footer-link.svelte-rnyrhp li a.svelte-rnyrhp:hover{color:#f2ae2b !important}.header-socials.footer-socials.svelte-rnyrhp.svelte-rnyrhp{margin:0px 0px 30px;width:100%;float:left}.header-socials.footer-socials.svelte-rnyrhp i.svelte-rnyrhp{width:30px;height:30px;line-height:28px;border:2px solid #515151;border-radius:30px;margin:0px 3px 0px 0px;color:#fff;text-align:center}.header-socials.footer-socials.svelte-rnyrhp i.svelte-rnyrhp:hover{color:#f2ae2b;border:2px solid #f2ae2b}.ftr-logo.svelte-rnyrhp.svelte-rnyrhp{width:auto;float:left}.footer-btm.svelte-rnyrhp.svelte-rnyrhp{width:100%;float:left;border-top:1px solid #373737;padding:22px 0px 26px;margin:60px 0px 0px}@media only screen and (max-width: 767px){a.header-requestbtn.contactus-btn.svelte-rnyrhp.svelte-rnyrhp{margin:5px 0px 0px}ul.footer-info.svelte-rnyrhp.svelte-rnyrhp{display:flex;flex-direction:column}}`,
       map: null
@@ -5706,7 +5709,7 @@ var ProjectItem;
 var init_projectItem_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/projectItem.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     ProjectItem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { href } = $$props;
       let { img } = $$props;
@@ -5734,7 +5737,7 @@ var css4, Service;
 var init_service_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/service.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     css4 = {
       code: ".service-column.svelte-u6xaaz.svelte-u6xaaz{padding:30px 15px;transition:all .3s ease-out;float:left}.service-column.svelte-u6xaaz .icons.svelte-u6xaaz{width:78px;height:78px;display:inline-block}.service-column.svelte-u6xaaz h5.svelte-u6xaaz{font-size:16px;margin:5px 0px 20px}.service-column.svelte-u6xaaz p span.svelte-u6xaaz{font-weight:700}.service-column.svelte-u6xaaz.svelte-u6xaaz:hover{background:#f2ae2b;transition:all .3s ease-in}.service-column.svelte-u6xaaz:hover a.svelte-u6xaaz{text-decoration:none}.service-column.svelte-u6xaaz:hover p.svelte-u6xaaz,.service-column.svelte-u6xaaz:hover h5.svelte-u6xaaz,.service-column.svelte-u6xaaz:hover .read-more-link.svelte-u6xaaz{color:#000}",
       map: null
@@ -5769,7 +5772,7 @@ var css5, Video;
 var init_video_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/video.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     css5 = {
       code: ".full-frame-video.small-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:none}@media screen and (max-width: 991px){.full-frame-video.small-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:none}}@media screen and (max-width: 767px){.full-frame-video.small-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:block;height:250px;min-height:250px}.full-frame-video.large-screens.svelte-1b3zeyc.svelte-1b3zeyc{display:none}}.full-frame-video.svelte-1b3zeyc.svelte-1b3zeyc{width:100%;min-height:580px}.svelte-1b3zeyc.svelte-1b3zeyc{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}div.svelte-1b3zeyc.svelte-1b3zeyc{display:block;background-image:url(https://assets.website-files.com/5b1091d\u2026/5da4f56\u2026_mackenzie-civil-20-secs-mobile-poster-00001.jpg)}.w-background-video.svelte-1b3zeyc>video.svelte-1b3zeyc{background-size:cover;background-position:50% 50%;position:absolute;margin:auto;width:100%;height:100%;right:-100%;bottom:-100%;top:-100%;left:-100%;object-fit:cover;z-index:-100}video.svelte-1b3zeyc.svelte-1b3zeyc{display:inline-block;vertical-align:baseline}video.svelte-1b3zeyc.svelte-1b3zeyc{object-fit:contain}.w-background-video.svelte-1b3zeyc.svelte-1b3zeyc{position:relative;overflow:hidden;height:500px;color:white}",
       map: null
@@ -5792,7 +5795,7 @@ var Home;
 var init_home_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/home.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_projectItem_svelte();
     init_service_svelte();
     init_video_svelte();
@@ -5948,7 +5951,7 @@ var Nav;
 var init_nav_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/nav.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     Nav = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<nav id="${"main-navigation-wrapper"}" class="${"navbar navbar-default "}"><div class="${"container"}"><div class="${"navbar-header"}"><div class="${"logo-menu"}"><a href="${"\\"}"><img src="${"images/white-logo.png"}" alt="${"logo"}"></a></div>
           <button type="${"button"}" data-toggle="${"collapse"}" data-target="${"#main-navigation"}" aria-expanded="${"false"}" class="${"navbar-toggle collapsed"}"><span class="${"sr-only"}">Toggle navigation</span><span class="${"icon-bar"}"></span><span class="${"icon-bar"}"></span><span class="${"icon-bar"}"></span></button></div>
@@ -5984,7 +5987,7 @@ var css6, Header;
 var init_header_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/header.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_nav_svelte();
     css6 = {
       code: "@media only screen and (max-width: 767px){.header-socials.svelte-1sh5qgq{display:none}}",
@@ -6015,11 +6018,11 @@ var Base;
 var init_base_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/base.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_header_svelte();
     init_nav_svelte();
     Base = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${$$result.head += `<link href="${"css/bootstrap.min.css"}" rel="${"stylesheet"}" data-svelte="svelte-6jd232"><link href="${"css/style.css"}" rel="${"stylesheet"}" data-svelte="svelte-6jd232"><link href="${"css/responsive-style.css"}" rel="${"stylesheet"}" data-svelte="svelte-6jd232"><link href="${"css/effect_style.css"}" rel="${"stylesheet"}" data-svelte="svelte-6jd232"><link rel="${"stylesheet"}" href="${"css/animate.min.css"}" data-svelte="svelte-6jd232"><link rel="${"stylesheet"}" href="${"css/animate.css"}" data-svelte="svelte-6jd232"><link href="${"css/responsive_bootstrap_carousel.css"}" rel="${"stylesheet"}" media="${"all"}" data-svelte="svelte-6jd232"><link rel="${"stylesheet"}" type="${"text/css"}" href="${"css/demo.css"}" data-svelte="svelte-6jd232"><link rel="${"stylesheet"}" type="${"text/css"}" href="${"css/set1.css"}" data-svelte="svelte-6jd232">${$$result.title = `<title>Civil Logic - Experts in Civil Infrastructure</title>`, ""}<link rel="${"icon"}" type="${"image/png"}" href="${"/favicon.png"}" data-svelte="svelte-6jd232">`, ""}
+      return `${$$result.head += `<link href="${"css/bootstrap.min.css"}" rel="${"stylesheet"}" data-svelte="svelte-1y5kbnc"><link href="${"css/style.css"}" rel="${"stylesheet"}" data-svelte="svelte-1y5kbnc"><link href="${"css/responsive-style.css"}" rel="${"stylesheet"}" data-svelte="svelte-1y5kbnc"><link href="${"css/effect_style.css"}" rel="${"stylesheet"}" data-svelte="svelte-1y5kbnc"><link rel="${"stylesheet"}" href="${"css/animate.min.css"}" data-svelte="svelte-1y5kbnc"><link rel="${"stylesheet"}" href="${"css/animate.css"}" data-svelte="svelte-1y5kbnc"><link href="${"css/responsive_bootstrap_carousel.css"}" rel="${"stylesheet"}" media="${"all"}" data-svelte="svelte-1y5kbnc"><link rel="${"stylesheet"}" type="${"text/css"}" href="${"css/demo.css"}" data-svelte="svelte-1y5kbnc"><link rel="${"stylesheet"}" type="${"text/css"}" href="${"css/set1.css"}" data-svelte="svelte-1y5kbnc">${$$result.title = `<title>Civil Logic - Experts in Civil Infrastructure</title>`, ""}`, ""}
 
 <main>${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
 	 
@@ -6044,7 +6047,7 @@ var Routes;
 var init_index_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/index.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_footer_svelte();
     init_home_svelte();
     init_base_svelte();
@@ -6076,8 +6079,8 @@ var init__3 = __esm({
     init_shims();
     init_index_svelte();
     index3 = 16;
-    entry3 = "pages/index.svelte-78ca8992.js";
-    js3 = ["pages/index.svelte-78ca8992.js", "chunks/index-a54bfd4c.js", "pages/components/footer.svelte-23c0fe6d.js", "pages/components/home.svelte-9a49bcfe.js", "pages/components/projectItem.svelte-62e6b4a1.js", "pages/components/service.svelte-082e60dc.js", "pages/components/video.svelte-f6445a11.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js"];
+    entry3 = "pages/index.svelte-0d6cff9e.js";
+    js3 = ["pages/index.svelte-0d6cff9e.js", "chunks/index-a54bfd4c.js", "pages/components/footer.svelte-64648673.js", "pages/components/home.svelte-078e8cc6.js", "pages/components/projectItem.svelte-76594284.js", "pages/components/service.svelte-0d3033d8.js", "pages/components/video.svelte-896d84bd.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js"];
     css7 = ["assets/pages/components/footer.svelte-2911137e.css", "assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css", "assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
@@ -6091,7 +6094,7 @@ var Banner;
 var init_banner_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/banner.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     Banner = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { title } = $$props;
       let { filename = title.toLowerCase() } = $$props;
@@ -6117,7 +6120,7 @@ var About;
 var init_about_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/about.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -6221,8 +6224,8 @@ var init__4 = __esm({
     init_shims();
     init_about_svelte();
     index4 = 2;
-    entry4 = "pages/about.svelte-c8a8ac9c.js";
-    js4 = ["pages/about.svelte-c8a8ac9c.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry4 = "pages/about.svelte-4733e3e8.js";
+    js4 = ["pages/about.svelte-4733e3e8.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css8 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6236,7 +6239,7 @@ var Coming_soon;
 var init_coming_soon_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/coming-soon.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     Coming_soon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<!DOCTYPE html>
 <html lang="${"en"}"><head><meta charset="${"utf-8"}">
@@ -6288,8 +6291,8 @@ var init__5 = __esm({
     init_shims();
     init_coming_soon_svelte();
     index5 = 3;
-    entry5 = "pages/coming-soon.svelte-a004a315.js";
-    js5 = ["pages/coming-soon.svelte-a004a315.js", "chunks/index-a54bfd4c.js"];
+    entry5 = "pages/coming-soon.svelte-d83ffc34.js";
+    js5 = ["pages/coming-soon.svelte-d83ffc34.js", "chunks/index-a54bfd4c.js"];
     css9 = [];
   }
 });
@@ -6303,7 +6306,7 @@ var Contact;
 var init_contact_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/contact.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -6352,8 +6355,8 @@ var init__6 = __esm({
     init_shims();
     init_contact_svelte();
     index6 = 15;
-    entry6 = "pages/contact.svelte-37a31abc.js";
-    js6 = ["pages/contact.svelte-37a31abc.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry6 = "pages/contact.svelte-f4dac480.js";
+    js6 = ["pages/contact.svelte-f4dac480.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css10 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6367,7 +6370,7 @@ var Maintenance;
 var init_maintenance_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/maintenance.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     Maintenance = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<!DOCTYPE html>
 <html lang="${"en"}"><head><meta charset="${"utf-8"}">
@@ -6408,9 +6411,36 @@ var init__7 = __esm({
     init_shims();
     init_maintenance_svelte();
     index7 = 17;
-    entry7 = "pages/maintenance.svelte-c7b347c6.js";
-    js7 = ["pages/maintenance.svelte-c7b347c6.js", "chunks/index-a54bfd4c.js"];
+    entry7 = "pages/maintenance.svelte-1ce53e81.js";
+    js7 = ["pages/maintenance.svelte-1ce53e81.js", "chunks/index-a54bfd4c.js"];
     css11 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/components/servieLeft.svelte.js
+var servieLeft_svelte_exports = {};
+__export(servieLeft_svelte_exports, {
+  default: () => ServieLeft
+});
+var ServieLeft;
+var init_servieLeft_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/components/servieLeft.svelte.js"() {
+    init_shims();
+    init_index_d427ef78();
+    ServieLeft = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { activeCategory = "none" } = $$props;
+      if ($$props.activeCategory === void 0 && $$bindings.activeCategory && activeCategory !== void 0)
+        $$bindings.activeCategory(activeCategory);
+      return `
+<div class="${"col-md-4 left-column"}"><ul class="${"category-list"}"><li><a href="${"management-and-planning"}"${add_classes((activeCategory === "management-and-planning" ? "active-category" : "").trim())}>Management and Planning</a></li>
+      <li><a href="${"physical-delivery"}"${add_classes((activeCategory === "physical-delivery" ? "active-category" : "").trim())}>Physical Delivery</a></li>
+      <li><a href="${"technical-support"}"${add_classes((activeCategory === "technical-support" ? "active-category" : "").trim())}>Technical Support</a></li></ul>
+   <div class="${"contact-help"}"><div class="${"office-info-col wdt-100"}"><h4>CONTACT US </h4>
+         <ul class="${"office-information"}"><li class="${"office-loc"}"><span class="${"info-txt"}">121  Maxwell Farm Road, Washington DC, USA</span></li>
+            <li class="${"office-phn"}"><span class="${"info-txt fnt_17"}">+1 (123) 456-7890</span></li>
+            <li class="${"office-msg"}"><span class="${"info-txt fnt_17"}">info@indofact.com</span></li></ul></div></div></div>
+`;
+    });
   }
 });
 
@@ -6423,10 +6453,11 @@ var Management_and_planning;
 var init_management_and_planning_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/management-and-planning.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
+    init_servieLeft_svelte();
     init_header_svelte();
     init_nav_svelte();
     Management_and_planning = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -6434,7 +6465,7 @@ var init_management_and_planning_svelte = __esm({
 ${validate_component(Banner, "Banner").$$render($$result, { title: "Management and Planning" }, {}, {})}
 <section class="${"pad100-top-bottom"}"><div class="${"container"}"><div class="${"row"}">
          <div class="${"col-md-8 right-column"}"><div class="${"service-right-desc"}"><span class="${"image_hover "}"><img src="${"images/management-rght-img.jpg"}" class="${"img-responsive zoom_img_effect"}" alt="${"manufacture-image"}"></span>
-               <h5>Expert management and planning services for all phases of he construction process. From inital conception to final inspection we have the experience you need</h5>
+               <h5>Expert management and planning services for all phases of the construction process. From inital conception to final inspection we have the experience you need</h5>
                <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
                <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.</p></div>
             <div class="${"specialization-cl"}"><div class="${"special-img image_hover"}"><img src="${"images/specialization-img.jpg"}" class="${"img-responsive zoom_img_effect"}" alt="${"special-image"}"></div>
@@ -6458,11 +6489,13 @@ ${validate_component(Banner, "Banner").$$render($$result, { title: "Management a
                <div class="${"have-queston"}"><p>Have you any question or querry</p>
                   <h3>GET FREE 
                      CONSULTATION 
-                     WITH OUR AGENT
+                     WITH OUR TEAM
                   </h3>
                   <a data-animation="${"animated fadeInUp"}" class="${"header-requestbtn black-request-btn hvr-bounce-to-right"}" href="${"request-quote"}">Request A Quote</a></div></div></div>
          
-         ${validate_component(Footer, "ServieLeft").$$render($$result, {}, {}, {})}</div></div></section>
+         ${validate_component(ServieLeft, "ServieLeft").$$render($$result, {
+        activeCategory: "management-and-planning"
+      }, {}, {})}</div></div></section>
 ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
     });
   }
@@ -6483,8 +6516,8 @@ var init__8 = __esm({
     init_shims();
     init_management_and_planning_svelte();
     index8 = 18;
-    entry8 = "pages/management-and-planning.svelte-bbe4ee6b.js";
-    js8 = ["pages/management-and-planning.svelte-bbe4ee6b.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry8 = "pages/management-and-planning.svelte-6669c386.js";
+    js8 = ["pages/management-and-planning.svelte-6669c386.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js", "pages/components/servieLeft.svelte-3c71ad3b.js"];
     css12 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6498,7 +6531,7 @@ var Page_404;
 var init_page_404_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/page-404.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_base_svelte();
     init_footer_svelte();
     init_header_svelte();
@@ -6530,8 +6563,8 @@ var init__9 = __esm({
     init_shims();
     init_page_404_svelte();
     index9 = 19;
-    entry9 = "pages/page-404.svelte-2c4afc88.js";
-    js9 = ["pages/page-404.svelte-2c4afc88.js", "chunks/index-a54bfd4c.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry9 = "pages/page-404.svelte-b77917b5.js";
+    js9 = ["pages/page-404.svelte-b77917b5.js", "chunks/index-a54bfd4c.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css13 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6545,7 +6578,7 @@ var Physical_delivery;
 var init_physical_delivery_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/physical-delivery.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -6617,8 +6650,8 @@ var init__10 = __esm({
     init_shims();
     init_physical_delivery_svelte();
     index10 = 20;
-    entry10 = "pages/physical-delivery.svelte-884116b5.js";
-    js10 = ["pages/physical-delivery.svelte-884116b5.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry10 = "pages/physical-delivery.svelte-e4d9d7d1.js";
+    js10 = ["pages/physical-delivery.svelte-e4d9d7d1.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css14 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6632,7 +6665,7 @@ var Portfolio_2;
 var init_portfolio_2_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/portfolio-2.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -6714,8 +6747,8 @@ var init__11 = __esm({
     init_shims();
     init_portfolio_2_svelte();
     index11 = 21;
-    entry11 = "pages/portfolio-2.svelte-6327fe3f.js";
-    js11 = ["pages/portfolio-2.svelte-6327fe3f.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry11 = "pages/portfolio-2.svelte-102b0b91.js";
+    js11 = ["pages/portfolio-2.svelte-102b0b91.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css15 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6729,7 +6762,7 @@ var Project_1;
 var init_project_1_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/project-1.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -6791,8 +6824,8 @@ var init__12 = __esm({
     init_shims();
     init_project_1_svelte();
     index12 = 22;
-    entry12 = "pages/project-1.svelte-892204a7.js";
-    js12 = ["pages/project-1.svelte-892204a7.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry12 = "pages/project-1.svelte-e929bd04.js";
+    js12 = ["pages/project-1.svelte-e929bd04.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css16 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6806,7 +6839,7 @@ var Request_quote;
 var init_request_quote_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/request-quote.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -6853,8 +6886,8 @@ var init__13 = __esm({
     init_shims();
     init_request_quote_svelte();
     index13 = 23;
-    entry13 = "pages/request-quote.svelte-18f6689d.js";
-    js13 = ["pages/request-quote.svelte-18f6689d.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry13 = "pages/request-quote.svelte-bcca7417.js";
+    js13 = ["pages/request-quote.svelte-bcca7417.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css17 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6868,7 +6901,7 @@ var Services;
 var init_services_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/services.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -6919,8 +6952,8 @@ var init__14 = __esm({
     init_shims();
     init_services_svelte();
     index14 = 24;
-    entry14 = "pages/services.svelte-411b47be.js";
-    js14 = ["pages/services.svelte-411b47be.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry14 = "pages/services.svelte-f449706d.js";
+    js14 = ["pages/services.svelte-f449706d.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css18 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -6934,7 +6967,7 @@ var Team;
 var init_team_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/team.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -7023,8 +7056,8 @@ var init__15 = __esm({
     init_shims();
     init_team_svelte();
     index15 = 25;
-    entry15 = "pages/team.svelte-03c61a9f.js";
-    js15 = ["pages/team.svelte-03c61a9f.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry15 = "pages/team.svelte-8e3c9f35.js";
+    js15 = ["pages/team.svelte-8e3c9f35.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css19 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -7038,7 +7071,7 @@ var Technical_support;
 var init_technical_support_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/technical-support.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -7110,8 +7143,8 @@ var init__16 = __esm({
     init_shims();
     init_technical_support_svelte();
     index16 = 26;
-    entry16 = "pages/technical-support.svelte-0764a1c4.js";
-    js16 = ["pages/technical-support.svelte-0764a1c4.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js"];
+    entry16 = "pages/technical-support.svelte-edc3f40d.js";
+    js16 = ["pages/technical-support.svelte-edc3f40d.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js"];
     css20 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -7125,7 +7158,7 @@ var Testimonial;
 var init_testimonial_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/components/testimonial.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     Testimonial = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { name } = $$props;
       let { testimony = "Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor." } = $$props;
@@ -7152,7 +7185,7 @@ var Testimonials;
 var init_testimonials_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/testimonials.svelte.js"() {
     init_shims();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_banner_svelte();
     init_base_svelte();
     init_footer_svelte();
@@ -7195,8 +7228,8 @@ var init__17 = __esm({
     init_shims();
     init_testimonials_svelte();
     index17 = 27;
-    entry17 = "pages/testimonials.svelte-0cfae702.js";
-    js17 = ["pages/testimonials.svelte-0cfae702.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-e38fbe44.js", "pages/components/base.svelte-b00d4b2c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js", "pages/components/footer.svelte-23c0fe6d.js", "pages/components/testimonial.svelte-e22326de.js"];
+    entry17 = "pages/testimonials.svelte-866d85d2.js";
+    js17 = ["pages/testimonials.svelte-866d85d2.js", "chunks/index-a54bfd4c.js", "pages/components/banner.svelte-a6151de2.js", "pages/components/base.svelte-e1890e23.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js", "pages/components/footer.svelte-64648673.js", "pages/components/testimonial.svelte-323ade94.js"];
     css21 = ["assets/pages/components/header.svelte-502e43d7.css", "assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -7216,8 +7249,8 @@ var init__18 = __esm({
     init_shims();
     init_banner_svelte();
     index18 = 4;
-    entry18 = "pages/components/banner.svelte-e38fbe44.js";
-    js18 = ["pages/components/banner.svelte-e38fbe44.js", "chunks/index-a54bfd4c.js"];
+    entry18 = "pages/components/banner.svelte-a6151de2.js";
+    js18 = ["pages/components/banner.svelte-a6151de2.js", "chunks/index-a54bfd4c.js"];
     css22 = [];
   }
 });
@@ -7237,8 +7270,8 @@ var init__19 = __esm({
     init_shims();
     init_base_svelte();
     index19 = 5;
-    entry19 = "pages/components/base.svelte-b00d4b2c.js";
-    js19 = ["pages/components/base.svelte-b00d4b2c.js", "chunks/index-a54bfd4c.js", "pages/components/header.svelte-645a48ce.js", "pages/components/nav.svelte-3a21dd56.js"];
+    entry19 = "pages/components/base.svelte-e1890e23.js";
+    js19 = ["pages/components/base.svelte-e1890e23.js", "chunks/index-a54bfd4c.js", "pages/components/header.svelte-0b7a98ef.js", "pages/components/nav.svelte-090a3a26.js"];
     css23 = ["assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
@@ -7258,8 +7291,8 @@ var init__20 = __esm({
     init_shims();
     init_footer_svelte();
     index20 = 6;
-    entry20 = "pages/components/footer.svelte-23c0fe6d.js";
-    js20 = ["pages/components/footer.svelte-23c0fe6d.js", "chunks/index-a54bfd4c.js"];
+    entry20 = "pages/components/footer.svelte-64648673.js";
+    js20 = ["pages/components/footer.svelte-64648673.js", "chunks/index-a54bfd4c.js"];
     css24 = ["assets/pages/components/footer.svelte-2911137e.css"];
   }
 });
@@ -7279,8 +7312,8 @@ var init__21 = __esm({
     init_shims();
     init_header_svelte();
     index21 = 7;
-    entry21 = "pages/components/header.svelte-645a48ce.js";
-    js21 = ["pages/components/header.svelte-645a48ce.js", "chunks/index-a54bfd4c.js", "pages/components/nav.svelte-3a21dd56.js"];
+    entry21 = "pages/components/header.svelte-0b7a98ef.js";
+    js21 = ["pages/components/header.svelte-0b7a98ef.js", "chunks/index-a54bfd4c.js", "pages/components/nav.svelte-090a3a26.js"];
     css25 = ["assets/pages/components/header.svelte-502e43d7.css"];
   }
 });
@@ -7300,8 +7333,8 @@ var init__22 = __esm({
     init_shims();
     init_home_svelte();
     index22 = 8;
-    entry22 = "pages/components/home.svelte-9a49bcfe.js";
-    js22 = ["pages/components/home.svelte-9a49bcfe.js", "chunks/index-a54bfd4c.js", "pages/components/projectItem.svelte-62e6b4a1.js", "pages/components/service.svelte-082e60dc.js", "pages/components/video.svelte-f6445a11.js"];
+    entry22 = "pages/components/home.svelte-078e8cc6.js";
+    js22 = ["pages/components/home.svelte-078e8cc6.js", "chunks/index-a54bfd4c.js", "pages/components/projectItem.svelte-76594284.js", "pages/components/service.svelte-0d3033d8.js", "pages/components/video.svelte-896d84bd.js"];
     css26 = ["assets/pages/components/service.svelte-5554b3a5.css", "assets/pages/components/video.svelte-4c5c571f.css"];
   }
 });
@@ -7321,8 +7354,8 @@ var init__23 = __esm({
     init_shims();
     init_nav_svelte();
     index23 = 9;
-    entry23 = "pages/components/nav.svelte-3a21dd56.js";
-    js23 = ["pages/components/nav.svelte-3a21dd56.js", "chunks/index-a54bfd4c.js"];
+    entry23 = "pages/components/nav.svelte-090a3a26.js";
+    js23 = ["pages/components/nav.svelte-090a3a26.js", "chunks/index-a54bfd4c.js"];
     css27 = [];
   }
 });
@@ -7342,8 +7375,8 @@ var init__24 = __esm({
     init_shims();
     init_projectItem_svelte();
     index24 = 10;
-    entry24 = "pages/components/projectItem.svelte-62e6b4a1.js";
-    js24 = ["pages/components/projectItem.svelte-62e6b4a1.js", "chunks/index-a54bfd4c.js"];
+    entry24 = "pages/components/projectItem.svelte-76594284.js";
+    js24 = ["pages/components/projectItem.svelte-76594284.js", "chunks/index-a54bfd4c.js"];
     css28 = [];
   }
 });
@@ -7363,37 +7396,9 @@ var init__25 = __esm({
     init_shims();
     init_service_svelte();
     index25 = 11;
-    entry25 = "pages/components/service.svelte-082e60dc.js";
-    js25 = ["pages/components/service.svelte-082e60dc.js", "chunks/index-a54bfd4c.js"];
+    entry25 = "pages/components/service.svelte-0d3033d8.js";
+    js25 = ["pages/components/service.svelte-0d3033d8.js", "chunks/index-a54bfd4c.js"];
     css29 = ["assets/pages/components/service.svelte-5554b3a5.css"];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/components/servieLeft.svelte.js
-var servieLeft_svelte_exports = {};
-__export(servieLeft_svelte_exports, {
-  default: () => ServieLeft
-});
-var ServieLeft;
-var init_servieLeft_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/components/servieLeft.svelte.js"() {
-    init_shims();
-    init_index_2835083a();
-    ServieLeft = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `
-<div class="${"col-md-4 left-column"}"><ul class="${"category-list"}"><li><a href="${"manufacturing"}" class="${"active-category"}">Manufacturing</a></li>
-      <li><a href="${"cnc-industry"}">CNC Industry</a></li>
-      <li><a href="${"chemical-industry"}">Chemical Industry</a></li>
-      <li><a href="${"energy-engineering"}">Energy Engineering</a></li>
-      <li><a href="${"oil-industry"}">Oil Industry</a></li>
-      <li><a href="${"material-engineering"}">Material Engineering</a></li></ul>
-   <div class="${"contact-help"}"><div class="${"office-info-col wdt-100"}"><h4>CONTACT US </h4>
-         <ul class="${"office-information"}"><li class="${"office-loc"}"><span class="${"info-txt"}">121  Maxwell Farm Road, Washington DC, USA</span></li>
-            <li class="${"office-phn"}"><span class="${"info-txt fnt_17"}">+1 (123) 456-7890</span></li>
-            <li class="${"office-msg"}"><span class="${"info-txt fnt_17"}">info@indofact.com</span></li></ul></div></div>
-   <a class="${"pdf-button"}" href="${"\\"}">DOWNLOAD BROCHURE</a></div>
-`;
-    });
   }
 });
 
@@ -7412,8 +7417,8 @@ var init__26 = __esm({
     init_shims();
     init_servieLeft_svelte();
     index26 = 12;
-    entry26 = "pages/components/servieLeft.svelte-f27fe79f.js";
-    js26 = ["pages/components/servieLeft.svelte-f27fe79f.js", "chunks/index-a54bfd4c.js"];
+    entry26 = "pages/components/servieLeft.svelte-3c71ad3b.js";
+    js26 = ["pages/components/servieLeft.svelte-3c71ad3b.js", "chunks/index-a54bfd4c.js"];
     css30 = [];
   }
 });
@@ -7433,8 +7438,8 @@ var init__27 = __esm({
     init_shims();
     init_testimonial_svelte();
     index27 = 13;
-    entry27 = "pages/components/testimonial.svelte-e22326de.js";
-    js27 = ["pages/components/testimonial.svelte-e22326de.js", "chunks/index-a54bfd4c.js"];
+    entry27 = "pages/components/testimonial.svelte-323ade94.js";
+    js27 = ["pages/components/testimonial.svelte-323ade94.js", "chunks/index-a54bfd4c.js"];
     css31 = [];
   }
 });
@@ -7454,8 +7459,8 @@ var init__28 = __esm({
     init_shims();
     init_video_svelte();
     index28 = 14;
-    entry28 = "pages/components/video.svelte-f6445a11.js";
-    js28 = ["pages/components/video.svelte-f6445a11.js", "chunks/index-a54bfd4c.js"];
+    entry28 = "pages/components/video.svelte-896d84bd.js";
+    js28 = ["pages/components/video.svelte-896d84bd.js", "chunks/index-a54bfd4c.js"];
     css32 = ["assets/pages/components/video.svelte-4c5c571f.css"];
   }
 });
@@ -7470,7 +7475,7 @@ var init_main = __esm({
   ".svelte-kit/output/server/entries/endpoints/main.js"() {
     init_shims();
     init_index_svelte();
-    init_index_2835083a();
+    init_index_d427ef78();
     init_footer_svelte();
     init_home_svelte();
     init_projectItem_svelte();
@@ -7496,7 +7501,7 @@ init_shims();
 
 // .svelte-kit/output/server/index.js
 init_shims();
-init_index_2835083a();
+init_index_d427ef78();
 function afterUpdate() {
 }
 var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -9715,7 +9720,7 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + "\n	</head>\n	<body>\n		<div>" + body + "</div>\n	</body>\n</html>\n";
+var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\r\n<html lang="en">\r\n	<head>\r\n		<meta charset="utf-8" />\r\n		<link rel="icon" href="favicon.png"/>\r\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\r\n		' + head + "\r\n	</head>\r\n	<body>\r\n		<div>" + body + "</div>\r\n	</body>\r\n</html>\r\n";
 var read = null;
 set_paths({ "base": "", "assets": "" });
 var Server = class {
@@ -9778,7 +9783,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set(["css/ajax-loader.gif", "css/animate.css", "css/animate.min.css", "css/bootstrap.min.css", "css/demo.css", "css/effect_style.css", "css/elastislide.css", "css/font-awesome.min.css", "css/jquery.fancybox.css", "css/responsive-style.css", "css/responsive_bootstrap_carousel.css", "css/set1.css", "css/slick.min.css", "css/style.css", "favicon.png", "fonts/FontAwesome.otf", "fonts/fontawesome-webfont.eot", "fonts/fontawesome-webfont.svg", "fonts/fontawesome-webfont.ttf", "fonts/fontawesome-webfont.woff", "fonts/fontawesome-webfont.woff2", "fonts/glyphicons-halflings-regular.eot", "fonts/glyphicons-halflings-regular.svg", "fonts/glyphicons-halflings-regular.ttf", "fonts/glyphicons-halflings-regular.woff", "fonts/glyphicons-halflings-regular.woff2", "images/404bg.jpg", "images/ImageAttribution.txt", "images/about-banner.jpg", "images/agri-img.jpg", "images/agricultural-img.jpg", "images/agricultural-large-img.jpg", "images/agricultural-scope-img.jpg", "images/black-logo.png", "images/black.png", "images/btn-left-divider.jpg", "images/chemical-banner.jpg", "images/chemical-icon-hover.png", "images/chemical-icon.png", "images/chemical-rght-img.jpg", "images/choose-arrow.png", "images/circle-after-img.png", "images/client-img1.jpg", "images/client-img2.jpg", "images/client-img3.jpg", "images/client-img4.jpg", "images/client-logo1.jpg", "images/client-logo2.jpg", "images/client-logo3.jpg", "images/client-logo4.jpg", "images/client-logo5.jpg", "images/client-logo6.jpg", "images/client-quote-img.png", "images/close_popup.png", "images/cnc-banner.jpg", "images/cnc-icon-hover.png", "images/cnc-icon.png", "images/cnc-right-img1.jpg", "images/cnc-right-img2.jpg", "images/coming-page-bg.jpg", "images/coming-page-bg.png", "images/contact-address-icon.png", "images/contact-banner.jpg", "images/contact-help-bg.jpg", "images/contact-help-cal.png", "images/contact-msg-icon.png", "images/contact-phn-icon.png", "images/coverage-img.png", "images/delete-icon.png", "images/delivery-icon.png", "images/delivery-icon1.png", "images/delivery-time-icon.png", "images/eco-project-image3.jpg", "images/electric-img.jpg", "images/electronic-img.jpg", "images/electronic-scope-img.jpg", "images/electronical-large-img.jpg", "images/energy-engineering-banner.jpg", "images/energy-icon-hover.png", "images/energy-icon.png", "images/energy-right-img.jpg", "images/factory-farm-img.jpg", "images/factory-farm-large-img.jpg", "images/factory-right-img.jpg", "images/faq-banner.jpg", "images/farm-img.jpg", "images/farm-scope-img.jpg", "images/footer-bg.jpg", "images/ftr-info-sprite.png", "images/ftr-logo.png", "images/gas-img.jpg", "images/gas-pipe-large-img.jpg", "images/gas-pipeline-img.jpg", "images/gas-scope-img.jpg", "images/gray-star.png", "images/hdr-call-icon.png", "images/hdr-loc-icon.png", "images/headquarter-img.png", "images/home1-images/eco-project-image1.jpg", "images/home1-images/eco-project-image2.jpg", "images/home1-images/eco-project-image3.jpg", "images/home1-images/eco-project-image4.jpg", "images/home1-images/home1-agriculture-project1.jpg", "images/home1-images/home1-electronic-project1.jpg", "images/home1-images/home1-farm-project1.jpg", "images/home1-images/home1-gaspipeline-project1.jpg", "images/home1-images/home1-news-img1.jpg", "images/home1-images/home1-news-img2.jpg", "images/home1-images/home1-news-img3.jpg", "images/home1-images/home1-oilplant-project1.jpg", "images/home1-images/home1-petrochemical-project1.jpg", "images/home1-images/home1-slide1.jpg", "images/home1-images/home1-slide2.jpg", "images/home1-images/home1-slide3.jpg", "images/home1-images/manufacturing-project-image1.jpg", "images/home1-images/manufacturing-project-image2.jpg", "images/home1-images/manufacturing-project-image3.jpg", "images/home1-images/manufacturing-project-image4.jpg", "images/home1-images/oil-project-image1.jpg", "images/home1-images/oil-project-image2.jpg", "images/home1-images/oil-project-image3.jpg", "images/home1-images/oil-project-image4.jpg", "images/home1-images/service-clearingicon.png", "images/home1-images/service-demolitionicon.png", "images/home1-images/service-drainageicon.png", "images/home1-images/service-erosion-controlicon.png", "images/home1-images/service-excavationicon.png", "images/home1-images/service-foundationsicon.png", "images/home1-images/service-gradingicon.png", "images/home1-images/service-haulingicon.png", "images/home1-images/service-landscapingicon.png", "images/humble-begin-img.png", "images/index2-wordpress-bg.jpg", "images/logo.png", "images/maintenance-bg.png", "images/manufacture-icon-hover.png", "images/manufacture-icon.png", "images/manufacture-rght-img.jpg", "images/manufacturing-banner.jpg", "images/martial-img.jpg", "images/material-banner.jpg", "images/material-icon-hover.png", "images/material-icon.png", "images/material-rght-img.jpg", "images/mission-icon.png", "images/nav.png", "images/nav_thumbs.png", "images/office-map-img.png", "images/office-sprite.png", "images/oil-icon-hover.png", "images/oil-icon.png", "images/oil-industry-banner.jpg", "images/oil-industry-rght-img.jpg", "images/oil-pipe-img.jpg", "images/oil-plant-img.jpg", "images/oil_img1.jpg", "images/oil_img2.jpg", "images/opening-loc-img.png", "images/ourteam-img1.jpg", "images/ourteam-img2.jpg", "images/ourteam-img3.jpg", "images/ourteam-img4.jpg", "images/page404-bg.jpg", "images/pattern.png", "images/paypal-img.png", "images/pdf-icon.jpg", "images/petro-chemical-img.jpg", "images/petro-img.jpg", "images/plant-project-img.jpg", "images/portfolio-banner.jpg", "images/product-large-img.jpg", "images/product-thumbnails-img1.jpg", "images/project-1-img.jpg", "images/project-2-img.jpg", "images/project-3-img.jpg", "images/project-det-img.jpg", "images/quality-icon.png", "images/requestquote-banner.jpg", "images/search-btn.png", "images/search_popup_icon.png", "images/service-banner.jpg", "images/service-img1.jpg", "images/service-img2.jpg", "images/service-img3.jpg", "images/service-img4.jpg", "images/service-img5.jpg", "images/service-img6.jpg", "images/service-page-sprite.png", "images/service_img1.jpg", "images/shop-banner.jpg", "images/specialization-img.jpg", "images/standard-labor-icon.png", "images/support-icon.png", "images/team-banner.jpg", "images/team-icon.png", "images/team-img1.jpg", "images/team-img2.jpg", "images/team-img3.jpg", "images/technology-icon.png", "images/technology-icon1.png", "images/testi-client-img1.png", "images/testi-client-img2.jpg", "images/testi-client-img3.jpg", "images/testi-quotes.png", "images/testimonial-banner.jpg", "images/value-icon.png", "images/views.png", "images/vision-icon.png", "images/white-logo.png", "images/white-search-btn.png", "images/who-are-img.jpg", "images/whoweare-img.jpg", "images/why-choose-bg.png", "images/wordpress-bg-img.png", "images/year-circles.png", "images/zoom_icon.jpg", "js/bootstrap.js", "js/bootstrap.min.js", "js/custom.js", "js/gallery.js", "js/imagelightbox.min.js", "js/isotope.min.js", "js/jquery.elastislide.js", "js/jquery.min.js", "js/jquery.tmpl.min.js", "js/jquery.touchSwipe.min.js", "js/main.js", "js/responsive_bootstrap_carousel.js", "js/slick.js", "js/theme.js", "js/theme1.js"]),
   mimeTypes: { ".gif": "image/gif", ".css": "text/css", ".png": "image/png", ".otf": "font/otf", ".eot": "application/vnd.ms-fontobject", ".svg": "image/svg+xml", ".ttf": "font/ttf", ".woff": "font/woff", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".txt": "text/plain", ".js": "application/javascript" },
   _: {
-    entry: { "file": "start-23259f13.js", "js": ["start-23259f13.js", "chunks/index-a54bfd4c.js"], "css": [] },
+    entry: { "file": "start-23aba21e.js", "js": ["start-23aba21e.js", "chunks/index-a54bfd4c.js"], "css": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

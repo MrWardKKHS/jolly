@@ -14,7 +14,6 @@ import Header from "./header.svelte";
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="css/set1.css" />
 	<title>Civil Logic - Experts in Civil Infrastructure</title>
-	<link rel='icon' type='image/png' href='/favicon.png'>
 </svelte:head>
 
 <main>

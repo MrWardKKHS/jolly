@@ -16,8 +16,7 @@
              <div class="mob-social display-none">
                 <div class="header-socials "> 
                    <a href="\" ><i class="fa fa-facebook" aria-hidden="true"></i></a> 
-                   <a href="\" ><i class="fa fa-twitter" aria-hidden="true"></i></a> 
-                   <a href="\" ><i class="fa fa-youtube" aria-hidden="true"></i></a> 
+                   <a href="https://www.youtube.com/channel/UCVSXGb9OeNgMORHwLiz7-yA" ><i class="fa fa-youtube" aria-hidden="true"></i></a> 
                    <a href="\" ><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
                 </div>
              </div>

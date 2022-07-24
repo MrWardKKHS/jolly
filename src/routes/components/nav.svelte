@@ -12,7 +12,6 @@
              <li class="dropdown">
                 <a href="about">About Us</a><i class="fa fa-chevron-down"></i>
                 <ul class="dropdown-submenu">
-                   <li><a href="faq">FAQ</a></li>
                    <li><a href="team">Our Team</a></li>
                    <li><a href="testimonials">Testimonials</a></li>
                 </ul>
@@ -20,12 +19,9 @@
              <li class="dropdown">
                 <a href="services">Services</a><i class="fa fa-chevron-down"></i>
                 <ul class="dropdown-submenu">
-                   <li><a href="manufacturing">Manufacturing</a></li>
-                   <li><a href="cnc-industry">CNC Industry</a></li>
-                   <li><a href="chemical-industry">Chemical Industry</a></li>
-                   <li><a href="energy-engineering">Energy Engineering</a></li>
-                   <li><a href="oil-industry">Oil Industry</a></li>
-                   <li><a href="material-engineering">Material Engineering</a></li>
+                   <li><a href="management-and-planning">Management and Planning</a></li>
+                   <li><a href="physical-delivery">Physical Delivery</a></li>
+                   <li><a href="technical-support">Technical Support</a></li>
                 </ul>
              </li>
              <li>
@@ -36,8 +32,7 @@
           <div class="header-nav-right">
              <div class="header-socials"> 
                 <a href="\" class="hvr-bounce-to-bottom"><i class="fa fa-facebook" aria-hidden="true"></i></a> 
-                <a href="\" class="hvr-bounce-to-bottom"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
-                <a href="\" class="hvr-bounce-to-bottom"><i class="fa fa-google-plus" aria-hidden="true"></i></a> 
+                <a href="https://www.youtube.com/channel/UCVSXGb9OeNgMORHwLiz7-yA" class="hvr-bounce-to-bottom"><i class="fa fa-youtube" aria-hidden="true"></i></a> 
                 <a href="\" class="hvr-bounce-to-bottom"><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
              </div>
              <span class="display-none">
